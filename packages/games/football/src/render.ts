@@ -116,11 +116,11 @@ function drawFootballer(
     limb(ctx, u * 0.8, -u * 0.1, u * 1.35, u * 0.5 - rp * 0.7, u * 0.42, c.skin);
   }
 
-  // torso / jersey
+  // torso / jersey (+ a subtle shoulder collar, not a face-like stripe)
   ctx.fillStyle = c.jersey;
-  roundRect(ctx, -u * 0.9, -u * 0.7, u * 1.8, u * 1.7, u * 0.55);
-  ctx.fillStyle = 'rgba(255,255,255,0.45)';
-  roundRect(ctx, -u * 0.18, -u * 0.7, u * 0.36, u * 1.7, u * 0.18);
+  roundRect(ctx, -u * 0.9, -u * 0.6, u * 1.8, u * 1.6, u * 0.55);
+  ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  roundRect(ctx, -u * 0.9, -u * 0.55, u * 1.8, u * 0.34, u * 0.25);
 
   // head + hair (toward the front)
   ctx.fillStyle = c.skin;

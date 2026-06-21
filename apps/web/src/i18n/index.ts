@@ -44,6 +44,24 @@ export function useTranslations(locale: Locale) {
   };
 }
 
+/**
+ * Read every STRING entry of an object group (e.g. all `game.*` labels), merged
+ * over the default locale. Used to hand a complete label map to the in-game HUD
+ * so games never show raw keys like "game.lives".
+ */
+export function getStringGroup(locale: Locale, key: string): Record<string, string> {
+  const collect = (o: unknown): Record<string, string> => {
+    const out: Record<string, string> = {};
+    if (o && typeof o === 'object') {
+      for (const [k, val] of Object.entries(o as Record<string, unknown>)) {
+        if (typeof val === 'string') out[k] = val;
+      }
+    }
+    return out;
+  };
+  return { ...collect(lookup(dicts[defaultLocale], key)), ...collect(lookup(dicts[locale], key)) };
+}
+
 /** Read a localized array (e.g. legal copy split into paragraphs). */
 export function getList(locale: Locale, key: string): string[] {
   const value = lookup(dicts[locale], key) ?? lookup(dicts[defaultLocale], key);

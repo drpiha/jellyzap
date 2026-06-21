@@ -1,5 +1,5 @@
 ---
-import { useTranslations, type Locale } from '../i18n';
+import { getStringGroup, useTranslations, type Locale } from '../i18n';
 
 interface Props {
   slug: string;
@@ -10,24 +10,11 @@ interface Props {
 const { slug, locale, accent = '#a855f7', playable = true } = Astro.props;
 const t = useTranslations(locale);
 
-const strings = {
-  playNow: t('game.playNow'),
-  loading: t('game.loading'),
-  gameOver: t('game.gameOver'),
-  playAgain: t('game.playAgain'),
+// Hand the game the COMPLETE set of game.* labels (plus the ad label) so the
+// in-game HUD never shows raw keys like "game.lives" or "game.time".
+const strings: Record<string, string> = {
+  ...getStringGroup(locale, 'game'),
   advertisement: t('common.advertisement'),
-  score: t('game.score'),
-  best: t('game.best'),
-  sound: t('game.sound'),
-  music: t('game.music'),
-  motion: t('game.motion'),
-  difficulty: t('game.difficulty'),
-  easy: t('game.easy'),
-  normal: t('game.normal'),
-  hard: t('game.hard'),
-  pause: t('game.pause'),
-  fullscreen: t('game.fullscreen'),
-  restart: t('game.restart'),
 };
 ---
 
