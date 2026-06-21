@@ -1,0 +1,128 @@
+{
+  "slug": "football",
+  "category": "action",
+  "accent": "#16a34a",
+  "order": 12,
+  "playable": true,
+  "title": { "en": "Football Goal Hunt", "tr": "Futbol Gol Avı", "de": "Fußball Torjagd" },
+  "tagline": {
+    "en": "Dribble past the defender and score!",
+    "tr": "Defansı geç ve gol at!",
+    "de": "Dribble am Verteidiger vorbei und triff!"
+  },
+  "description": {
+    "en": "Football Goal Hunt is a fast, friendly top-down soccer game. Dribble your player up the pitch, dodge the chasing defender, then shoot past the diving keeper to score. There's no losing — just a ticking clock, so rack up as many goals as you can before time runs out. Line up the open corner of the goal, fire, and celebrate every net-buster. Pick Easy, Normal or Hard to make the defender and keeper quicker. It's instant, no-download fun for kids and grown-ups on phone or computer.",
+    "tr": "Futbol Gol Avı, hızlı ve dostça, yukarıdan bakışlı bir futbol oyunudur. Oyuncunu sahada sürükle, peşindeki defansı atlat, sonra kaleciyi geçip gol at. Kaybetmek yok — sadece işleyen bir saat var, o yüzden süre dolmadan olabildiğince çok gol at. Kalenin boş köşesini ayarla, şutu çek ve her ağ sarsan golü kutla. Defansı ve kaleciyi hızlandırmak için Kolay, Orta veya Zor seç. Telefonda veya bilgisayarda, indirme olmadan çocuklar ve büyükler için anında eğlence.",
+    "de": "Fußball Torjagd ist ein schnelles, freundliches Fußballspiel aus der Vogelperspektive. Dribble deinen Spieler über den Platz, weiche dem verfolgenden Verteidiger aus und schieße am Torwart vorbei. Verlieren gibt es nicht — nur eine tickende Uhr, also erziele so viele Tore wie möglich, bevor die Zeit abläuft. Visiere die freie Ecke an, schieße und feiere jeden Treffer. Wähle Leicht, Normal oder Schwer, um Verteidiger und Torwart schneller zu machen. Sofortiger Spaß ohne Download für Kinder und Erwachsene, auf Handy oder Computer."
+  },
+  "howToPlay": {
+    "en": [
+      "Drag (or use arrow keys) to move your player and dribble the ball.",
+      "Avoid the red defender — if it catches you, the ball goes back to the start.",
+      "Get into space and tap (or press Space) to shoot at the goal.",
+      "Aim for a corner the yellow keeper can't reach.",
+      "Score as many goals as you can before the clock hits zero."
+    ],
+    "tr": [
+      "Oyuncunu hareket ettirip topu sürmek için sürükle (ya da ok tuşlarını kullan).",
+      "Kırmızı defanstan kaç — seni yakalarsa top başa döner.",
+      "Boş alana geç ve kaleye şut çekmek için dokun (ya da Boşluk tuşuna bas).",
+      "Sarı kalecinin yetişemeyeceği bir köşeye nişan al.",
+      "Saat sıfırlanmadan olabildiğince çok gol at."
+    ],
+    "de": [
+      "Ziehe (oder nutze die Pfeiltasten), um deinen Spieler zu bewegen und zu dribbeln.",
+      "Weiche dem roten Verteidiger aus — fängt er dich, geht der Ball zurück zum Start.",
+      "Schaffe dir Platz und tippe (oder drücke die Leertaste), um aufs Tor zu schießen.",
+      "Ziele in eine Ecke, die der gelbe Torwart nicht erreicht.",
+      "Erziele so viele Tore wie möglich, bevor die Uhr abläuft."
+    ]
+  },
+  "controls": {
+    "en": ["Drag or arrow keys — move and dribble", "Tap or Space — shoot"],
+    "tr": ["Sürükle veya ok tuşları — hareket ve top sürme", "Dokun veya Boşluk — şut"],
+    "de": ["Ziehen oder Pfeiltasten — bewegen und dribbeln", "Tippen oder Leertaste — schießen"]
+  },
+  "tips": {
+    "en": [
+      "Get close to the goal before shooting — the keeper has less time to slide across.",
+      "Pull the defender to one side, then cut back into the open space.",
+      "Aim for the far corner away from the keeper.",
+      "Don't panic after a tackle — you keep all your goals, only the ball resets."
+    ],
+    "tr": [
+      "Şut çekmeden önce kaleye yaklaş — kalecinin kayacak daha az zamanı olur.",
+      "Defansı bir tarafa çek, sonra boşalan alana dön.",
+      "Kaleciden uzaktaki uzak köşeye nişan al.",
+      "Top kapılınca panik yapma — gollerin durur, sadece top başa döner."
+    ],
+    "de": [
+      "Komm nah ans Tor, bevor du schießt — der Torwart hat weniger Zeit zu reagieren.",
+      "Zieh den Verteidiger auf eine Seite und schneide dann in den freien Raum.",
+      "Ziele in die weite Ecke, weg vom Torwart.",
+      "Keine Panik nach einer Eroberung — deine Tore bleiben, nur der Ball wird zurückgesetzt."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Football Goal Hunt free to play?",
+        "a": "Yes! It's completely free on Jellyzap and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play on mobile?",
+        "a": "Drag your finger to dribble the player around, and tap to shoot at the goal."
+      },
+      {
+        "q": "Can I lose the game?",
+        "a": "There's no losing — you just play against the clock. A tackle only resets the ball, so it's relaxed and kid-friendly."
+      },
+      {
+        "q": "How do I make it harder?",
+        "a": "Use the difficulty button to pick Easy, Normal or Hard — higher levels give a faster defender and keeper and less time."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Futbol Gol Avı ücretsiz mi?",
+        "a": "Evet! Jellyzap'te tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde nasıl oynanır?",
+        "a": "Oyuncuyu sürmek için parmağını sürükle, kaleye şut çekmek için dokun."
+      },
+      {
+        "q": "Oyunu kaybedebilir miyim?",
+        "a": "Kaybetmek yok — sadece saate karşı oynarsın. Top kapılması yalnızca topu başa döndürür, bu yüzden rahat ve çocuk dostudur."
+      },
+      {
+        "q": "Nasıl zorlaştırırım?",
+        "a": "Zorluk düğmesiyle Kolay, Orta veya Zor seç — yüksek seviyeler daha hızlı defans ile kaleci ve daha az süre verir."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Fußball Torjagd kostenlos?",
+        "a": "Ja! Es ist auf Jellyzap völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich auf dem Handy?",
+        "a": "Ziehe mit dem Finger, um den Spieler zu dribbeln, und tippe, um aufs Tor zu schießen."
+      },
+      {
+        "q": "Kann ich verlieren?",
+        "a": "Verlieren gibt es nicht — du spielst nur gegen die Uhr. Eine Eroberung setzt nur den Ball zurück, also ist es entspannt und kinderfreundlich."
+      },
+      {
+        "q": "Wie mache ich es schwerer?",
+        "a": "Mit dem Schwierigkeitsknopf wählst du Leicht, Normal oder Schwer — höhere Stufen geben einen schnelleren Verteidiger und Torwart und weniger Zeit."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "football game, soccer game, score goals, free football game, play soccer online, kids football game",
+    "tr": "futbol oyunu, gol atma oyunu, ücretsiz futbol oyunu, online futbol, çocuk futbol oyunu, top oyunu",
+    "de": "fußballspiel, fussball spielen, tore schießen, kostenloses fußballspiel, fußball online, kinder fußballspiel"
+  },
+  "tags": ["football", "soccer", "sports", "action", "goals", "high-score"]
+}

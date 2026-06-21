@@ -44,6 +44,9 @@ importers:
       '@jellyzap/game-flappy':
         specifier: workspace:*
         version: link:../../packages/games/flappy
+      '@jellyzap/game-football':
+        specifier: workspace:*
+        version: link:../../packages/games/football
       '@jellyzap/game-karts':
         specifier: workspace:*
         version: link:../../packages/games/karts
@@ -106,6 +109,12 @@ importers:
         version: link:../../game-sdk
 
   packages/games/flappy:
+    dependencies:
+      '@jellyzap/game-sdk':
+        specifier: workspace:*
+        version: link:../../game-sdk
+
+  packages/games/football:
     dependencies:
       '@jellyzap/game-sdk':
         specifier: workspace:*

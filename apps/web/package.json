@@ -16,6 +16,7 @@
     "@jellyzap/game-2048": "workspace:*",
     "@jellyzap/game-breakout": "workspace:*",
     "@jellyzap/game-flappy": "workspace:*",
+    "@jellyzap/game-football": "workspace:*",
     "@jellyzap/game-karts": "workspace:*",
     "@jellyzap/game-match3": "workspace:*",
     "@jellyzap/game-memory": "workspace:*",
