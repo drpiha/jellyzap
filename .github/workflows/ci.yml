@@ -1,0 +1,47 @@
+# CI for the Jellyzap games portal.
+# NOTE: GitHub only runs workflows from `.github/workflows` at the REPOSITORY ROOT.
+# This file is ready for when `jellyzap/` becomes its own repo. While it lives in a
+# subfolder it will not trigger automatically — run `pnpm check && pnpm e2e` locally.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm gen:icons
+      - run: pnpm run check:determinism
+      - run: pnpm run typecheck
+      - run: pnpm run test
+      - run: pnpm run build
+
+      - name: Install Playwright browser
+        run: pnpm --filter @jellyzap/web exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: pnpm run e2e
+        env:
+          CI: 'true'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7

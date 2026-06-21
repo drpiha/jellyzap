@@ -1,0 +1,156 @@
+{
+  "site": {
+    "name": "Jellyzap",
+    "tagline": "Herkes için ücretsiz online oyunlar",
+    "description": "Jellyzap'te en iyi ücretsiz online oyunları oyna — Yılan, Tetris, 2048, kelime ve çark oyunları, araba savaşları ve daha fazlası. İndirme yok, mobil ve masaüstünde anında oyna."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "games": "Tüm Oyunlar",
+    "categories": "Kategoriler",
+    "play": "Oyna"
+  },
+  "home": {
+    "hero": {
+      "title": "Oyna, eğlen, zıpla!",
+      "subtitle": "Yüzlerce ücretsiz oyun, sıfır indirme. Her cihazda doğrudan oyunun içine atla.",
+      "cta": "Hemen oyna"
+    },
+    "trending": "🔥 Şu an popüler",
+    "popular": "⭐ En çok oynananlar",
+    "allGames": "Tüm oyunlar",
+    "byCategory": "Kategorilere göz at",
+    "seoHeading": "Ücretsiz online oyunlar — anında oyna, indirme yok",
+    "seoBody": "Jellyzap; çocuklar, gençler ve içindeki çocuğu yaşatan herkes için ücretsiz bir online oyun portalıdır. Tüm oyunlar doğrudan tarayıcında çalışır — kurulum yok, bekleme yok. Yılan ve Tetris gibi arcade klasiklerini, 2048 ve Şeker Patlat gibi zeka oyunlarını, kelime oyunlarını, Çarkıfelek'i ve hızlı araba savaşlarını telefonunda, tabletinde veya bilgisayarında oyna. Sürekli yeni oyunlar ekleniyor; hepsi ücretsiz ve aileye uygun."
+  },
+  "games": {
+    "title": "Tüm oyunlar",
+    "subtitle": "Tüm Jellyzap oyunları tek yerde — birini seç ve anında oyna.",
+    "count": "{count} oyun"
+  },
+  "category": {
+    "titleTemplate": "{name} oyunları",
+    "intro": "En iyi ücretsiz {name} oyunlarını online oyna — anında oyna, indirme yok."
+  },
+  "categories": {
+    "arcade": { "name": "Arcade", "desc": "Hızlı refleksler ve klasik arcade keyfi." },
+    "puzzle": { "name": "Bulmaca", "desc": "Seni düşündüren zeka oyunları." },
+    "word": { "name": "Kelime", "desc": "Harflerle hecele, tahmin et, kazan." },
+    "action": { "name": "Aksiyon", "desc": "Savaşlar ve yüksek hızlı meydan okumalar." }
+  },
+  "game": {
+    "play": "Oyna",
+    "playNow": "Hemen oyna",
+    "loading": "Oyun yükleniyor…",
+    "score": "Skor",
+    "best": "Rekor",
+    "gameOver": "Oyun Bitti",
+    "playAgain": "Tekrar oyna",
+    "lives": "Can",
+    "moves": "Hamle",
+    "pairs": "Çift",
+    "spin": "Çevir",
+    "tapToLaunch": "Başlatmak için dokun",
+    "value": "Değer",
+    "word": "Kelime",
+    "win": "Kazandın!",
+    "youWin": "Kazandın!",
+    "pause": "Duraklat",
+    "resume": "Devam et",
+    "sound": "Ses",
+    "soundOn": "Ses açık",
+    "soundOff": "Ses kapalı",
+    "fullscreen": "Tam ekran",
+    "restart": "Yeniden başlat",
+    "howToPlay": "Nasıl oynanır",
+    "controls": "Kontroller",
+    "tips": "İpuçları ve taktikler",
+    "faq": "Sıkça sorulan sorular",
+    "related": "Benzer oyunlar",
+    "about": "Bu oyun hakkında",
+    "rotateHint": "En iyi deneyim için cihazını çevir.",
+    "tapToStart": "Başlamak için dokun",
+    "continue": "Devam et",
+    "watchToContinue": "Devam etmek için reklam izle",
+    "noReward": "Hayır, teşekkürler"
+  },
+  "common": {
+    "advertisement": "Reklam",
+    "backToGames": "Tüm oyunlara dön",
+    "home": "Ana Sayfa",
+    "menu": "Menü",
+    "close": "Kapat",
+    "language": "Dil",
+    "loading": "Yükleniyor…"
+  },
+  "footer": {
+    "tagline": "Ücretsiz online oyunlar; sevgiyle ve biraz jöleyle yapıldı.",
+    "explore": "Keşfet",
+    "legal": "Yasal",
+    "about": "Hakkımızda",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Şartları",
+    "rights": "Tüm hakları saklıdır.",
+    "disclaimer": "Jellyzap, ücretsiz ve reklam destekli bir oyun portalıdır. Oyunlar eğlence amaçlıdır."
+  },
+  "consent": {
+    "title": "Gizliliğine değer veriyoruz",
+    "body": "Jellyzap'i ücretsiz tutabilmek için reklam göstermek ve trafiği ölçmek amacıyla çerezler kullanıyoruz. Neye izin vereceğine sen karar verirsin. Küçük oyunculara gösterilen reklamlar kişiselleştirilmez.",
+    "acceptAll": "Tümünü kabul et",
+    "rejectAll": "Gerekli olmayanları reddet",
+    "customize": "Özelleştir",
+    "necessary": "Kesinlikle gerekli",
+    "necessaryDesc": "Sitenin çalışması için gerekli. Her zaman açık.",
+    "analytics": "Analitik",
+    "analyticsDesc": "Hangi oyunları sevdiğini anlamamıza yardımcı olur.",
+    "ads": "Reklam",
+    "adsDesc": "Jellyzap'i ücretsiz tutan reklamları göstermemizi sağlar.",
+    "save": "Seçimleri kaydet",
+    "privacyLink": "Gizlilik Politikamızı oku"
+  },
+  "about": {
+    "title": "Jellyzap Hakkında",
+    "body": [
+      "Jellyzap; çocuklar, gençler ve hızlı, renkli oyunları seven herkes için ücretsiz bir online oyun portalıdır. Her şey tarayıcında anında çalışır — indirme yok, kayıt yok.",
+      "Amacımız basit: telefonlarda, tabletlerde ve bilgisayarlarda, kendi dilinde harika çalışan parlak, samimi ve küçük oyunlar.",
+      "Düzenli olarak yeni oyunlar ekliyoruz. Jellyzap ücretsizdir ve reklamlarla desteklenir."
+    ]
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "body": [
+      "Bu Gizlilik Politikası, web sitemizi kullandığında Jellyzap'in (\"biz\") bilgileri nasıl işlediğini açıklar.",
+      "Çerezler ve yerel depolama: Ayarlarını (ses, rekorlar gibi) hatırlamak için yerel depolamayı ve onayınla analitik ve reklam için çerezleri kullanırız.",
+      "Analitik: Onayınla, sitenin nasıl kullanıldığını anlamak için Google Analytics kullanırız. Bu veriler toplulaştırılır ve oyunlarımızı geliştirmemize yardımcı olur.",
+      "Reklam: Onayınla, Jellyzap'i ücretsiz tutmak için reklam gösteririz. Oyunlarımız küçük yaş gruplarına hitap ettiğinden, çocuk bölümündeki reklamlar yasaların gerektirdiği yerlerde (ör. COPPA, GDPR) çocuğa yönelik ve kişiselleştirilmemiş olarak ele alınır.",
+      "Seçimlerin: Onayını istediğin zaman alt bilgideki çerez ayarları bağlantısından değiştirebilir veya geri çekebilirsin.",
+      "İletişim: Bu politikayla ilgili sorularını web sitesi üzerinden bize iletebilirsin."
+    ]
+  },
+  "terms": {
+    "title": "Kullanım Şartları",
+    "body": [
+      "Jellyzap'i kullanarak bu Kullanım Şartları'nı kabul etmiş olursun.",
+      "Jellyzap ve oyunları, kişisel ve ticari olmayan eğlence amacıyla \"olduğu gibi\" sunulur.",
+      "Siteyi kötüye kullanmamayı, çalışmasını engellememeyi ve yasa dışı şekilde kullanmamayı kabul edersin.",
+      "Oyunları ve özellikleri istediğimiz zaman güncelleyebilir veya kaldırabiliriz. Sitenin kullanımından doğan kayıplardan sorumlu değiliz.",
+      "Bu şartlar zaman zaman güncellenebilir; kullanmaya devam etmen değişiklikleri kabul ettiğin anlamına gelir."
+    ]
+  },
+  "seo": {
+    "homeTitle": "Jellyzap — Ücretsiz Online Oyunlar | İndirmeden Anında Oyna",
+    "homeDescription": "Jellyzap'te yüzlerce ücretsiz online oyun oyna. Yılan, Tetris, 2048, kelime oyunları, Çarkıfelek, araba savaşları ve daha fazlası. İndirme yok — mobil ve masaüstünde anında oyna.",
+    "gamesTitle": "Tüm Ücretsiz Online Oyunlar | Jellyzap",
+    "gamesDescription": "Jellyzap'teki tüm ücretsiz oyunlara göz at ve tarayıcında anında oyna — her yaşa uygun arcade, bulmaca, kelime ve aksiyon oyunları.",
+    "gameTitleTemplate": "{game} — Ücretsiz Online Oyna | Jellyzap",
+    "categoryTitleTemplate": "Ücretsiz {name} Oyunları — Online Oyna | Jellyzap"
+  },
+  "notFound": {
+    "title": "Hata! Sayfa bulunamadı",
+    "body": "Aradığın sayfa kaybolmuş. Hadi seni oyunlara geri götürelim.",
+    "cta": "Oyunlara dön"
+  },
+  "a11y": {
+    "skipToContent": "İçeriğe geç"
+  }
+}

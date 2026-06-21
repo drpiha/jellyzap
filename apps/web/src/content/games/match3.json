@@ -1,0 +1,128 @@
+{
+  "slug": "match3",
+  "category": "puzzle",
+  "accent": "#f472b6",
+  "order": 4,
+  "playable": true,
+  "title": { "en": "Jelly Match", "tr": "Şeker Patlat", "de": "Jelly Match" },
+  "tagline": {
+    "en": "Swap the candies and pop sweet combos!",
+    "tr": "Şekerleri değiştir, tatlı kombolar patlat!",
+    "de": "Tausche die Bonbons und knack süße Kombos!"
+  },
+  "description": {
+    "en": "Jelly Match is a juicy candy-swapping puzzle where you line up three or more matching gems to clear them off the board. Swap two neighbouring candies to form a row or column of three, four or more, then watch new gems tumble in and trigger satisfying chain reactions. Every cascade multiplies your score, so the bigger the combo, the sweeter the reward. Easy to pick up but endlessly moreish, Jelly Match is the perfect treat for a quick brain teaser or a long high-score chase.",
+    "tr": "Şeker Patlat, üç veya daha fazla aynı mücevheri yan yana getirip tahtadan temizlediğin sulu bir şeker eşleştirme bulmacasıdır. Komşu iki şekeri değiştirerek üçlü, dörtlü ya da daha uzun bir satır veya sütun oluştur; sonra yukarıdan yeni şekerlerin düşüşünü ve tatmin edici zincirleme patlamaları izle. Her zincir skorunu katlar, yani kombo ne kadar büyükse ödül o kadar tatlıdır. Öğrenmesi kolay ama bırakması zor; Şeker Patlat, hızlı bir zeka molası ya da uzun bir rekor avı için mükemmel bir ikramdır.",
+    "de": "Jelly Match ist ein saftiges Bonbon-Tausch-Puzzle, bei dem du drei oder mehr gleiche Edelsteine in eine Reihe bringst, um sie vom Feld zu räumen. Tausche zwei benachbarte Bonbons zu einer Reihe oder Spalte aus drei, vier oder mehr und sieh zu, wie neue Steine nachrutschen und befriedigende Kettenreaktionen auslösen. Jede Kaskade vervielfacht deine Punkte — je größer die Kombo, desto süßer die Belohnung. Leicht zu lernen und endlos fesselnd, ist Jelly Match der perfekte Leckerbissen für ein schnelles Knobeln oder eine lange Rekordjagd."
+  },
+  "howToPlay": {
+    "en": [
+      "Tap a candy to select it, then tap an adjacent candy to swap them.",
+      "On touchscreens you can also tap a candy and swipe in any direction.",
+      "Line up three or more of the same candy in a row or column to clear them.",
+      "Cleared candies make the ones above fall down and new ones drop in.",
+      "Chain cascades for bonus points and beat your high score!"
+    ],
+    "tr": [
+      "Bir şekeri seçmek için dokun, sonra yanındaki bir şekere dokunup yer değiştir.",
+      "Dokunmatik ekranda bir şekere dokunup istediğin yöne kaydırabilirsin.",
+      "Aynı şekerden üç veya daha fazlasını bir satır ya da sütunda dizip temizle.",
+      "Temizlenen şekerlerin üstündekiler aşağı düşer ve yenileri gelir.",
+      "Bonus puan için zincirleme patlamalar yap ve rekorunu kır!"
+    ],
+    "de": [
+      "Tippe auf ein Bonbon, um es auszuwählen, und dann auf ein benachbartes, um sie zu tauschen.",
+      "Auf Touchscreens kannst du ein Bonbon antippen und in eine beliebige Richtung wischen.",
+      "Bringe drei oder mehr gleiche Bonbons in eine Reihe oder Spalte, um sie zu räumen.",
+      "Geräumte Bonbons lassen die darüber nachfallen und neue rutschen nach.",
+      "Verkette Kaskaden für Bonuspunkte und knacke deinen Rekord!"
+    ]
+  },
+  "controls": {
+    "en": ["Tap two adjacent candies — swap them", "Tap then swipe on touchscreens — swap in that direction"],
+    "tr": ["İki komşu şekere dokun — yer değiştir", "Dokunmatik ekranda dokun ve kaydır — o yöne değiştir"],
+    "de": ["Auf zwei benachbarte Bonbons tippen — tauschen", "Auf Touchscreens tippen und wischen — in die Richtung tauschen"]
+  },
+  "tips": {
+    "en": [
+      "Look for moves that set up a cascade rather than just a single match.",
+      "Matches of four or five score far more than three at a time.",
+      "Scan the whole board before moving — combos often hide near the edges.",
+      "When stuck, work the bottom rows to trigger longer chain reactions."
+    ],
+    "tr": [
+      "Tek bir eşleşme yerine zincir başlatacak hamleler ara.",
+      "Dörtlü ve beşli eşleşmeler, üçlüden çok daha fazla puan verir.",
+      "Hamle yapmadan tüm tahtayı tara — kombolar genelde kenarlarda gizlidir.",
+      "Tıkandığında alt sıralarda çalış, daha uzun zincirler tetiklenir."
+    ],
+    "de": [
+      "Suche Züge, die eine Kaskade auslösen, statt nur einer einzelnen Kombination.",
+      "Vierer- und Fünfer-Kombinationen geben weit mehr Punkte als Dreier.",
+      "Scanne das ganze Feld vor dem Zug — Kombos verstecken sich oft an den Rändern.",
+      "Wenn du feststeckst, arbeite an den unteren Reihen für längere Kettenreaktionen."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Jelly Match free to play?",
+        "a": "Yes! Jelly Match on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Jelly Match on mobile?",
+        "a": "Tap a candy and then an adjacent one to swap, or tap a candy and swipe. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you score points in Jelly Match?",
+        "a": "Match three or more candies to clear them. Bigger groups and chain cascades award bonus points, so combos are the key to a high score."
+      },
+      {
+        "q": "What happens when there are no moves left?",
+        "a": "If no matching swaps remain, the board reshuffles. If it still has no moves, the game ends and your score is saved."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Şeker Patlat ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Şeker Patlat tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Şeker Patlat nasıl oynanır?",
+        "a": "Bir şekere, sonra yanındakine dokunarak yer değiştir ya da bir şekere dokunup kaydır. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Şeker Patlat'ta nasıl puan kazanılır?",
+        "a": "Üç veya daha fazla şekeri eşleştirip temizle. Büyük gruplar ve zincirleme patlamalar bonus puan verir; yüksek skorun anahtarı kombolardır."
+      },
+      {
+        "q": "Hamle kalmayınca ne olur?",
+        "a": "Eşleşmeli hamle kalmadığında tahta yeniden karılır. Yine hamle yoksa oyun biter ve skorun kaydedilir."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Jelly Match kostenlos?",
+        "a": "Ja! Jelly Match auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Jelly Match auf dem Handy?",
+        "a": "Tippe auf ein Bonbon und dann auf ein benachbartes zum Tauschen, oder tippe ein Bonbon an und wische. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie erziele ich Punkte bei Jelly Match?",
+        "a": "Kombiniere drei oder mehr Bonbons, um sie zu räumen. Größere Gruppen und Kettenkaskaden geben Bonuspunkte — Kombos sind der Schlüssel zu einem hohen Score."
+      },
+      {
+        "q": "Was passiert, wenn keine Züge mehr übrig sind?",
+        "a": "Wenn keine passenden Tausche mehr möglich sind, wird das Feld neu gemischt. Gibt es danach immer noch keine Züge, endet das Spiel und dein Score wird gespeichert."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "match 3 game, candy match game, play match 3 online, free puzzle game, gem swap game",
+    "tr": "eşleştirme oyunu, şeker patlat oyunu, match 3 oyna, ücretsiz bulmaca oyunu, mücevher eşleştirme",
+    "de": "match 3 spiel, bonbon match spiel, match 3 online spielen, kostenloses puzzlespiel, edelstein tausch spiel"
+  },
+  "tags": ["match-3", "puzzle", "candy", "casual", "high-score"]
+}

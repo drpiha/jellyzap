@@ -1,0 +1,128 @@
+{
+  "slug": "2048",
+  "category": "puzzle",
+  "accent": "#fbbf24",
+  "order": 3,
+  "playable": true,
+  "title": { "en": "2048", "tr": "2048", "de": "2048" },
+  "tagline": {
+    "en": "Slide, merge, and reach the 2048 tile!",
+    "tr": "Kaydır, birleştir ve 2048 karesine ulaş!",
+    "de": "Schiebe, kombiniere und erreiche die 2048-Kachel!"
+  },
+  "description": {
+    "en": "2048 is the addictive sliding-tile puzzle where you combine matching numbers to build ever-bigger tiles. Swipe in any direction and every tile slides until it hits a wall or a neighbor — when two equal numbers touch, they merge into one that's twice as big. Each move drops a new tile onto the board, so space runs out fast and every slide counts. Easy to learn but devilishly hard to master, 2048 is the perfect brain-teaser to chase that elusive 2048 tile and set a new high score.",
+    "tr": "2048, eşleşen sayıları birleştirerek giderek daha büyük kareler oluşturduğun bağımlılık yapan kayan taş bulmacasıdır. Herhangi bir yöne kaydır; her kare bir duvara veya komşusuna çarpana kadar kayar — iki eşit sayı dokunduğunda iki katı büyüklükte tek bir kareye birleşir. Her hamle tahtaya yeni bir kare bırakır, bu yüzden yer hızla biter ve her kaydırma önemlidir. Öğrenmesi kolay ama ustalaşması çok zor olan 2048, o ele avuca sığmaz 2048 karesini kovalamak ve yeni rekor kırmak için mükemmel bir zekâ oyunudur.",
+    "de": "2048 ist das süchtig machende Schiebe-Puzzle, bei dem du gleiche Zahlen kombinierst, um immer größere Kacheln zu bauen. Wische in eine beliebige Richtung, und jede Kachel rutscht, bis sie auf eine Wand oder einen Nachbarn trifft — berühren sich zwei gleiche Zahlen, verschmelzen sie zu einer doppelt so großen. Jeder Zug lässt eine neue Kachel auf dem Feld erscheinen, sodass der Platz schnell knapp wird und jeder Zug zählt. Leicht zu lernen, aber teuflisch schwer zu meistern — 2048 ist der perfekte Knobelspaß, um die begehrte 2048-Kachel zu jagen und einen neuen Rekord aufzustellen."
+  },
+  "howToPlay": {
+    "en": [
+      "Use the arrow keys, WASD, or swipe to slide all tiles.",
+      "Tiles move as far as they can until they hit a wall or another tile.",
+      "When two tiles with the same number touch, they merge into one.",
+      "After every move a new 2 or 4 tile appears on the board.",
+      "Keep merging to create the 2048 tile and beat your high score!"
+    ],
+    "tr": [
+      "Tüm kareleri kaydırmak için ok tuşlarını, WASD'yi veya kaydırmayı kullan.",
+      "Kareler bir duvara veya başka bir kareye çarpana kadar gidebildikleri kadar kayar.",
+      "Aynı sayıya sahip iki kare dokunduğunda tek bir kareye birleşir.",
+      "Her hamleden sonra tahtada yeni bir 2 veya 4 karesi belirir.",
+      "2048 karesini oluşturmak için birleştirmeye devam et ve rekorunu kır!"
+    ],
+    "de": [
+      "Schiebe alle Kacheln mit den Pfeiltasten, WASD oder per Wischen.",
+      "Kacheln rutschen so weit wie möglich, bis sie auf eine Wand oder Kachel treffen.",
+      "Berühren sich zwei Kacheln mit derselben Zahl, verschmelzen sie zu einer.",
+      "Nach jedem Zug erscheint eine neue 2er- oder 4er-Kachel auf dem Feld.",
+      "Kombiniere weiter, um die 2048-Kachel zu bilden und deinen Rekord zu knacken!"
+    ]
+  },
+  "controls": {
+    "en": ["Arrow keys or WASD — slide the tiles", "Swipe on touchscreens — slide the tiles"],
+    "tr": ["Ok tuşları veya WASD — kareleri kaydır", "Dokunmatik ekranda kaydır — kareleri kaydır"],
+    "de": ["Pfeiltasten oder WASD — Kacheln schieben", "Auf Touchscreens wischen — Kacheln schieben"]
+  },
+  "tips": {
+    "en": [
+      "Pick a corner and keep your biggest tile parked there.",
+      "Build your numbers in order along one edge to chain merges.",
+      "Avoid swiping in the direction that moves your big tile out of its corner.",
+      "Think one move ahead — keep the board tidy so you don't run out of space."
+    ],
+    "tr": [
+      "Bir köşe seç ve en büyük kareni hep orada tut.",
+      "Birleşmeleri zincirlemek için sayılarını bir kenar boyunca sıralı diz.",
+      "Büyük kareni köşesinden çıkaracak yöne kaydırmaktan kaçın.",
+      "Bir hamle ilerisini düşün — yerin bitmesin diye tahtayı düzenli tut."
+    ],
+    "de": [
+      "Wähle eine Ecke und parke deine größte Kachel dauerhaft dort.",
+      "Ordne deine Zahlen entlang einer Kante, um Ketten-Merges zu schaffen.",
+      "Wische nicht in die Richtung, die deine große Kachel aus ihrer Ecke bewegt.",
+      "Denke einen Zug voraus — halte das Feld ordentlich, damit der Platz reicht."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is 2048 free to play?",
+        "a": "Yes! 2048 on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play 2048 on mobile?",
+        "a": "Just swipe up, down, left or right to slide the tiles. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you win at 2048?",
+        "a": "Merge matching tiles to reach the 2048 tile. Once you do, you can keep playing to push for an even higher score."
+      },
+      {
+        "q": "When does the game end?",
+        "a": "The game is over when the board is full and no neighboring tiles can be merged in any direction."
+      }
+    ],
+    "tr": [
+      {
+        "q": "2048 oyunu ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki 2048 tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde 2048 nasıl oynanır?",
+        "a": "Kareleri kaydırmak için yukarı, aşağı, sola veya sağa kaydırman yeterli. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "2048 oyununda nasıl kazanılır?",
+        "a": "2048 karesine ulaşmak için eşleşen kareleri birleştir. Ulaştığında daha da yüksek bir skor için oynamaya devam edebilirsin."
+      },
+      {
+        "q": "Oyun ne zaman biter?",
+        "a": "Tahta dolduğunda ve hiçbir yönde komşu kareler birleştirilemediğinde oyun biter."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist 2048 kostenlos?",
+        "a": "Ja! 2048 auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich 2048 auf dem Handy?",
+        "a": "Wische einfach nach oben, unten, links oder rechts, um die Kacheln zu schieben. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie gewinnt man bei 2048?",
+        "a": "Kombiniere gleiche Kacheln, um die 2048-Kachel zu erreichen. Danach kannst du weiterspielen und einen noch höheren Punktestand anstreben."
+      },
+      {
+        "q": "Wann ist das Spiel vorbei?",
+        "a": "Das Spiel endet, wenn das Feld voll ist und in keine Richtung benachbarte Kacheln kombiniert werden können."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "2048 game, play 2048 online, free 2048 game, number puzzle, sliding tile puzzle",
+    "tr": "2048 oyunu, 2048 oyna, ücretsiz 2048 oyunu, sayı bulmacası, kayan taş bulmacası",
+    "de": "2048 spiel, 2048 online spielen, kostenloses 2048 spiel, zahlenrätsel, schiebepuzzle"
+  },
+  "tags": ["2048", "puzzle", "numbers", "merge", "high-score"]
+}

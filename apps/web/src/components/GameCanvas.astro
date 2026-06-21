@@ -1,0 +1,335 @@
+---
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  slug: string;
+  locale: Locale;
+  accent?: string;
+  playable?: boolean;
+}
+const { slug, locale, accent = '#a855f7', playable = true } = Astro.props;
+const t = useTranslations(locale);
+
+const strings = {
+  playNow: t('game.playNow'),
+  loading: t('game.loading'),
+  gameOver: t('game.gameOver'),
+  playAgain: t('game.playAgain'),
+  advertisement: t('common.advertisement'),
+  score: t('game.score'),
+  best: t('game.best'),
+  sound: t('game.sound'),
+  pause: t('game.pause'),
+  fullscreen: t('game.fullscreen'),
+  restart: t('game.restart'),
+};
+---
+
+<div
+  class="jz-stage"
+  data-jz-game
+  data-slug={slug}
+  data-locale={locale}
+  data-playable={String(playable)}
+  data-strings={JSON.stringify(strings)}
+  style={`--accent:${accent}`}
+>
+  <div class="jz-frame">
+    <div class="jz-mount" data-jz-mount></div>
+
+    <div class="jz-ov jz-ov--start" data-jz-start>
+      <button class="jz-play" data-jz-play type="button">
+        <span class="tri">▶</span><span>{strings.playNow}</span>
+      </button>
+    </div>
+
+    <div class="jz-ov jz-ov--load" data-jz-loading hidden>
+      <div class="jz-spinner" aria-hidden="true"></div>
+      <p>{strings.loading}</p>
+    </div>
+
+    <div class="jz-ov jz-ov--over" data-jz-over hidden>
+      <h3>{strings.gameOver}</h3>
+      <p class="jz-finalscore" data-jz-finalscore></p>
+      <button class="jz-play" data-jz-again type="button">
+        <span class="tri">↻</span><span>{strings.playAgain}</span>
+      </button>
+    </div>
+
+    <div class="jz-ov jz-ov--ad" data-jz-ad hidden>
+      <span class="jz-adlabel">{strings.advertisement}</span>
+      <div class="jz-adbox">▢</div>
+      <p class="jz-adcd" data-jz-adcd></p>
+    </div>
+  </div>
+
+  <div class="jz-controls">
+    <button data-jz-sound type="button" aria-label={strings.sound}>🔊</button>
+    <button data-jz-pause type="button" aria-label={strings.pause}>⏸</button>
+    <button data-jz-restart type="button" aria-label={strings.restart}>↻</button>
+    <button data-jz-fs type="button" aria-label={strings.fullscreen}>⛶</button>
+  </div>
+</div>
+
+<script>
+  import { createGameHost, type GameHostHandle } from '@jellyzap/game-sdk';
+  import { loadGame } from '../lib/registry';
+  import { AD_CONFIG } from '../lib/ads';
+
+  const stage = document.querySelector<HTMLElement>('[data-jz-game]');
+  if (stage) void initStage(stage);
+
+  async function initStage(stage: HTMLElement) {
+    const slug = stage.dataset.slug || '';
+    const locale = stage.dataset.locale || 'en';
+    const strings: Record<string, string> = JSON.parse(stage.dataset.strings || '{}');
+    const mount = stage.querySelector<HTMLElement>('[data-jz-mount]');
+    if (!mount) return;
+
+    const ovStart = stage.querySelector<HTMLElement>('[data-jz-start]');
+    const ovLoading = stage.querySelector<HTMLElement>('[data-jz-loading]');
+    const ovOver = stage.querySelector<HTMLElement>('[data-jz-over]');
+    const ovAd = stage.querySelector<HTMLElement>('[data-jz-ad]');
+    const finalScoreEl = stage.querySelector<HTMLElement>('[data-jz-finalscore]');
+    const adCd = stage.querySelector<HTMLElement>('[data-jz-adcd]');
+    const soundBtn = stage.querySelector<HTMLButtonElement>('[data-jz-sound]');
+
+    const params = new URLSearchParams(location.search);
+    const raw = params.get('seed');
+    const seed =
+      raw !== null && raw !== '' && !Number.isNaN(Number(raw)) ? Number(raw) : undefined;
+
+    let host: GameHostHandle | null = null;
+    let lastInterstitial = 0;
+    let muted = false;
+
+    const show = (el: HTMLElement | null) => el && (el.hidden = false);
+    const hide = (el: HTMLElement | null) => el && (el.hidden = true);
+    const track = (e: string, p?: Record<string, unknown>) =>
+      (window as unknown as { jzTrack?: (e: string, p?: unknown) => void }).jzTrack?.(e, p);
+    const tt = (key: string) => {
+      const short = key.split('.').pop() || key;
+      return strings[short] ?? strings[key] ?? key;
+    };
+
+    function runAd(seconds: number): Promise<void> {
+      return new Promise((resolve) => {
+        show(ovAd);
+        let left = Math.ceil(seconds);
+        if (adCd) adCd.textContent = String(left);
+        const iv = window.setInterval(() => {
+          left -= 1;
+          if (adCd) adCd.textContent = String(Math.max(0, left));
+          if (left <= 0) {
+            window.clearInterval(iv);
+            hide(ovAd);
+            resolve();
+          }
+        }, 1000);
+      });
+    }
+
+    function maybeInterstitial(): Promise<void> {
+      const cap = AD_CONFIG.frequencyCapSeconds || 60;
+      if ((Date.now() - lastInterstitial) / 1000 < cap) return Promise.resolve();
+      lastInterstitial = Date.now();
+      track('ad_shown', { type: 'interstitial', slug });
+      return runAd(1.6);
+    }
+
+    async function onGameOver(score: number) {
+      await maybeInterstitial();
+      if (finalScoreEl) finalScoreEl.textContent = `${strings.score}: ${score}`;
+      show(ovOver);
+    }
+
+    function requestReward(): Promise<boolean> {
+      track('ad_shown', { type: 'rewarded', slug });
+      return runAd(2).then(() => {
+        track('reward_granted', { slug });
+        return true;
+      });
+    }
+
+    const syncSound = () => soundBtn && (soundBtn.textContent = muted ? '🔇' : '🔊');
+
+    async function boot() {
+      hide(ovStart);
+      show(ovLoading);
+      const game = await loadGame(slug);
+      if (!game) {
+        if (ovLoading) ovLoading.innerHTML = '<p>😕</p>';
+        return;
+      }
+      host = await createGameHost({
+        game,
+        mount: mount!,
+        locale,
+        seed,
+        t: tt,
+        hooks: {
+          onAnalytics: (e, p) => track(e, p),
+          onGameOver: (score) => void onGameOver(score),
+          onRewardRequested: () => requestReward(),
+        },
+      });
+      (window as unknown as { __jzHost?: GameHostHandle }).__jzHost = host;
+      hide(ovLoading);
+      syncSound();
+    }
+
+    stage.querySelector('[data-jz-play]')?.addEventListener('click', () => void boot());
+    stage.querySelector('[data-jz-again]')?.addEventListener('click', () => {
+      hide(ovOver);
+      host?.restart();
+    });
+    stage.querySelector('[data-jz-restart]')?.addEventListener('click', () => {
+      hide(ovOver);
+      host?.restart();
+    });
+    soundBtn?.addEventListener('click', () => {
+      muted = !muted;
+      host?.setMuted(muted);
+      syncSound();
+    });
+    stage.querySelector('[data-jz-pause]')?.addEventListener('click', () => {
+      if (!host) return;
+      host.isPaused() ? host.resume() : host.pause();
+    });
+    stage.querySelector('[data-jz-fs]')?.addEventListener('click', () => {
+      if (document.fullscreenElement) void document.exitFullscreen?.();
+      else void stage.requestFullscreen?.();
+    });
+    window.addEventListener('pagehide', () => host?.destroy(), { once: true });
+  }
+</script>
+
+<style>
+  .jz-stage {
+    max-width: 540px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .jz-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: min(72vh, 760px);
+    border-radius: var(--radius-jelly, 1.25rem);
+    overflow: hidden;
+    background: #120a24;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    touch-action: none;
+  }
+  .jz-mount {
+    position: absolute;
+    inset: 0;
+  }
+  .jz-mount :global(canvas) {
+    width: 100%;
+    height: 100%;
+  }
+  .jz-ov {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    text-align: center;
+    background: rgba(10, 5, 24, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 2;
+  }
+  .jz-ov[hidden] {
+    display: none;
+  }
+  .jz-ov--start {
+    background:
+      radial-gradient(120% 80% at 50% 20%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%),
+      rgba(10, 5, 24, 0.5);
+  }
+  .jz-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--color-grape, #a855f7), var(--color-bubble, #ff4d8d));
+    box-shadow: 0 10px 26px rgba(168, 85, 247, 0.5);
+    transition: transform 0.12s ease;
+  }
+  .jz-play:hover {
+    transform: scale(1.05);
+  }
+  .jz-play .tri {
+    font-size: 1.2rem;
+  }
+  .jz-ov--over h3 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  .jz-finalscore {
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .jz-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--color-bubble, #ff4d8d);
+    animation: jzspin 0.8s linear infinite;
+  }
+  @keyframes jzspin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .jz-adlabel {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .jz-adbox {
+    display: grid;
+    place-items: center;
+    width: 70%;
+    max-width: 320px;
+    aspect-ratio: 16 / 9;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 0.7rem;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .jz-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+  }
+  .jz-controls button {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-ink, #f4ecff);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+  .jz-controls button:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+</style>

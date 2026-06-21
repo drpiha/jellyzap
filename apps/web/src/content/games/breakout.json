@@ -1,0 +1,140 @@
+{
+  "slug": "breakout",
+  "category": "arcade",
+  "accent": "#fb7185",
+  "order": 9,
+  "playable": true,
+  "title": { "en": "Brick Breaker", "tr": "Tuğla Kır", "de": "Brick Breaker" },
+  "tagline": {
+    "en": "Bounce the ball and smash every brick!",
+    "tr": "Topu sektir ve tüm tuğlaları kır!",
+    "de": "Lass den Ball springen und zertrümmere jeden Stein!"
+  },
+  "description": {
+    "en": "Brick Breaker is the timeless arcade smash-'em-up where you slide a paddle to keep a bouncing ball in play and demolish a colorful wall of bricks. Angle each bounce off your paddle to aim, clear stubborn rows, and chase combos for a higher score. Miss the ball and you lose a life — run out and it's game over. Easy to pick up, satisfying to master, and endlessly replayable, Brick Breaker is the perfect way to test your reflexes one rally at a time.",
+    "tr": "Tuğla Kır, sektirdiğin topu oyunda tutmak için bir raketi kaydırıp rengârenk bir tuğla duvarını yıktığın zamansız arcade klasiğidir. Her sekişi raketinle açılandırarak nişan al, inatçı sıraları temizle ve daha yüksek skor için kombolar peşinde koş. Topu kaçırırsan bir can kaybedersin — canların biterse oyun sona erer. Öğrenmesi kolay, ustalaşması keyifli ve sonsuz tekrar oynanabilir; Tuğla Kır, reflekslerini tek tek ralliyle sınamanın en güzel yolu.",
+    "de": "Brick Breaker ist der zeitlose Arcade-Klassiker: Steuere ein Paddel, halte einen springenden Ball im Spiel und zertrümmere eine bunte Mauer aus Steinen. Lenke jeden Abpraller über dein Paddel, um zu zielen, räume hartnäckige Reihen ab und jage Kombos für mehr Punkte. Verfehlst du den Ball, verlierst du ein Leben — sind alle weg, ist das Spiel vorbei. Leicht zu lernen, herrlich befriedigend zu meistern und endlos wiederspielbar — Brick Breaker testet deine Reflexe Ballwechsel für Ballwechsel."
+  },
+  "howToPlay": {
+    "en": [
+      "Move your mouse or finger to slide the paddle left and right.",
+      "Tap, click, or press Space to launch the ball into play.",
+      "Bounce the ball off the paddle to keep it from falling.",
+      "Hit each brick to break it and add points to your score.",
+      "Clear every brick to win — but don't run out of lives!"
+    ],
+    "tr": [
+      "Raketi sağa sola kaydırmak için fareni ya da parmağını hareket ettir.",
+      "Topu oyuna sürmek için dokun, tıkla veya Boşluk tuşuna bas.",
+      "Düşmemesi için topu raketten sektir.",
+      "Her tuğlaya vurarak onu kır ve skoruna puan ekle.",
+      "Kazanmak için tüm tuğlaları temizle — ama canlarını tüketme!"
+    ],
+    "de": [
+      "Bewege Maus oder Finger, um das Paddel nach links und rechts zu schieben.",
+      "Tippe, klicke oder drücke die Leertaste, um den Ball zu starten.",
+      "Lass den Ball vom Paddel abprallen, damit er nicht herunterfällt.",
+      "Triff jeden Stein, um ihn zu zerschlagen und Punkte zu sammeln.",
+      "Räume alle Steine ab, um zu gewinnen — aber verbrauche nicht alle Leben!"
+    ]
+  },
+  "controls": {
+    "en": [
+      "Mouse or touch — slide the paddle",
+      "Arrow keys or A/D — move the paddle",
+      "Click, tap or Space — launch the ball"
+    ],
+    "tr": [
+      "Fare veya dokunmatik — raketi kaydır",
+      "Ok tuşları veya A/D — raketi hareket ettir",
+      "Tıkla, dokun veya Boşluk — topu fırlat"
+    ],
+    "de": [
+      "Maus oder Touch — Paddel schieben",
+      "Pfeiltasten oder A/D — Paddel bewegen",
+      "Klick, Tipp oder Leertaste — Ball starten"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Hit the ball with the edge of the paddle to send it off at a sharp angle.",
+      "Keep the paddle moving toward the ball instead of waiting in the center.",
+      "Aim for a gap in one column to send the ball bouncing along the top row.",
+      "Stay calm when the ball speeds up — small paddle nudges beat big swings."
+    ],
+    "tr": [
+      "Topu sert bir açıyla göndermek için raketin kenarıyla vur.",
+      "Ortada beklemek yerine raketi sürekli topa doğru hareket ettir.",
+      "Bir sütunda boşluk açıp topu üst sıra boyunca sektirmeye çalış.",
+      "Top hızlanınca sakin kal — büyük savruluşlar yerine küçük dokunuşlar daha iyidir."
+    ],
+    "de": [
+      "Triff den Ball mit der Paddelkante, um ihn in einem scharfen Winkel wegzuschicken.",
+      "Bewege das Paddel zum Ball, statt in der Mitte zu warten.",
+      "Schlage eine Lücke in eine Spalte und lass den Ball entlang der obersten Reihe springen.",
+      "Bleib ruhig, wenn der Ball schneller wird — kleine Korrekturen schlagen große Bewegungen."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Brick Breaker free to play?",
+        "a": "Yes! Brick Breaker on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Brick Breaker on mobile?",
+        "a": "Just slide your finger across the screen to move the paddle, and tap to launch the ball. It works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you win at Brick Breaker?",
+        "a": "Clear every brick on the level without losing all your lives. Each brick you smash adds to your score."
+      },
+      {
+        "q": "What happens when I miss the ball?",
+        "a": "If the ball falls below the paddle you lose a life. You start with three lives, and the game ends when they run out."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Tuğla Kır oyunu ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Tuğla Kır tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Tuğla Kır nasıl oynanır?",
+        "a": "Raketi hareket ettirmek için parmağını ekranda kaydır, topu fırlatmak için dokun. Telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Tuğla Kır oyununda nasıl kazanılır?",
+        "a": "Tüm canlarını kaybetmeden seviyedeki bütün tuğlaları temizle. Kırdığın her tuğla skoruna eklenir."
+      },
+      {
+        "q": "Topu kaçırınca ne olur?",
+        "a": "Top raketin altına düşerse bir can kaybedersin. Üç canla başlarsın ve canların bitince oyun sona erer."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Brick Breaker kostenlos?",
+        "a": "Ja! Brick Breaker auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Brick Breaker auf dem Handy?",
+        "a": "Wische einfach mit dem Finger über den Bildschirm, um das Paddel zu bewegen, und tippe, um den Ball zu starten. Es läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie gewinnt man bei Brick Breaker?",
+        "a": "Räume alle Steine des Levels ab, ohne all deine Leben zu verlieren. Jeder zerschlagene Stein erhöht deine Punktzahl."
+      },
+      {
+        "q": "Was passiert, wenn ich den Ball verfehle?",
+        "a": "Fällt der Ball unter das Paddel, verlierst du ein Leben. Du startest mit drei Leben, und das Spiel endet, wenn sie aufgebraucht sind."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "brick breaker, breakout game, play breakout online, free brick breaker, classic arcade ball game",
+    "tr": "tuğla kır, breakout oyunu, breakout oyna, ücretsiz tuğla kır, klasik arcade top oyunu",
+    "de": "brick breaker, breakout spiel, breakout online spielen, kostenloses brick breaker, klassisches arcade ballspiel"
+  },
+  "tags": ["breakout", "brick-breaker", "arcade", "classic", "high-score"]
+}

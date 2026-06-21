@@ -1,0 +1,137 @@
+{
+  "slug": "flappy",
+  "category": "arcade",
+  "accent": "#2dd4bf",
+  "order": 8,
+  "playable": true,
+  "title": { "en": "Flappy Jelly", "tr": "Zıpır Kuş", "de": "Flappy Jelly" },
+  "tagline": {
+    "en": "Tap to fly and squeeze through the pipes!",
+    "tr": "Dokun, uç ve borulardan sıyrıl!",
+    "de": "Tippe zum Fliegen und schlüpf durch die Röhren!"
+  },
+  "description": {
+    "en": "Flappy Jelly is a wonderfully simple one-tap flyer that is fiendishly hard to master. Tap, click, or press a key to give your little jelly bird a flap of its wings, then time each tap to glide through the gaps between the wobbly pipes. Gravity is always pulling you down, so the rhythm never stops — one moment of hesitation and you'll clip a pipe or hit the ground. With instant restarts and a high score that begs to be beaten, Flappy Jelly is the perfect pocket-sized challenge for one more try.",
+    "tr": "Zıpır Kuş, öğrenmesi çok kolay ama ustalaşması zorlu, tek dokunuşla oynanan bir uçuş oyunudur. Dokun, tıkla ya da bir tuşa bas; minik jöle kuşun kanat çırpsın ve her dokunuşu zamanlayarak sallanan boruların arasındaki boşluklardan süzül. Yerçekimi seni hep aşağı çeker, bu yüzden ritim hiç durmaz — bir anlık tereddüt ve bir boruya takılır ya da yere çarparsın. Anında yeniden başlama ve kırılmayı bekleyen bir rekorla Zıpır Kuş, 'bir kez daha' demek için biçilmiş kaftan.",
+    "de": "Flappy Jelly ist ein herrlich simpler Ein-Tipp-Flieger, der teuflisch schwer zu meistern ist. Tippe, klicke oder drücke eine Taste, damit dein kleiner Jelly-Vogel mit den Flügeln schlägt, und timing jeden Tipp, um durch die Lücken zwischen den wackeligen Röhren zu gleiten. Die Schwerkraft zieht dich ständig nach unten, der Rhythmus hört also nie auf — ein Moment des Zögerns und du streifst eine Röhre oder stürzt zu Boden. Mit sofortigem Neustart und einem Rekord, der nach Bestleistung schreit, ist Flappy Jelly die perfekte Herausforderung für nur noch einen Versuch."
+  },
+  "howToPlay": {
+    "en": [
+      "Tap the screen, click, or press Space to flap upward.",
+      "Each flap lifts the bird; gravity constantly pulls it back down.",
+      "Steer through the gap between each pair of pipes.",
+      "Don't touch the pipes, the ground, or the ceiling.",
+      "Pass a pipe to score a point and chase your high score!"
+    ],
+    "tr": [
+      "Yukarı çırpınmak için ekrana dokun, tıkla veya Boşluk tuşuna bas.",
+      "Her çırpınış kuşu yükseltir; yerçekimi onu sürekli aşağı çeker.",
+      "Her boru çiftinin arasındaki boşluktan geç.",
+      "Borulara, yere veya tavana dokunma.",
+      "Bir boruyu geçince puan kazan ve rekorunun peşine düş!"
+    ],
+    "de": [
+      "Tippe auf den Bildschirm, klicke oder drücke die Leertaste, um nach oben zu flattern.",
+      "Jeder Flügelschlag hebt den Vogel; die Schwerkraft zieht ihn ständig zurück.",
+      "Steuere durch die Lücke zwischen jedem Röhrenpaar.",
+      "Berühre weder die Röhren noch den Boden oder die Decke.",
+      "Passiere eine Röhre für einen Punkt und jage deinen Rekord!"
+    ]
+  },
+  "controls": {
+    "en": [
+      "Tap or click — flap upward",
+      "Space or Up Arrow — flap upward"
+    ],
+    "tr": [
+      "Dokun veya tıkla — yukarı çırpın",
+      "Boşluk veya Yukarı Ok — yukarı çırpın"
+    ],
+    "de": [
+      "Tippen oder klicken — nach oben flattern",
+      "Leertaste oder Pfeil hoch — nach oben flattern"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Tap in a steady rhythm instead of mashing — small, frequent flaps are easier to control.",
+      "Aim for the centre of each gap to leave room for mistakes.",
+      "Let the bird drop a little before the next gap, then flap to line up.",
+      "Stay calm after a near miss; panic-tapping sends you straight into the ceiling."
+    ],
+    "tr": [
+      "Tuşa basıp durmak yerine düzenli bir ritimde dokun — küçük ve sık çırpınışları kontrol etmek daha kolaydır.",
+      "Hata payı bırakmak için her boşluğun ortasını hedefle.",
+      "Sonraki boşluktan önce kuşun biraz alçalmasına izin ver, sonra hizalanmak için çırpın.",
+      "Ucuz atlattıktan sonra sakin kal; panikle dokunmak seni doğrudan tavana çarptırır."
+    ],
+    "de": [
+      "Tippe in gleichmäßigem Rhythmus statt wild zu hämmern — kleine, häufige Schläge sind leichter zu kontrollieren.",
+      "Ziele auf die Mitte jeder Lücke, um Spielraum für Fehler zu lassen.",
+      "Lass den Vogel vor der nächsten Lücke etwas sinken und flattere dann zum Ausrichten.",
+      "Bleib nach einem Beinahe-Treffer ruhig; Panik-Tippen schickt dich direkt an die Decke."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Flappy Jelly free to play?",
+        "a": "Yes! Flappy Jelly on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Flappy Jelly on mobile?",
+        "a": "Just tap anywhere on the screen to flap. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you win at Flappy Jelly?",
+        "a": "There is no final level — the goal is to fly through as many pipes as possible and set the highest score without crashing."
+      },
+      {
+        "q": "Why does Flappy Jelly feel so hard?",
+        "a": "Gravity never stops pulling the bird down, so you must keep tapping with precise timing — that constant rhythm is what makes it so addictive."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Zıpır Kuş ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Zıpır Kuş tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Zıpır Kuş nasıl oynanır?",
+        "a": "Çırpınmak için ekranda herhangi bir yere dokunman yeterli. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Zıpır Kuş'ta nasıl kazanılır?",
+        "a": "Son bir seviye yoktur — amaç, çarpmadan olabildiğince çok borudan geçip en yüksek skoru yapmaktır."
+      },
+      {
+        "q": "Zıpır Kuş neden bu kadar zor hissettiriyor?",
+        "a": "Yerçekimi kuşu durmadan aşağı çeker, bu yüzden hassas bir zamanlamayla dokunmaya devam etmelisin — o sürekli ritim oyunu bağımlılık yapan şeydir."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Flappy Jelly kostenlos?",
+        "a": "Ja! Flappy Jelly auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Flappy Jelly auf dem Handy?",
+        "a": "Tippe einfach irgendwo auf den Bildschirm, um zu flattern. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie gewinnt man bei Flappy Jelly?",
+        "a": "Es gibt kein Endlevel — das Ziel ist, durch möglichst viele Röhren zu fliegen und den höchsten Punktestand zu erreichen, ohne zu verunglücken."
+      },
+      {
+        "q": "Warum fühlt sich Flappy Jelly so schwer an?",
+        "a": "Die Schwerkraft zieht den Vogel ununterbrochen nach unten, du musst also mit präzisem Timing weitertippen — dieser ständige Rhythmus macht es so süchtig."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "flappy game, play flappy online, free flappy bird game, one tap flyer, tap to fly arcade",
+    "tr": "flappy oyunu, flappy oyna, ücretsiz flappy bird oyunu, tek dokunuş uçuş, dokun ve uç arcade",
+    "de": "flappy spiel, flappy online spielen, kostenloses flappy bird spiel, ein tipp flieger, tippen zum fliegen arcade"
+  },
+  "tags": ["flappy", "bird", "arcade", "one-tap", "high-score"]
+}

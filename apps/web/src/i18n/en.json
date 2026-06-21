@@ -1,0 +1,156 @@
+{
+  "site": {
+    "name": "Jellyzap",
+    "tagline": "Free online games for everyone",
+    "description": "Play the best free online games at Jellyzap — Snake, Tetris, 2048, word & wheel games, kart battles and more. No download, instant play on mobile and desktop."
+  },
+  "nav": {
+    "home": "Home",
+    "games": "All Games",
+    "categories": "Categories",
+    "play": "Play"
+  },
+  "home": {
+    "hero": {
+      "title": "Play. Zap. Have fun!",
+      "subtitle": "Hundreds of free games, zero downloads. Jump straight into the action on any device.",
+      "cta": "Play now"
+    },
+    "trending": "🔥 Trending now",
+    "popular": "⭐ Most popular",
+    "allGames": "All games",
+    "byCategory": "Browse by category",
+    "seoHeading": "Free online games — instant play, no download",
+    "seoBody": "Jellyzap is a free online games portal built for kids, teens and the young at heart. Every game runs right in your browser — no installs, no waiting. Play arcade classics like Snake and Tetris, brain teasers like 2048 and Match-3, word games, Wheel of Fortune and fast kart battles on your phone, tablet or computer. New games are added all the time, all free to play and family friendly."
+  },
+  "games": {
+    "title": "All games",
+    "subtitle": "Every Jellyzap game in one place — pick one and play instantly.",
+    "count": "{count} games"
+  },
+  "category": {
+    "titleTemplate": "{name} games",
+    "intro": "Play the best free {name} games online — instant play, no download."
+  },
+  "categories": {
+    "arcade": { "name": "Arcade", "desc": "Fast reflexes and classic arcade fun." },
+    "puzzle": { "name": "Puzzle", "desc": "Brain teasers that make you think." },
+    "word": { "name": "Word", "desc": "Spell, guess and win with words." },
+    "action": { "name": "Action", "desc": "Battles and high-speed challenges." }
+  },
+  "game": {
+    "play": "Play",
+    "playNow": "Play now",
+    "loading": "Loading game…",
+    "score": "Score",
+    "best": "Best",
+    "gameOver": "Game Over",
+    "playAgain": "Play again",
+    "lives": "Lives",
+    "moves": "Moves",
+    "pairs": "Pairs",
+    "spin": "Spin",
+    "tapToLaunch": "Tap to launch",
+    "value": "Value",
+    "word": "Word",
+    "win": "You win!",
+    "youWin": "You win!",
+    "pause": "Pause",
+    "resume": "Resume",
+    "sound": "Sound",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off",
+    "fullscreen": "Fullscreen",
+    "restart": "Restart",
+    "howToPlay": "How to play",
+    "controls": "Controls",
+    "tips": "Tips & tricks",
+    "faq": "Frequently asked questions",
+    "related": "More games like this",
+    "about": "About this game",
+    "rotateHint": "Rotate your device for the best experience.",
+    "tapToStart": "Tap to start",
+    "continue": "Continue",
+    "watchToContinue": "Watch an ad to continue",
+    "noReward": "No thanks"
+  },
+  "common": {
+    "advertisement": "Advertisement",
+    "backToGames": "Back to all games",
+    "home": "Home",
+    "menu": "Menu",
+    "close": "Close",
+    "language": "Language",
+    "loading": "Loading…"
+  },
+  "footer": {
+    "tagline": "Free online games, made with love and a little jelly.",
+    "explore": "Explore",
+    "legal": "Legal",
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "rights": "All rights reserved.",
+    "disclaimer": "Jellyzap is a free, ad-supported games portal. Games are intended for entertainment."
+  },
+  "consent": {
+    "title": "We value your privacy",
+    "body": "We use cookies to run ads and measure traffic so we can keep Jellyzap free. You choose what to allow. Ads shown to younger players are non-personalized.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject non-essential",
+    "customize": "Customize",
+    "necessary": "Strictly necessary",
+    "necessaryDesc": "Required for the site to work. Always on.",
+    "analytics": "Analytics",
+    "analyticsDesc": "Helps us understand which games you love.",
+    "ads": "Advertising",
+    "adsDesc": "Lets us show ads that keep Jellyzap free.",
+    "save": "Save choices",
+    "privacyLink": "Read our Privacy Policy"
+  },
+  "about": {
+    "title": "About Jellyzap",
+    "body": [
+      "Jellyzap is a free online games portal made for kids, teens and anyone who loves a quick, colourful game. Everything runs instantly in your browser — no downloads, no sign-ups.",
+      "Our mission is simple: bright, friendly, bite-sized games that work great on phones, tablets and computers, in your language.",
+      "We add new games regularly. Jellyzap is free to play and supported by advertising."
+    ]
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "body": [
+      "This Privacy Policy explains how Jellyzap (\"we\") handles information when you use our website.",
+      "Cookies & local storage: We use local storage to remember your settings (such as sound and high scores) and, with your consent, cookies for analytics and advertising.",
+      "Analytics: With your consent we use Google Analytics to understand how the site is used. This data is aggregated and helps us improve our games.",
+      "Advertising: With your consent we display ads to keep Jellyzap free. Because our games appeal to younger audiences, advertising in the kids section is treated as child-directed and non-personalized where required by law (e.g. COPPA, GDPR).",
+      "Your choices: You can change or withdraw your consent at any time using the cookie settings link in the footer.",
+      "Contact: If you have any questions about this policy, please contact us through the website."
+    ]
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "body": [
+      "By using Jellyzap you agree to these Terms of Use.",
+      "Jellyzap and its games are provided \"as is\" for personal, non-commercial entertainment.",
+      "You agree not to misuse the site, attempt to disrupt it, or use it in any unlawful way.",
+      "We may update or remove games and features at any time. We are not liable for any loss arising from the use of the site.",
+      "These terms may be updated from time to time; continued use means you accept the changes."
+    ]
+  },
+  "seo": {
+    "homeTitle": "Jellyzap — Free Online Games | Play Instantly, No Download",
+    "homeDescription": "Play 100s of free online games at Jellyzap. Snake, Tetris, 2048, word games, Wheel of Fortune, kart battles & more. No download — instant play on mobile & desktop.",
+    "gamesTitle": "All Free Online Games | Jellyzap",
+    "gamesDescription": "Browse every free game on Jellyzap and play instantly in your browser — arcade, puzzle, word and action games for all ages.",
+    "gameTitleTemplate": "{game} — Play Online for Free | Jellyzap",
+    "categoryTitleTemplate": "Free {name} Games — Play Online | Jellyzap"
+  },
+  "notFound": {
+    "title": "Oops! Page not found",
+    "body": "The page you are looking for has wandered off. Let's get you back to the games.",
+    "cta": "Back to games"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content"
+  }
+}

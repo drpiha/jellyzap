@@ -1,0 +1,37 @@
+{
+  "name": "jellyzap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @jellyzap/web dev",
+    "build": "pnpm --filter @jellyzap/web build",
+    "preview": "pnpm --filter @jellyzap/web preview",
+    "typecheck": "tsc -p tsconfig.check.json && pnpm --filter @jellyzap/web run typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "e2e": "pnpm --filter @jellyzap/web e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:determinism": "node scripts/check-determinism.mjs",
+    "gen:icons": "node scripts/gen-icons.mjs",
+    "check": "pnpm run check:determinism && pnpm run typecheck && pnpm run test && pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@vitest/coverage-v8": "^2.1.9",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "sharp": "^0.34.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
+  }
+}

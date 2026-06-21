@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f0d3d" />
+      <stop offset="1" stop-color="#16092e" />
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a855f7" />
+      <stop offset="1" stop-color="#ff4d8d" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g transform="translate(130,180)">
+    <rect width="270" height="270" rx="88" fill="url(#g)" />
+    <circle cx="95" cy="120" r="34" fill="#fff" />
+    <circle cx="175" cy="120" r="34" fill="#fff" />
+    <circle cx="101" cy="127" r="16" fill="#160a2e" />
+    <circle cx="181" cy="127" r="16" fill="#160a2e" />
+    <path d="M88 185 q47 46 94 0" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" />
+  </g>
+  <text x="460" y="300" font-family="'Nunito','DejaVu Sans',sans-serif" font-size="120" font-weight="800" fill="#f4ecff">Jelly<tspan fill="#ff4d8d">zap</tspan></text>
+  <text x="466" y="372" font-family="'Nunito','DejaVu Sans',sans-serif" font-size="40" fill="#b9a7e0">Free online games — play instantly, no download</text>
+</svg>

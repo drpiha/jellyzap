@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GameCard from '../../../components/GameCard.astro';
+import AdSlot from '../../../components/ads/AdSlot.astro';
+import { getPlayableGames, L } from '../../../lib/games';
+import { CATEGORIES, CATEGORY_ICON } from '../../../lib/categories';
+import {
+  localeStaticPaths,
+  localizePath,
+  useTranslations,
+  defaultLocale,
+  type Locale,
+} from '../../../i18n';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const locale = (Astro.params.locale ?? defaultLocale) as Locale;
+const t = useTranslations(locale);
+const games = await getPlayableGames();
+const site = (Astro.site ?? new URL('https://jellyzap.com')).href;
+
+const byCategory = CATEGORIES.map((c) => ({
+  id: c,
+  games: games.filter((g) => g.data.category === c),
+})).filter((group) => group.games.length > 0);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('seo.gamesTitle'),
+    url: new URL(localizePath(locale, '/games'), site).href,
+    inLanguage: locale,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: games.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(localizePath(locale, `/g/${g.data.slug}`), site).href,
+      name: L(g.data.title, locale),
+    })),
+  },
+];
+---
+
+<BaseLayout
+  locale={locale}
+  title={t('seo.gamesTitle')}
+  description={t('seo.gamesDescription')}
+  path="/games"
+  jsonLd={jsonLd}
+>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>{t('games.title')}</h1>
+      <p>{t('games.subtitle')} · {t('games.count', { count: games.length })}</p>
+    </header>
+
+    <AdSlot placement="banner" locale={locale} />
+
+    {
+      byCategory.map((group) => (
+        <section class="section">
+          <h2>
+            <a href={localizePath(locale, `/c/${group.id}`)}>
+              <span aria-hidden="true">{CATEGORY_ICON[group.id]}</span> {t(`categories.${group.id}.name`)}
+            </a>
+          </h2>
+          <div class="grid">
+            {group.games.map((g) => (
+              <GameCard game={g} locale={locale} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  .page-head h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    margin: 0;
+  }
+  .page-head p {
+    color: var(--color-ink-dim, #b9a7e0);
+    margin: 0.3rem 0 1rem;
+  }
+  .section {
+    margin: 1.6rem 0;
+  }
+  .section h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.9rem;
+  }
+  .section h2 a:hover {
+    color: var(--color-bubble, #ff4d8d);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+</style>

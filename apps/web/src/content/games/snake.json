@@ -1,0 +1,128 @@
+{
+  "slug": "snake",
+  "category": "arcade",
+  "accent": "#22d3ee",
+  "order": 1,
+  "playable": true,
+  "title": { "en": "Snake", "tr": "Yılan", "de": "Snake" },
+  "tagline": {
+    "en": "Eat, grow, and don't bite yourself!",
+    "tr": "Ye, büyü ve kendini ısırma!",
+    "de": "Iss, wachse und beiß dich nicht selbst!"
+  },
+  "description": {
+    "en": "Snake is the legendary arcade classic where you guide an ever-growing snake around the board, gobbling up food to score points. Every snack makes your tail longer — and the longer you get, the harder it is to avoid crashing into the walls or your own body. Simple to learn and impossible to put down, Snake is the perfect quick game to beat your high score again and again.",
+    "tr": "Yılan, sürekli büyüyen bir yılanı tahtada yönlendirip puan kazanmak için yem topladığın efsanevi arcade klasiğidir. Her atıştırmalık kuyruğunu uzatır — ve uzadıkça duvarlara veya kendi gövdene çarpmamak zorlaşır. Öğrenmesi kolay, bırakması imkânsız; Yılan, rekorunu tekrar tekrar kırmak için mükemmel bir hızlı oyundur.",
+    "de": "Snake ist der legendäre Arcade-Klassiker: Steuere eine stetig wachsende Schlange über das Feld und sammle Futter für Punkte. Jeder Happen macht deinen Schwanz länger — und je länger du wirst, desto schwerer ist es, Wände oder den eigenen Körper zu meiden. Leicht zu lernen und kaum wegzulegen — perfekt, um immer wieder deinen Rekord zu knacken."
+  },
+  "howToPlay": {
+    "en": [
+      "Use the arrow keys, WASD, or swipe to steer the snake.",
+      "Guide the snake's head onto the glowing food to eat it.",
+      "Each piece of food makes you longer and adds to your score.",
+      "Avoid hitting the walls or running into your own tail.",
+      "Survive as long as you can and beat your high score!"
+    ],
+    "tr": [
+      "Yılanı yönlendirmek için ok tuşlarını, WASD'yi veya kaydırmayı kullan.",
+      "Yılanın başını parlayan yemin üzerine getirip ye.",
+      "Her yem seni uzatır ve skorunu artırır.",
+      "Duvarlara veya kendi kuyruğuna çarpmaktan kaçın.",
+      "Olabildiğince hayatta kal ve rekorunu kır!"
+    ],
+    "de": [
+      "Steuere die Schlange mit den Pfeiltasten, WASD oder per Wischen.",
+      "Führe den Kopf der Schlange auf das leuchtende Futter, um es zu fressen.",
+      "Jedes Futter macht dich länger und erhöht deine Punkte.",
+      "Stoße nicht gegen Wände oder deinen eigenen Schwanz.",
+      "Überlebe so lange wie möglich und knacke deinen Rekord!"
+    ]
+  },
+  "controls": {
+    "en": ["Arrow keys or WASD — steer the snake", "Swipe on touchscreens — steer the snake"],
+    "tr": ["Ok tuşları veya WASD — yılanı yönlendir", "Dokunmatik ekranda kaydır — yılanı yönlendir"],
+    "de": ["Pfeiltasten oder WASD — Schlange lenken", "Auf Touchscreens wischen — Schlange lenken"]
+  },
+  "tips": {
+    "en": [
+      "Plan your turns early and leave yourself room near the walls.",
+      "Use the center of the board and avoid trapping your own tail.",
+      "Head for food in a straight line, then turn at the last moment.",
+      "The snake speeds up as you score, so stay calm and focused."
+    ],
+    "tr": [
+      "Dönüşlerini erken planla ve duvar kenarlarında kendine alan bırak.",
+      "Tahtanın ortasını kullan ve kuyruğunu köşeye sıkıştırma.",
+      "Yeme düz bir çizgide git, son anda dön.",
+      "Skor arttıkça yılan hızlanır; sakin ve odaklı kal."
+    ],
+    "de": [
+      "Plane deine Kurven früh und lass dir Platz an den Wänden.",
+      "Nutze die Mitte des Feldes und sperre deinen Schwanz nicht ein.",
+      "Steuere in gerader Linie zum Futter und dreh im letzten Moment.",
+      "Die Schlange wird mit steigender Punktzahl schneller — bleib ruhig."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Snake free to play?",
+        "a": "Yes! Snake on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Snake on mobile?",
+        "a": "Just swipe in the direction you want the snake to move. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you win at Snake?",
+        "a": "There is no final level — the goal is to eat as much food as possible and set the highest score without crashing."
+      },
+      {
+        "q": "Why does the snake get faster?",
+        "a": "The snake speeds up as your score grows, making the game more challenging the longer you survive."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Yılan oyunu ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Yılan tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Yılan nasıl oynanır?",
+        "a": "Yılanın gitmesini istediğin yöne kaydırman yeterli. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Yılan oyununda nasıl kazanılır?",
+        "a": "Son bir seviye yoktur — amaç, çarpmadan olabildiğince çok yem yiyip en yüksek skoru yapmaktır."
+      },
+      {
+        "q": "Yılan neden hızlanıyor?",
+        "a": "Skorun arttıkça yılan hızlanır; hayatta kaldıkça oyun zorlaşır."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Snake kostenlos?",
+        "a": "Ja! Snake auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Snake auf dem Handy?",
+        "a": "Wische einfach in die Richtung, in die sich die Schlange bewegen soll. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie gewinnt man bei Snake?",
+        "a": "Es gibt kein Endlevel — das Ziel ist, möglichst viel Futter zu fressen und den höchsten Punktestand zu erreichen, ohne zu verunglücken."
+      },
+      {
+        "q": "Warum wird die Schlange schneller?",
+        "a": "Mit steigender Punktzahl wird die Schlange schneller — je länger du überlebst, desto schwieriger wird es."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "snake game, play snake online, free snake game, classic snake, retro arcade",
+    "tr": "yılan oyunu, yılan oyna, ücretsiz yılan oyunu, klasik yılan, retro arcade",
+    "de": "snake spiel, snake online spielen, kostenloses snake spiel, klassisches snake, retro arcade"
+  },
+  "tags": ["snake", "classic", "arcade", "retro", "high-score"]
+}

@@ -1,0 +1,238 @@
+---
+import { GA_ID } from '../../lib/analytics';
+import { AD_CONFIG } from '../../lib/ads';
+import { useTranslations, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const cfg = {
+  gaId: GA_ID,
+  adsEnabled: AD_CONFIG.enabled,
+  publisherId: AD_CONFIG.publisherId,
+};
+---
+
+<div
+  id="jz-consent"
+  class="jz-consent"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="jz-consent-title"
+  hidden
+>
+  <div class="jz-consent__card">
+    <h2 id="jz-consent-title">{t('consent.title')}</h2>
+    <p>{t('consent.body')}</p>
+
+    <div class="jz-consent__details" data-jz-consent-details hidden>
+      <label class="row">
+        <input type="checkbox" checked disabled />
+        <span><strong>{t('consent.necessary')}</strong><br />{t('consent.necessaryDesc')}</span>
+      </label>
+      <label class="row">
+        <input type="checkbox" data-jz-chk-analytics />
+        <span><strong>{t('consent.analytics')}</strong><br />{t('consent.analyticsDesc')}</span>
+      </label>
+      <label class="row">
+        <input type="checkbox" data-jz-chk-ads />
+        <span><strong>{t('consent.ads')}</strong><br />{t('consent.adsDesc')}</span>
+      </label>
+    </div>
+
+    <div class="jz-consent__actions">
+      <button type="button" class="ghost" data-jz-customize>{t('consent.customize')}</button>
+      <button type="button" class="ghost" data-jz-reject>{t('consent.rejectAll')}</button>
+      <button type="button" class="primary" data-jz-save hidden>{t('consent.save')}</button>
+      <button type="button" class="primary" data-jz-accept>{t('consent.acceptAll')}</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ cfg }}>
+  (function () {
+    const KEY = 'jz:consent:v1';
+    const banner = document.getElementById('jz-consent');
+    if (!banner) return;
+    const details = banner.querySelector('[data-jz-consent-details]');
+    const chkAnalytics = banner.querySelector('[data-jz-chk-analytics]');
+    const chkAds = banner.querySelector('[data-jz-chk-ads]');
+    const saveBtn = banner.querySelector('[data-jz-save]');
+    const pending = [];
+
+    let state = null;
+    try {
+      state = JSON.parse(localStorage.getItem(KEY) || 'null');
+    } catch (e) {
+      state = null;
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      } catch (e) {
+        /* storage blocked */
+      }
+    }
+
+    function loadGA() {
+      if (!cfg.gaId || window.__jzGaLoaded) return;
+      window.__jzGaLoaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('js', new Date());
+      window.gtag('consent', 'default', {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: state && state.ads ? 'granted' : 'denied',
+        analytics_storage: 'granted',
+      });
+      window.gtag('config', cfg.gaId, { anonymize_ip: true });
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.gaId;
+      document.head.appendChild(s);
+      for (const [e, p] of pending) window.gtag('event', e, p || {});
+      pending.length = 0;
+    }
+
+    function loadAds() {
+      if (!cfg.adsEnabled || !cfg.publisherId || window.__jzAdsLoaded) return;
+      window.__jzAdsLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.src =
+        'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + cfg.publisherId;
+      document.head.appendChild(s);
+    }
+
+    function apply() {
+      if (state && state.analytics) loadGA();
+      if (state && state.ads) loadAds();
+    }
+
+    window.jzTrack = function (event, params) {
+      if (state && state.analytics && window.gtag) window.gtag('event', event, params || {});
+      else if (state && state.analytics) pending.push([event, params]);
+      else if (window.__jzDebug) console.debug('[jz] event (no consent):', event, params);
+    };
+
+    window.jzConsent = {
+      has: function (cat) {
+        return !!(state && state[cat]);
+      },
+      set: function (v) {
+        state = { analytics: !!v.analytics, ads: !!v.ads, ts: Date.now() };
+        persist();
+        banner.hidden = true;
+        apply();
+      },
+      open: function () {
+        if (chkAnalytics) chkAnalytics.checked = !!(state && state.analytics);
+        if (chkAds) chkAds.checked = !!(state && state.ads);
+        banner.hidden = false;
+      },
+    };
+
+    banner.querySelector('[data-jz-accept]').addEventListener('click', function () {
+      window.jzConsent.set({ analytics: true, ads: true });
+    });
+    banner.querySelector('[data-jz-reject]').addEventListener('click', function () {
+      window.jzConsent.set({ analytics: false, ads: false });
+    });
+    banner.querySelector('[data-jz-customize]').addEventListener('click', function () {
+      if (details) details.hidden = !details.hidden;
+      if (saveBtn) saveBtn.hidden = details ? details.hidden : true;
+    });
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        window.jzConsent.set({
+          analytics: !!(chkAnalytics && chkAnalytics.checked),
+          ads: !!(chkAds && chkAds.checked),
+        });
+      });
+    }
+    document.querySelectorAll('[data-jz-consent-open]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        window.jzConsent.open();
+      });
+    });
+
+    if (state) {
+      apply();
+    } else {
+      banner.hidden = false;
+    }
+  })();
+</script>
+
+<style>
+  .jz-consent {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+  .jz-consent[hidden] {
+    display: none;
+  }
+  .jz-consent__card {
+    width: min(680px, 100%);
+    background: var(--color-panel, #2a1758);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+  .jz-consent__card h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+  }
+  .jz-consent__card p {
+    margin: 0 0 0.6rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .jz-consent__details {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+  }
+  .jz-consent__details .row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: start;
+    font-size: 0.82rem;
+  }
+  .jz-consent__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .jz-consent__actions button {
+    border: 0;
+    cursor: pointer;
+    font-weight: 800;
+    font-family: inherit;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+  }
+  .jz-consent__actions .ghost {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-ink, #f4ecff);
+  }
+  .jz-consent__actions .primary {
+    background: linear-gradient(120deg, var(--color-grape, #a855f7), var(--color-bubble, #ff4d8d));
+    color: white;
+  }
+</style>

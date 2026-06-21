@@ -1,0 +1,36 @@
+{
+  "name": "@jellyzap/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --host",
+    "typecheck": "astro check",
+    "e2e": "playwright test",
+    "e2e:install": "playwright install --with-deps chromium"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.0",
+    "@jellyzap/game-2048": "workspace:*",
+    "@jellyzap/game-breakout": "workspace:*",
+    "@jellyzap/game-flappy": "workspace:*",
+    "@jellyzap/game-karts": "workspace:*",
+    "@jellyzap/game-match3": "workspace:*",
+    "@jellyzap/game-memory": "workspace:*",
+    "@jellyzap/game-sdk": "workspace:*",
+    "@jellyzap/game-snake": "workspace:*",
+    "@jellyzap/game-tetris": "workspace:*",
+    "@jellyzap/game-wheel": "workspace:*",
+    "@jellyzap/game-word": "workspace:*",
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.49.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3"
+  }
+}

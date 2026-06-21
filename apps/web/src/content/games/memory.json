@@ -1,0 +1,128 @@
+{
+  "slug": "memory",
+  "category": "puzzle",
+  "accent": "#38bdf8",
+  "order": 5,
+  "playable": true,
+  "title": { "en": "Memory Match", "tr": "Hafıza Eşleştirme", "de": "Memory" },
+  "tagline": {
+    "en": "Flip the cards and find every matching pair!",
+    "tr": "Kartları çevir ve tüm eşleşen çiftleri bul!",
+    "de": "Drehe die Karten um und finde jedes passende Paar!"
+  },
+  "description": {
+    "en": "Memory Match is the timeless concentration game that puts your recall to the test. Flip two cards at a time to reveal the hidden symbols and try to find every matching pair on the board. Remember where each card lies, link the pairs in as few moves as possible, and clear the whole grid to win. Quick to pick up yet endlessly satisfying, Memory Match is the perfect brain-teaser for a relaxing break or a friendly battle for the best score.",
+    "tr": "Hafıza Eşleştirme, hafızanı sınayan zamansız bir konsantrasyon oyunudur. Her seferinde iki kart çevirerek gizli sembolleri ortaya çıkar ve tahtadaki tüm eşleşen çiftleri bulmaya çalış. Her kartın yerini hatırla, çiftleri mümkün olan en az hamlede eşleştir ve kazanmak için tüm tahtayı temizle. Öğrenmesi kolay ama sürekli keyifli olan Hafıza Eşleştirme, rahat bir mola ya da en iyi skor için dostça bir yarış için mükemmel bir zeka oyunudur.",
+    "de": "Memory ist das zeitlose Konzentrationsspiel, das dein Gedächtnis auf die Probe stellt. Drehe immer zwei Karten um, um die verborgenen Symbole aufzudecken, und versuche, jedes passende Paar auf dem Feld zu finden. Merke dir, wo jede Karte liegt, verbinde die Paare in möglichst wenigen Zügen und räume das ganze Spielfeld ab, um zu gewinnen. Schnell erlernt und dabei endlos befriedigend ist Memory das perfekte Gehirnjogging für eine entspannte Pause oder einen freundschaftlichen Kampf um die beste Punktzahl."
+  },
+  "howToPlay": {
+    "en": [
+      "Tap or click a card to flip it face-up and reveal its symbol.",
+      "Flip a second card to try to match the first one.",
+      "If the two symbols match, the pair stays open and is cleared.",
+      "If they differ, both cards flip back — so remember where they were.",
+      "Match every pair on the board to win in as few moves as you can!"
+    ],
+    "tr": [
+      "Bir kartı çevirip sembolünü görmek için dokun veya tıkla.",
+      "İlkiyle eşleştirmek için ikinci bir kart çevir.",
+      "İki sembol eşleşirse çift açık kalır ve tahtadan kalkar.",
+      "Farklılarsa iki kart da kapanır — bu yüzden yerlerini hatırla.",
+      "Tüm çiftleri en az hamlede eşleştirerek kazan!"
+    ],
+    "de": [
+      "Tippe oder klicke eine Karte an, um sie umzudrehen und ihr Symbol zu zeigen.",
+      "Drehe eine zweite Karte um, um sie mit der ersten zu paaren.",
+      "Stimmen die Symbole überein, bleibt das Paar offen und wird entfernt.",
+      "Sind sie verschieden, drehen sich beide zurück — merke dir ihre Plätze.",
+      "Finde alle Paare auf dem Feld und gewinne mit möglichst wenigen Zügen!"
+    ]
+  },
+  "controls": {
+    "en": ["Tap or click — flip a card", "Match two cards with the same symbol"],
+    "tr": ["Dokun veya tıkla — kart çevir", "Aynı sembole sahip iki kartı eşleştir"],
+    "de": ["Tippen oder klicken — Karte umdrehen", "Zwei Karten mit demselben Symbol paaren"]
+  },
+  "tips": {
+    "en": [
+      "Start by flipping cards in a steady order to map out the board.",
+      "Picture the grid as rows and columns to lock positions in memory.",
+      "When you reveal a new symbol, recall if you have seen its twin.",
+      "Fewer moves means a higher score, so match with purpose."
+    ],
+    "tr": [
+      "Tahtayı tanımak için kartları düzenli bir sırayla çevirerek başla.",
+      "Konumları hafızana kazımak için tahtayı satır ve sütun olarak düşün.",
+      "Yeni bir sembol açtığında ikizini görüp görmediğini hatırla.",
+      "Daha az hamle daha yüksek skor demektir, bu yüzden bilinçli eşleştir."
+    ],
+    "de": [
+      "Drehe Karten zu Beginn in fester Reihenfolge um, um das Feld zu erfassen.",
+      "Stell dir das Feld als Zeilen und Spalten vor, um Positionen einzuprägen.",
+      "Wenn ein neues Symbol erscheint, überlege, ob du sein Pendant kennst.",
+      "Weniger Züge bedeuten mehr Punkte — paare also gezielt."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Memory Match free to play?",
+        "a": "Yes! Memory Match on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Memory Match on mobile?",
+        "a": "Just tap a card to flip it, then tap another to find its pair. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you win at Memory Match?",
+        "a": "You win by finding every matching pair and clearing the whole board. Doing it in fewer moves earns a higher score."
+      },
+      {
+        "q": "How is my score calculated?",
+        "a": "Your score rewards efficiency: the fewer moves you use to clear the board, the more points you keep, plus a bonus for winning."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Hafıza Eşleştirme ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Hafıza Eşleştirme tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Hafıza Eşleştirme nasıl oynanır?",
+        "a": "Bir kartı çevirmek için dokun, sonra çiftini bulmak için bir karta daha dokun. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Hafıza Eşleştirme'de nasıl kazanılır?",
+        "a": "Tüm eşleşen çiftleri bulup tahtayı temizleyerek kazanırsın. Bunu daha az hamlede yapmak daha yüksek skor kazandırır."
+      },
+      {
+        "q": "Skorum nasıl hesaplanır?",
+        "a": "Skorun verimliliği ödüllendirir: tahtayı temizlemek için ne kadar az hamle kullanırsan o kadar çok puan korursun, ayrıca kazanma bonusu alırsın."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Memory kostenlos?",
+        "a": "Ja! Memory auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Memory auf dem Handy?",
+        "a": "Tippe einfach eine Karte an, um sie umzudrehen, und dann eine weitere, um ihr Paar zu finden. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie gewinnt man bei Memory?",
+        "a": "Du gewinnst, indem du alle passenden Paare findest und das ganze Feld abräumst. Mit weniger Zügen erzielst du eine höhere Punktzahl."
+      },
+      {
+        "q": "Wie wird meine Punktzahl berechnet?",
+        "a": "Deine Punktzahl belohnt Effizienz: Je weniger Züge du zum Abräumen brauchst, desto mehr Punkte behältst du, plus einen Bonus fürs Gewinnen."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "memory game, card matching game, play memory online, free memory game, concentration game",
+    "tr": "hafıza oyunu, kart eşleştirme oyunu, hafıza oyna, ücretsiz hafıza oyunu, konsantrasyon oyunu",
+    "de": "memory spiel, kartenpaare spiel, memory online spielen, kostenloses memory spiel, konzentrationsspiel"
+  },
+  "tags": ["memory", "cards", "matching", "puzzle", "brain"]
+}

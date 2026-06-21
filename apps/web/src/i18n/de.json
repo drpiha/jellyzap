@@ -1,0 +1,156 @@
+{
+  "site": {
+    "name": "Jellyzap",
+    "tagline": "Kostenlose Onlinespiele für alle",
+    "description": "Spiele die besten kostenlosen Onlinespiele auf Jellyzap — Snake, Tetris, 2048, Wort- und Glücksradspiele, Kart-Battles und mehr. Kein Download, sofort spielen auf Handy und Desktop."
+  },
+  "nav": {
+    "home": "Start",
+    "games": "Alle Spiele",
+    "categories": "Kategorien",
+    "play": "Spielen"
+  },
+  "home": {
+    "hero": {
+      "title": "Spielen. Zappen. Spaß haben!",
+      "subtitle": "Hunderte kostenlose Spiele, kein Download. Steig auf jedem Gerät direkt ins Spiel ein.",
+      "cta": "Jetzt spielen"
+    },
+    "trending": "🔥 Gerade beliebt",
+    "popular": "⭐ Am beliebtesten",
+    "allGames": "Alle Spiele",
+    "byCategory": "Nach Kategorie stöbern",
+    "seoHeading": "Kostenlose Onlinespiele — sofort spielen, kein Download",
+    "seoBody": "Jellyzap ist ein kostenloses Onlinespiele-Portal für Kinder, Jugendliche und alle Junggebliebenen. Jedes Spiel läuft direkt im Browser — keine Installation, kein Warten. Spiele Arcade-Klassiker wie Snake und Tetris, Knobelspiele wie 2048 und Match-3, Wortspiele, Glücksrad und schnelle Kart-Battles auf Handy, Tablet oder Computer. Ständig kommen neue Spiele dazu — alle kostenlos und familienfreundlich."
+  },
+  "games": {
+    "title": "Alle Spiele",
+    "subtitle": "Alle Jellyzap-Spiele an einem Ort — wähl eins und spiel sofort.",
+    "count": "{count} Spiele"
+  },
+  "category": {
+    "titleTemplate": "{name}-Spiele",
+    "intro": "Spiele die besten kostenlosen {name}-Spiele online — sofort spielen, kein Download."
+  },
+  "categories": {
+    "arcade": { "name": "Arcade", "desc": "Schnelle Reflexe und klassischer Arcade-Spaß." },
+    "puzzle": { "name": "Puzzle", "desc": "Knobeleien, die dich zum Denken bringen." },
+    "word": { "name": "Wort", "desc": "Buchstabieren, raten und mit Wörtern gewinnen." },
+    "action": { "name": "Action", "desc": "Battles und rasante Herausforderungen." }
+  },
+  "game": {
+    "play": "Spielen",
+    "playNow": "Jetzt spielen",
+    "loading": "Spiel wird geladen…",
+    "score": "Punkte",
+    "best": "Bestwert",
+    "gameOver": "Game Over",
+    "playAgain": "Nochmal spielen",
+    "lives": "Leben",
+    "moves": "Züge",
+    "pairs": "Paare",
+    "spin": "Drehen",
+    "tapToLaunch": "Zum Abschuss tippen",
+    "value": "Wert",
+    "word": "Wort",
+    "win": "Gewonnen!",
+    "youWin": "Gewonnen!",
+    "pause": "Pause",
+    "resume": "Weiter",
+    "sound": "Ton",
+    "soundOn": "Ton an",
+    "soundOff": "Ton aus",
+    "fullscreen": "Vollbild",
+    "restart": "Neu starten",
+    "howToPlay": "So wird gespielt",
+    "controls": "Steuerung",
+    "tips": "Tipps & Tricks",
+    "faq": "Häufige Fragen",
+    "related": "Mehr Spiele wie dieses",
+    "about": "Über dieses Spiel",
+    "rotateHint": "Dreh dein Gerät für das beste Erlebnis.",
+    "tapToStart": "Zum Starten tippen",
+    "continue": "Weiter",
+    "watchToContinue": "Werbung ansehen, um weiterzuspielen",
+    "noReward": "Nein danke"
+  },
+  "common": {
+    "advertisement": "Werbung",
+    "backToGames": "Zurück zu allen Spielen",
+    "home": "Start",
+    "menu": "Menü",
+    "close": "Schließen",
+    "language": "Sprache",
+    "loading": "Lädt…"
+  },
+  "footer": {
+    "tagline": "Kostenlose Onlinespiele, mit Liebe und etwas Wackelpudding gemacht.",
+    "explore": "Entdecken",
+    "legal": "Rechtliches",
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "rights": "Alle Rechte vorbehalten.",
+    "disclaimer": "Jellyzap ist ein kostenloses, werbefinanziertes Spiele-Portal. Die Spiele dienen der Unterhaltung."
+  },
+  "consent": {
+    "title": "Uns ist dein Datenschutz wichtig",
+    "body": "Wir verwenden Cookies für Werbung und Reichweitenmessung, damit Jellyzap kostenlos bleibt. Du entscheidest, was du erlaubst. Werbung für jüngere Spieler wird nicht personalisiert.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Nicht notwendige ablehnen",
+    "customize": "Anpassen",
+    "necessary": "Unbedingt erforderlich",
+    "necessaryDesc": "Für den Betrieb der Seite nötig. Immer aktiv.",
+    "analytics": "Analyse",
+    "analyticsDesc": "Hilft uns zu verstehen, welche Spiele du liebst.",
+    "ads": "Werbung",
+    "adsDesc": "Ermöglicht Werbung, die Jellyzap kostenlos hält.",
+    "save": "Auswahl speichern",
+    "privacyLink": "Datenschutzerklärung lesen"
+  },
+  "about": {
+    "title": "Über Jellyzap",
+    "body": [
+      "Jellyzap ist ein kostenloses Onlinespiele-Portal für Kinder, Jugendliche und alle, die schnelle, bunte Spiele lieben. Alles läuft sofort im Browser — kein Download, keine Anmeldung.",
+      "Unsere Mission ist einfach: helle, freundliche, kurzweilige Spiele, die auf Handys, Tablets und Computern in deiner Sprache super funktionieren.",
+      "Wir fügen regelmäßig neue Spiele hinzu. Jellyzap ist kostenlos und wird durch Werbung finanziert."
+    ]
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "body": [
+      "Diese Datenschutzerklärung erläutert, wie Jellyzap (\"wir\") mit Informationen umgeht, wenn du unsere Website nutzt.",
+      "Cookies & lokaler Speicher: Wir nutzen lokalen Speicher, um deine Einstellungen (z. B. Ton und Highscores) zu merken, und mit deiner Einwilligung Cookies für Analyse und Werbung.",
+      "Analyse: Mit deiner Einwilligung nutzen wir Google Analytics, um zu verstehen, wie die Seite genutzt wird. Diese Daten werden aggregiert und helfen uns, unsere Spiele zu verbessern.",
+      "Werbung: Mit deiner Einwilligung zeigen wir Werbung, um Jellyzap kostenlos zu halten. Da unsere Spiele jüngere Zielgruppen ansprechen, wird Werbung im Kinderbereich dort, wo gesetzlich vorgeschrieben (z. B. COPPA, DSGVO), als an Kinder gerichtet und nicht personalisiert behandelt.",
+      "Deine Wahl: Du kannst deine Einwilligung jederzeit über den Cookie-Einstellungslink in der Fußzeile ändern oder widerrufen.",
+      "Kontakt: Bei Fragen zu dieser Erklärung kontaktiere uns bitte über die Website."
+    ]
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen",
+    "body": [
+      "Durch die Nutzung von Jellyzap stimmst du diesen Nutzungsbedingungen zu.",
+      "Jellyzap und seine Spiele werden \"wie besehen\" für die persönliche, nicht kommerzielle Unterhaltung bereitgestellt.",
+      "Du verpflichtest dich, die Seite nicht zu missbrauchen, zu stören oder rechtswidrig zu nutzen.",
+      "Wir können Spiele und Funktionen jederzeit aktualisieren oder entfernen. Für Schäden aus der Nutzung der Seite haften wir nicht.",
+      "Diese Bedingungen können von Zeit zu Zeit aktualisiert werden; die weitere Nutzung gilt als Zustimmung."
+    ]
+  },
+  "seo": {
+    "homeTitle": "Jellyzap — Kostenlose Onlinespiele | Sofort spielen, kein Download",
+    "homeDescription": "Spiele Hunderte kostenlose Onlinespiele auf Jellyzap. Snake, Tetris, 2048, Wortspiele, Glücksrad, Kart-Battles & mehr. Kein Download — sofort spielen auf Handy & Desktop.",
+    "gamesTitle": "Alle kostenlosen Onlinespiele | Jellyzap",
+    "gamesDescription": "Stöbere durch alle kostenlosen Spiele auf Jellyzap und spiel sofort im Browser — Arcade-, Puzzle-, Wort- und Actionspiele für jedes Alter.",
+    "gameTitleTemplate": "{game} — Kostenlos online spielen | Jellyzap",
+    "categoryTitleTemplate": "Kostenlose {name}-Spiele — Online spielen | Jellyzap"
+  },
+  "notFound": {
+    "title": "Hoppla! Seite nicht gefunden",
+    "body": "Die gesuchte Seite ist verschwunden. Zurück zu den Spielen.",
+    "cta": "Zurück zu den Spielen"
+  },
+  "a11y": {
+    "skipToContent": "Zum Inhalt springen"
+  }
+}

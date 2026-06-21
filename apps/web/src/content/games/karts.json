@@ -1,0 +1,140 @@
+{
+  "slug": "karts",
+  "category": "action",
+  "accent": "#ff4d8d",
+  "order": 10,
+  "playable": true,
+  "title": { "en": "Kart Battle", "tr": "Kapışan Arabalar", "de": "Kart Battle" },
+  "tagline": {
+    "en": "Drift, blast your rivals, and rule the arena!",
+    "tr": "Drift at, rakiplerini vur ve arenaya hükmet!",
+    "de": "Driften, Gegner abschießen und die Arena beherrschen!"
+  },
+  "description": {
+    "en": "Kart Battle is a fast top-down arena shooter where you take the wheel and go head-to-head against three AI karts. Steer your kart around the walled battlefield, line up your shots, and fire to take down rival drivers before they wreck you. Every kill stacks up your score, but a few hits will cost you a life — so weave, dodge, and keep your guns blazing. Easy to pick up and packed with explosive action, Kart Battle is the perfect arcade brawl to chase a new high score.",
+    "tr": "Kapışan Arabalar, direksiyona geçip üç yapay zekâ arabasıyla kafa kafaya çarpıştığın hızlı, kuşbakışı bir arena nişancısıdır. Arabanı duvarlarla çevrili savaş alanında sür, atışlarını hizala ve seni hurdaya çevirmeden rakip sürücüleri devir. Her öldürme skorunu yükseltir ama birkaç isabet sana bir can kaybettirir — bu yüzden kıvrıl, kaç ve silahlarını susturma. Öğrenmesi kolay ve patlayıcı aksiyonla dolu olan Kapışan Arabalar, yeni bir rekor kovalamak için mükemmel bir arcade kapışmasıdır.",
+    "de": "Kart Battle ist ein schneller Top-down-Arena-Shooter, in dem du das Steuer übernimmst und dich mit drei KI-Karts duellierst. Lenke deinen Kart über das ummauerte Schlachtfeld, bring deine Schüsse in Stellung und feuere, um gegnerische Fahrer auszuschalten, bevor sie dich zerlegen. Jeder Abschuss treibt deine Punktzahl nach oben, doch ein paar Treffer kosten dich ein Leben — also weiche aus, schlängle dich durch und halte die Kanonen heiß. Leicht zu lernen und voller explosiver Action ist Kart Battle der perfekte Arcade-Schlagabtausch für einen neuen Rekord."
+  },
+  "howToPlay": {
+    "en": [
+      "Use the arrow keys or WASD to accelerate and steer your kart.",
+      "Press Space to fire a shot in the direction you are facing.",
+      "On touch, drag to steer toward your finger and tap to shoot.",
+      "Aim at rival karts and blast them to score 100 points each.",
+      "Avoid enemy fire — losing all your lives ends the battle!"
+    ],
+    "tr": [
+      "Arabanı hızlandırmak ve yönlendirmek için ok tuşlarını veya WASD'yi kullan.",
+      "Baktığın yöne atış yapmak için Boşluk tuşuna bas.",
+      "Dokunmatikte parmağına doğru sürükleyerek yönlendir, ateş etmek için dokun.",
+      "Rakip arabaları nişanla ve vurarak her biri için 100 puan kazan.",
+      "Düşman ateşinden kaçın — tüm canlarını kaybetmek savaşı bitirir!"
+    ],
+    "de": [
+      "Beschleunige und lenke deinen Kart mit den Pfeiltasten oder WASD.",
+      "Drücke die Leertaste, um in Blickrichtung zu schießen.",
+      "Auf Touch ziehst du in Richtung deines Fingers und tippst zum Schießen.",
+      "Ziele auf gegnerische Karts und schieße sie ab — je 100 Punkte.",
+      "Weiche feindlichem Feuer aus — sind alle Leben weg, ist Schluss!"
+    ]
+  },
+  "controls": {
+    "en": [
+      "Arrow keys or WASD — accelerate and turn",
+      "Space — fire",
+      "Touch: drag to steer, tap to shoot"
+    ],
+    "tr": [
+      "Ok tuşları veya WASD — hızlan ve dön",
+      "Boşluk — ateş et",
+      "Dokunmatik: sürükleyerek yönlendir, dokunarak ateş et"
+    ],
+    "de": [
+      "Pfeiltasten oder WASD — beschleunigen und lenken",
+      "Leertaste — feuern",
+      "Touch: ziehen zum Lenken, tippen zum Schießen"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Keep moving — a kart that sits still is an easy target.",
+      "Line up your nose with an enemy before you pull the trigger.",
+      "Use the arena walls to break line of sight and dodge shots.",
+      "Pick off respawning karts the moment they reappear for fast points."
+    ],
+    "tr": [
+      "Hareket halinde kal — yerinde duran araba kolay hedeftir.",
+      "Tetiğe basmadan önce burnunu düşmanla hizala.",
+      "Atışlardan kaçmak ve görüşü kesmek için arena duvarlarını kullan.",
+      "Yeniden doğan arabaları belirir belirmez vurarak hızlı puan topla."
+    ],
+    "de": [
+      "Bleib in Bewegung — ein stehender Kart ist ein leichtes Ziel.",
+      "Richte deine Front auf den Gegner aus, bevor du abdrückst.",
+      "Nutze die Arenawände, um Sichtlinien zu brechen und Schüssen auszuweichen.",
+      "Schalte respawnende Karts sofort aus, sobald sie auftauchen, für schnelle Punkte."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Kart Battle free to play?",
+        "a": "Yes! Kart Battle on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Kart Battle on mobile?",
+        "a": "Drag your finger to steer the kart toward that point and tap to fire. The game works on phones, tablets and computers."
+      },
+      {
+        "q": "How do you score points in Kart Battle?",
+        "a": "Destroy rival karts with your shots. Each kart you take out is worth 100 points toward your high score."
+      },
+      {
+        "q": "What happens when I run out of lives?",
+        "a": "You can watch a short rewarded ad to continue with an extra life, or end the run and save your score."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Kapışan Arabalar ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Kapışan Arabalar tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Kapışan Arabalar nasıl oynanır?",
+        "a": "Arabayı o noktaya yönlendirmek için parmağını sürükle, ateş etmek için dokun. Oyun telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Kapışan Arabalar'da nasıl puan kazanılır?",
+        "a": "Rakip arabaları atışlarınla yok et. Devirdiğin her araba rekoruna 100 puan ekler."
+      },
+      {
+        "q": "Canlarım bittiğinde ne olur?",
+        "a": "Ekstra bir canla devam etmek için kısa bir ödüllü reklam izleyebilir ya da turu bitirip skorunu kaydedebilirsin."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Kart Battle kostenlos?",
+        "a": "Ja! Kart Battle auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Kart Battle auf dem Handy?",
+        "a": "Ziehe deinen Finger, um den Kart dorthin zu lenken, und tippe zum Feuern. Das Spiel läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie sammle ich Punkte in Kart Battle?",
+        "a": "Zerstöre gegnerische Karts mit deinen Schüssen. Jeder ausgeschaltete Kart bringt 100 Punkte für deinen Rekord."
+      },
+      {
+        "q": "Was passiert, wenn meine Leben aufgebraucht sind?",
+        "a": "Du kannst einen kurzen Belohnungs-Werbespot ansehen, um mit einem Extraleben weiterzuspielen, oder die Runde beenden und deinen Punktestand sichern."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "kart battle game, car shooter, smash karts, play kart battle online, free arena shooter",
+    "tr": "araba savaş oyunu, araba nişancı, kapışan arabalar, araba savaşı oyna, ücretsiz arena nişancı",
+    "de": "kart battle spiel, auto shooter, smash karts, kart battle online spielen, kostenloser arena shooter"
+  },
+  "tags": ["karts", "shooter", "action", "arena", "high-score"]
+}

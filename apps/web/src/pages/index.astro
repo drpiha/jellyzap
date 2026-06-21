@@ -1,0 +1,30 @@
+---
+// Root entry point: route visitors to their preferred language (default English).
+// Excluded from the sitemap (see astro.config.mjs filter).
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jellyzap — Free Online Games</title>
+    <meta http-equiv="refresh" content="0; url=/en/" />
+    <script is:inline>
+      (function () {
+        try {
+          var supported = ['en', 'tr', 'de'];
+          var stored = localStorage.getItem('jz:locale');
+          var nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
+          var loc = supported.indexOf(stored) >= 0 ? stored : supported.indexOf(nav) >= 0 ? nav : 'en';
+          location.replace('/' + loc + '/');
+        } catch (e) {
+          location.replace('/en/');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/en/">Jellyzap</a>…</p>
+  </body>
+</html>

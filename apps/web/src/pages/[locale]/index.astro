@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
+import { getPlayableGames, L } from '../../lib/games';
+import { CATEGORIES, CATEGORY_ICON } from '../../lib/categories';
+import {
+  localeStaticPaths,
+  localizePath,
+  useTranslations,
+  defaultLocale,
+  type Locale,
+} from '../../i18n';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const locale = (Astro.params.locale ?? defaultLocale) as Locale;
+const t = useTranslations(locale);
+const games = await getPlayableGames();
+const site = (Astro.site ?? new URL('https://jellyzap.com')).href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Jellyzap',
+    url: site,
+    inLanguage: locale,
+    description: t('seo.homeDescription'),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Jellyzap',
+    url: site,
+    logo: new URL('/icons/icon-512.png', site).href,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: games.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(localizePath(locale, `/g/${g.data.slug}`), site).href,
+      name: L(g.data.title, locale),
+    })),
+  },
+];
+---
+
+<BaseLayout
+  locale={locale}
+  title={t('seo.homeTitle')}
+  description={t('seo.homeDescription')}
+  path="/"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="hero__text">
+      <h1>{t('home.hero.title')}</h1>
+      <p>{t('home.hero.subtitle')}</p>
+      <a class="cta" href="#games">{t('home.hero.cta')}</a>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <AdSlot placement="banner" locale={locale} class="home-ad" />
+
+    <nav class="chips" aria-label={t('nav.categories')}>
+      {
+        CATEGORIES.map((c) => (
+          <a class="chip" href={localizePath(locale, `/c/${c}`)}>
+            <span aria-hidden="true">{CATEGORY_ICON[c]}</span> {t(`categories.${c}.name`)}
+          </a>
+        ))
+      }
+    </nav>
+
+    <section id="games" class="section">
+      <h2>{t('home.trending')}</h2>
+      <div class="grid">
+        {games.map((g) => <GameCard game={g} locale={locale} />)}
+      </div>
+    </section>
+
+    <section class="seo-block">
+      <h2>{t('home.seoHeading')}</h2>
+      <p>{t('home.seoBody')}</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 3rem 1rem 1rem;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+  }
+  .hero__text h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    margin: 0 0 0.6rem;
+    background: linear-gradient(120deg, #fff, var(--color-bubble, #ff4d8d));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero__text p {
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    color: var(--color-ink-dim, #b9a7e0);
+    max-width: 42ch;
+  }
+  .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    color: white;
+    background: linear-gradient(120deg, var(--color-grape, #a855f7), var(--color-bubble, #ff4d8d));
+    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.5);
+  }
+  .hero__art {
+    position: relative;
+    height: 220px;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: float 6s ease-in-out infinite;
+  }
+  .b1 {
+    width: 120px;
+    height: 120px;
+    background: var(--color-grape);
+    top: 20px;
+    left: 30%;
+  }
+  .b2 {
+    width: 90px;
+    height: 90px;
+    background: var(--color-aqua);
+    top: 90px;
+    left: 55%;
+    animation-delay: 1s;
+  }
+  .b3 {
+    width: 70px;
+    height: 70px;
+    background: var(--color-bubble);
+    top: 40px;
+    left: 70%;
+    animation-delay: 2s;
+  }
+  @keyframes float {
+    50% {
+      transform: translateY(-16px);
+    }
+  }
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .home-ad {
+    margin: 1rem auto 0.5rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.2rem 0;
+  }
+  .chip {
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .chip:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .section {
+    margin: 1.5rem 0;
+  }
+  .section h2 {
+    font-size: 1.4rem;
+    margin: 0 0 0.9rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .seo-block {
+    margin: 2.5rem 0 1rem;
+    color: var(--color-ink-dim, #b9a7e0);
+    max-width: 75ch;
+  }
+  .seo-block h2 {
+    color: var(--color-ink, #f4ecff);
+    font-size: 1.2rem;
+  }
+  @media (max-width: 720px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .hero__art {
+      display: none;
+    }
+  }
+</style>

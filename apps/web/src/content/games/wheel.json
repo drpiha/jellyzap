@@ -1,0 +1,128 @@
+{
+  "slug": "wheel",
+  "category": "word",
+  "accent": "#fb923c",
+  "order": 7,
+  "playable": true,
+  "title": { "en": "Wheel of Fortune", "tr": "Çarkıfelek", "de": "Glücksrad" },
+  "tagline": {
+    "en": "Spin the wheel, guess the word, win big!",
+    "tr": "Çarkı çevir, kelimeyi bul, büyük kazan!",
+    "de": "Dreh das Rad, errate das Wort, gewinne groß!"
+  },
+  "description": {
+    "en": "Wheel of Fortune is the classic spin-and-guess word game. Give the colorful wheel a spin to set how much each letter is worth, then call out a letter to fill in the hidden word. Land on a high value and a single lucky letter can be worth a fortune — but watch out for the BANKRUPT and LOSE A TURN wedges that can wipe out your round or cost you a life. Reveal every letter to win and bank your score. With fresh words in English, Turkish and German, it is easy to learn and endlessly replayable.",
+    "tr": "Çarkıfelek, klasik çevir-ve-tahmin et kelime oyunudur. Her harfin kaç puan değerinde olacağını belirlemek için renkli çarkı çevir, ardından gizli kelimeyi doldurmak için bir harf söyle. Yüksek bir değere denk gelirsen tek bir şanslı harf bir servet edebilir — ama turunu sıfırlayabilen ya da canına mal olabilen İFLAS ve TUR KAYBI dilimlerine dikkat et. Tüm harfleri açığa çıkar, kazan ve skorunu kasaya at. İngilizce, Türkçe ve Almanca yeni kelimelerle öğrenmesi kolay ve sonsuz tekrar oynanabilir.",
+    "de": "Glücksrad ist das klassische Dreh-und-Rate-Wortspiel. Gib dem bunten Rad einen Schwung, um festzulegen, wie viel jeder Buchstabe wert ist, und nenne dann einen Buchstaben, um das versteckte Wort zu füllen. Landest du auf einem hohen Wert, kann ein einziger Glücksbuchstabe ein Vermögen wert sein — doch hüte dich vor den Feldern BANKROTT und AUSSETZEN, die deine Runde auslöschen oder ein Leben kosten können. Decke jeden Buchstaben auf, um zu gewinnen und deine Punkte zu sichern. Mit frischen Wörtern auf Englisch, Türkisch und Deutsch ist es leicht zu lernen und endlos wiederspielbar."
+  },
+  "howToPlay": {
+    "en": [
+      "Tap the SPIN button (or press Space) to spin the wheel.",
+      "The wheel lands on a value that sets how much each letter is worth.",
+      "Pick a letter from the on-screen alphabet or press a letter key.",
+      "Correct letters reveal everywhere they appear and add to your score.",
+      "Reveal the whole word to win — but avoid BANKRUPT and losing your lives!"
+    ],
+    "tr": [
+      "Çarkı çevirmek için ÇEVİR düğmesine dokun (veya Boşluk'a bas).",
+      "Çark, her harfin kaç puan değerinde olacağını belirleyen bir değere konar.",
+      "Ekrandaki alfabeden bir harf seç veya bir harf tuşuna bas.",
+      "Doğru harfler geçtikleri her yerde açılır ve skoruna eklenir.",
+      "Tüm kelimeyi aç ve kazan — ama İFLAS'tan ve canlarını kaybetmekten kaçın!"
+    ],
+    "de": [
+      "Tippe auf DREHEN (oder drücke die Leertaste), um das Rad zu drehen.",
+      "Das Rad landet auf einem Wert, der festlegt, wie viel jeder Buchstabe wert ist.",
+      "Wähle einen Buchstaben aus dem Alphabet am Bildschirm oder drücke eine Buchstabentaste.",
+      "Richtige Buchstaben erscheinen überall und erhöhen deine Punkte.",
+      "Decke das ganze Wort auf, um zu gewinnen — meide BANKROTT und den Verlust deiner Leben!"
+    ]
+  },
+  "controls": {
+    "en": ["Tap SPIN or press Space — spin the wheel", "Tap a letter or press a letter key — guess"],
+    "tr": ["ÇEVİR'e dokun veya Boşluk'a bas — çarkı çevir", "Bir harfe dokun veya harf tuşuna bas — tahmin et"],
+    "de": ["DREHEN tippen oder Leertaste — Rad drehen", "Buchstaben tippen oder Buchstabentaste — raten"]
+  },
+  "tips": {
+    "en": [
+      "Spin for a high value before guessing common letters like vowels.",
+      "Guess vowels early to reveal the shape of the word.",
+      "Common consonants like R, S, T and N show up in many words.",
+      "Every spin is a risk — a BANKRUPT wedge can wipe your round score."
+    ],
+    "tr": [
+      "Sesli harfler gibi sık harfleri tahmin etmeden önce yüksek değere oyna.",
+      "Kelimenin şeklini ortaya çıkarmak için sesli harfleri erken tahmin et.",
+      "R, S, T ve N gibi yaygın sessiz harfler birçok kelimede geçer.",
+      "Her çeviriş bir risktir — İFLAS dilimi tur skorunu silebilir."
+    ],
+    "de": [
+      "Dreh auf einen hohen Wert, bevor du häufige Buchstaben wie Vokale rätst.",
+      "Rate Vokale früh, um die Form des Wortes aufzudecken.",
+      "Häufige Konsonanten wie R, S, T und N kommen in vielen Wörtern vor.",
+      "Jede Drehung ist ein Risiko — ein BANKROTT-Feld kann deine Rundenpunkte löschen."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Wheel of Fortune free to play?",
+        "a": "Yes! Wheel of Fortune on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Wheel of Fortune on mobile?",
+        "a": "Tap the SPIN button to spin the wheel, then tap letters on the on-screen alphabet. It works on phones, tablets and computers."
+      },
+      {
+        "q": "What happens if I land on BANKRUPT?",
+        "a": "BANKRUPT resets your current round score to zero, and LOSE A TURN costs you a life — so spin wisely."
+      },
+      {
+        "q": "How do you win at Wheel of Fortune?",
+        "a": "Guess every letter to fully reveal the hidden word before you run out of lives, and your round score is banked."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Çarkıfelek ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Çarkıfelek tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Çarkıfelek nasıl oynanır?",
+        "a": "Çarkı çevirmek için ÇEVİR düğmesine dokun, ardından ekrandaki alfabeden harflere dokun. Telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "İFLAS'a denk gelirsem ne olur?",
+        "a": "İFLAS mevcut tur skorunu sıfırlar, TUR KAYBI ise bir canına mal olur — bu yüzden akıllıca çevir."
+      },
+      {
+        "q": "Çarkıfelek'te nasıl kazanılır?",
+        "a": "Canların bitmeden gizli kelimeyi tamamen açığa çıkarmak için tüm harfleri tahmin et; tur skorun kasaya yazılır."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Glücksrad kostenlos?",
+        "a": "Ja! Glücksrad auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Glücksrad auf dem Handy?",
+        "a": "Tippe auf DREHEN, um das Rad zu drehen, und tippe dann Buchstaben im Alphabet am Bildschirm an. Es läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Was passiert, wenn ich auf BANKROTT lande?",
+        "a": "BANKROTT setzt deine aktuellen Rundenpunkte auf null, und AUSSETZEN kostet ein Leben — drehe also mit Bedacht."
+      },
+      {
+        "q": "Wie gewinnt man bei Glücksrad?",
+        "a": "Errate jeden Buchstaben, um das versteckte Wort vollständig aufzudecken, bevor deine Leben aufgebraucht sind — dann werden deine Rundenpunkte gesichert."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "wheel of fortune, word guessing game, spin the wheel, play wheel of fortune online, free word game",
+    "tr": "çarkıfelek, kelime tahmin oyunu, çark çevir, çarkıfelek oyna, ücretsiz kelime oyunu",
+    "de": "glücksrad, wortratespiel, rad drehen, glücksrad online spielen, kostenloses wortspiel"
+  },
+  "tags": ["wheel", "word", "puzzle", "spin", "high-score"]
+}

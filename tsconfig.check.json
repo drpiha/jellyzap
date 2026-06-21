@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": []
+  },
+  "include": ["packages/game-sdk/src/**/*", "packages/games/*/src/**/*"]
+}

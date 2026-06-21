@@ -1,0 +1,109 @@
+---
+import { localizePath, useTranslations, type Locale } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href={localizePath(locale, '/')} aria-label="Jellyzap home">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <defs>
+          <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#a855f7"></stop>
+            <stop offset="1" stop-color="#ff4d8d"></stop>
+          </linearGradient>
+        </defs>
+        <rect x="5" y="5" width="38" height="38" rx="15" fill="url(#brandGrad)"></rect>
+        <circle cx="19" cy="22" r="4.2" fill="#fff"></circle>
+        <circle cx="29" cy="22" r="4.2" fill="#fff"></circle>
+        <circle cx="19.6" cy="23" r="2" fill="#160a2e"></circle>
+        <circle cx="29.6" cy="23" r="2" fill="#160a2e"></circle>
+        <path
+          d="M18 30 q6 6 12 0"
+          stroke="#fff"
+          stroke-width="2.6"
+          fill="none"
+          stroke-linecap="round"></path>
+      </svg>
+      <span class="name">Jelly<span class="zap">zap</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href={localizePath(locale, '/')}>{t('nav.home')}</a>
+      <a href={localizePath(locale, '/games')}>{t('nav.games')}</a>
+    </nav>
+
+    <div class="right">
+      <LanguageSwitcher locale={locale} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(22, 9, 46, 0.72);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+  }
+  .logo {
+    width: 2.1rem;
+    height: 2.1rem;
+    filter: drop-shadow(0 4px 10px rgba(168, 85, 247, 0.5));
+  }
+  .name .zap {
+    color: var(--color-bubble, #ff4d8d);
+  }
+  .nav {
+    display: flex;
+    gap: 0.4rem;
+    margin-left: 0.5rem;
+  }
+  .nav a {
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .nav a:hover {
+    color: var(--color-ink, #f4ecff);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .right {
+    margin-left: auto;
+  }
+  @media (max-width: 480px) {
+    .brand {
+      font-size: 1.2rem;
+    }
+    .nav a {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.88rem;
+    }
+  }
+</style>

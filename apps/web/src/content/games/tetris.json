@@ -1,0 +1,143 @@
+{
+  "slug": "tetris",
+  "category": "puzzle",
+  "accent": "#a855f7",
+  "order": 2,
+  "playable": true,
+  "title": { "en": "Tetris", "tr": "Tetris", "de": "Tetris" },
+  "tagline": {
+    "en": "Stack the blocks, clear the lines!",
+    "tr": "Blokları diz, satırları temizle!",
+    "de": "Staple die Blöcke, räume die Reihen!"
+  },
+  "description": {
+    "en": "Tetris is the timeless puzzle classic where falling blocks — the famous tetrominoes — drop into a well one at a time. Slide and rotate each piece to weave them together, and complete a full horizontal line to make it vanish and earn points. The pieces fall faster as you level up, so quick thinking and tidy stacking are everything. Clear four lines at once for a Tetris and a huge score bonus. Easy to pick up yet endlessly addictive, it is the perfect game to chase one more high score.",
+    "tr": "Tetris, düşen blokların — meşhur tetrominoların — kuyuya birer birer indiği zamansız bulmaca klasiğidir. Her parçayı kaydır ve döndürerek birbirine geçir; yatay bir satırı tamamladığında satır kaybolur ve puan kazanırsın. Seviye yükseldikçe parçalar daha hızlı düşer; bu yüzden hızlı düşünmek ve düzenli istiflemek her şeydir. Dört satırı aynı anda temizle, bir Tetris yap ve büyük bir puan bonusu kap. Öğrenmesi kolay ama bırakması imkânsız; bir rekor daha kovalamak için mükemmel oyun.",
+    "de": "Tetris ist der zeitlose Puzzle-Klassiker: Fallende Blöcke — die berühmten Tetrominos — sinken nacheinander in einen Schacht. Verschiebe und drehe jeden Stein, um die Teile ineinanderzufügen, und vervollständige eine volle waagerechte Reihe, damit sie verschwindet und Punkte bringt. Mit jedem Level fallen die Steine schneller, deshalb zählen schnelles Denken und sauberes Stapeln. Räume vier Reihen auf einmal für ein Tetris und einen riesigen Punktebonus. Leicht zu lernen und endlos fesselnd — perfekt, um den nächsten Rekord zu jagen."
+  },
+  "howToPlay": {
+    "en": [
+      "Pieces fall from the top into the 10-by-20 well — guide each one as it drops.",
+      "Move pieces left and right with the arrow keys, WASD, or by swiping.",
+      "Rotate a piece to fit it snugly against the stack below.",
+      "Fill an entire horizontal row to clear it and score points.",
+      "Don't let the stack reach the top — clear lines to keep playing!"
+    ],
+    "tr": [
+      "Parçalar 10'a 20'lik kuyuya yukarıdan düşer — her birini düşerken yönlendir.",
+      "Parçaları ok tuşları, WASD veya kaydırma ile sola ve sağa hareket ettir.",
+      "Bir parçayı döndürerek alttaki yığına tam oturt.",
+      "Yatay bir satırın tamamını doldur, satırı temizle ve puan kazan.",
+      "Yığının tepeye ulaşmasına izin verme — oynamaya devam etmek için satırları temizle!"
+    ],
+    "de": [
+      "Steine fallen von oben in den 10-mal-20-Schacht — lenke jeden im Fall.",
+      "Bewege Steine mit den Pfeiltasten, WASD oder per Wischen nach links und rechts.",
+      "Drehe einen Stein, damit er genau auf den Stapel darunter passt.",
+      "Fülle eine komplette waagerechte Reihe, um sie zu räumen und zu punkten.",
+      "Lass den Stapel nicht die Oberkante erreichen — räume Reihen, um weiterzuspielen!"
+    ]
+  },
+  "controls": {
+    "en": [
+      "Arrow keys or WASD — move and soft drop",
+      "Up arrow or W — rotate the piece",
+      "Spacebar — hard drop instantly",
+      "Swipe to move, swipe down to drop, tap to rotate"
+    ],
+    "tr": [
+      "Ok tuşları veya WASD — hareket ettir ve yumuşak düşür",
+      "Yukarı ok veya W — parçayı döndür",
+      "Boşluk tuşu — anında sert düşür",
+      "Kaydırarak hareket ettir, aşağı kaydırarak düşür, dokunarak döndür"
+    ],
+    "de": [
+      "Pfeiltasten oder WASD — bewegen und sanft fallen lassen",
+      "Pfeil nach oben oder W — Stein drehen",
+      "Leertaste — sofort hart fallen lassen",
+      "Wischen zum Bewegen, nach unten wischen zum Fallen, tippen zum Drehen"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Keep your stack low and flat to give yourself room to react.",
+      "Save a one-wide column on the side and clear four lines with the I-piece for a Tetris.",
+      "Use the ghost outline to see exactly where a piece will land.",
+      "Rotate against the walls — a kick can squeeze a piece into a tight gap."
+    ],
+    "tr": [
+      "Tepki verecek alan bırakmak için yığınını alçak ve düz tut.",
+      "Kenarda tek genişlikte bir sütun sakla ve I-parçasıyla dört satırı temizleyip Tetris yap.",
+      "Bir parçanın tam olarak nereye ineceğini görmek için hayalet çizgisini kullan.",
+      "Duvarlara dayanarak döndür — bir tekme, parçayı dar bir boşluğa sıkıştırabilir."
+    ],
+    "de": [
+      "Halte deinen Stapel niedrig und flach, damit du Zeit zum Reagieren hast.",
+      "Lass eine ein Feld breite Spalte am Rand frei und räume mit dem I-Stein vier Reihen für ein Tetris.",
+      "Nutze den Schatten-Umriss, um genau zu sehen, wo ein Stein landet.",
+      "Drehe an den Wänden — ein Kick kann einen Stein in eine enge Lücke quetschen."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Tetris free to play?",
+        "a": "Yes! Tetris on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Tetris on mobile?",
+        "a": "Swipe left or right to move a piece, swipe down to drop it, and tap the screen to rotate. It works on phones, tablets and computers."
+      },
+      {
+        "q": "How does scoring work in Tetris?",
+        "a": "You earn points for every line you clear, and clearing more lines at once is worth far more. A four-line Tetris scores the biggest bonus, and points grow with your level."
+      },
+      {
+        "q": "Why do the pieces fall faster?",
+        "a": "Every ten lines you clear raises your level, and each level makes the pieces drop quicker — so the game gets more challenging the longer you play."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Tetris oyunu ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Tetris tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Tetris nasıl oynanır?",
+        "a": "Bir parçayı hareket ettirmek için sola veya sağa kaydır, düşürmek için aşağı kaydır ve döndürmek için ekrana dokun. Telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Tetris'te puanlama nasıl işler?",
+        "a": "Temizlediğin her satır için puan kazanırsın ve aynı anda daha çok satır temizlemek çok daha değerlidir. Dört satırlık bir Tetris en büyük bonusu verir; puanlar seviyenle birlikte artar."
+      },
+      {
+        "q": "Parçalar neden daha hızlı düşüyor?",
+        "a": "Temizlediğin her on satır seviyeni yükseltir ve her seviye parçaları daha hızlı düşürür — yani oynadıkça oyun zorlaşır."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Tetris kostenlos?",
+        "a": "Ja! Tetris auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Tetris auf dem Handy?",
+        "a": "Wische nach links oder rechts, um einen Stein zu bewegen, nach unten, um ihn fallen zu lassen, und tippe auf den Bildschirm zum Drehen. Es läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Wie funktioniert die Punktewertung bei Tetris?",
+        "a": "Du erhältst Punkte für jede geräumte Reihe, und mehrere Reihen auf einmal sind deutlich mehr wert. Ein Tetris aus vier Reihen bringt den größten Bonus, und die Punkte steigen mit deinem Level."
+      },
+      {
+        "q": "Warum fallen die Steine schneller?",
+        "a": "Alle zehn geräumten Reihen steigt dein Level, und jedes Level lässt die Steine schneller fallen — je länger du spielst, desto schwieriger wird es."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "tetris game, play tetris online, free tetris game, falling blocks, block puzzle",
+    "tr": "tetris oyunu, tetris oyna, ücretsiz tetris oyunu, düşen bloklar, blok bulmaca",
+    "de": "tetris spiel, tetris online spielen, kostenloses tetris spiel, fallende blöcke, block puzzle"
+  },
+  "tags": ["tetris", "puzzle", "blocks", "classic", "high-score"]
+}

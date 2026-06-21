@@ -1,0 +1,59 @@
+---
+import { AD_SIZES, type AdPlacement } from '../../lib/ads';
+import { useTranslations, type Locale } from '../../i18n';
+
+interface Props {
+  placement: AdPlacement;
+  locale: Locale;
+  class?: string;
+}
+const { placement, locale, class: cls = '' } = Astro.props;
+const t = useTranslations(locale);
+const size = AD_SIZES[placement];
+---
+
+<aside
+  class:list={['jz-ad', placement, cls]}
+  data-ad-placement={placement}
+  data-ad-slot="pending"
+  aria-label={t('common.advertisement')}
+  style={`--ad-w:${size.w}px;--ad-h:${size.h}px`}
+>
+  <span class="jz-ad__label">{t('common.advertisement')}</span>
+  <div class="jz-ad__inner">
+    {/* A real <ins class="adsbygoogle"> is injected here after consent when ads are enabled. */}
+  </div>
+</aside>
+
+<style>
+  .jz-ad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 100%;
+    max-width: var(--ad-w);
+    margin-inline: auto;
+    /* Reserve height up-front so ads never cause layout shift (CLS). */
+    min-height: calc(var(--ad-h) + 1.4rem);
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .jz-ad.sidebar {
+    min-height: calc(250px + 1.4rem);
+  }
+  .jz-ad__label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .jz-ad__inner {
+    display: grid;
+    place-items: center;
+    width: 100%;
+  }
+</style>

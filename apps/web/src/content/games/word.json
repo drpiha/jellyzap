@@ -1,0 +1,137 @@
+{
+  "slug": "word",
+  "category": "word",
+  "accent": "#34d399",
+  "order": 6,
+  "playable": true,
+  "title": { "en": "Word Guess", "tr": "Kelime Bul", "de": "Wort Raten" },
+  "tagline": {
+    "en": "Crack the hidden five-letter word in six tries!",
+    "tr": "Gizli beş harfli kelimeyi altı denemede çöz!",
+    "de": "Knacke das versteckte Fünf-Buchstaben-Wort in sechs Versuchen!"
+  },
+  "description": {
+    "en": "Word Guess is a brain-teasing daily-style puzzle where you have six tries to uncover a secret five-letter word. After every guess each tile changes color to give you clues: green means the letter is correct and in the right spot, yellow means it is in the word but somewhere else, and gray means it is not in the word at all. Use logic and a sharp vocabulary to narrow down the possibilities and solve it before your guesses run out. Quick to pick up and endlessly replayable, it is the perfect bite-sized challenge for word lovers.",
+    "tr": "Kelime Bul, gizli beş harfli bir kelimeyi altı denemede ortaya çıkardığın, beyin yakan günlük tarzı bir bulmacadır. Her tahminden sonra her kutu renk değiştirerek ipucu verir: yeşil harfin doğru ve doğru yerde olduğunu, sarı kelimede ama başka bir yerde olduğunu, gri ise kelimede hiç olmadığını gösterir. Olasılıkları daraltmak için mantığını ve geniş kelime dağarcığını kullan, hakların bitmeden çöz. Öğrenmesi hızlı ve sonsuz tekrar oynanabilir; kelime severler için mükemmel, kısa bir meydan okuma.",
+    "de": "Wort Raten ist ein kniffliges Puzzle im Tagesrätsel-Stil, bei dem du sechs Versuche hast, ein geheimes Fünf-Buchstaben-Wort zu erraten. Nach jedem Versuch wechseln die Kacheln die Farbe und geben dir Hinweise: Grün bedeutet, der Buchstabe ist richtig und an der richtigen Stelle, Gelb bedeutet, er kommt im Wort vor, aber woanders, und Grau bedeutet, er ist gar nicht im Wort. Nutze Logik und einen scharfen Wortschatz, um die Möglichkeiten einzugrenzen und es zu lösen, bevor dir die Versuche ausgehen. Schnell zu lernen und endlos wiederspielbar — die perfekte kleine Herausforderung für Wortliebhaber."
+  },
+  "howToPlay": {
+    "en": [
+      "Type any valid five-letter word and press Enter to submit your guess.",
+      "Green tiles mark letters that are correct and in the right position.",
+      "Yellow tiles mark letters that are in the word but in the wrong spot.",
+      "Gray tiles mark letters that do not appear in the word at all.",
+      "Use the clues to refine each guess and solve the word within six tries!"
+    ],
+    "tr": [
+      "Geçerli beş harfli bir kelime yaz ve tahminini göndermek için Enter'a bas.",
+      "Yeşil kutular doğru ve doğru konumdaki harfleri gösterir.",
+      "Sarı kutular kelimede olan ama yanlış yerdeki harfleri gösterir.",
+      "Gri kutular kelimede hiç bulunmayan harfleri gösterir.",
+      "İpuçlarını kullanarak tahminlerini daralt ve kelimeyi altı denemede çöz!"
+    ],
+    "de": [
+      "Tippe ein gültiges Fünf-Buchstaben-Wort und drücke Enter, um zu raten.",
+      "Grüne Kacheln markieren Buchstaben, die richtig und an der richtigen Stelle sind.",
+      "Gelbe Kacheln markieren Buchstaben, die im Wort vorkommen, aber falsch platziert sind.",
+      "Graue Kacheln markieren Buchstaben, die im Wort gar nicht vorkommen.",
+      "Nutze die Hinweise, um jeden Versuch zu verfeinern, und löse das Wort in sechs Versuchen!"
+    ]
+  },
+  "controls": {
+    "en": [
+      "Type with your keyboard — Enter to submit, Backspace to delete",
+      "Tap the on-screen keyboard — type, submit and delete by tapping"
+    ],
+    "tr": [
+      "Klavyeyle yaz — göndermek için Enter, silmek için Backspace",
+      "Ekran klavyesine dokun — dokunarak yaz, gönder ve sil"
+    ],
+    "de": [
+      "Mit der Tastatur tippen — Enter zum Absenden, Backspace zum Löschen",
+      "Auf die Bildschirmtastatur tippen — tippen, absenden und löschen"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Open with a word rich in common vowels and consonants to gather clues fast.",
+      "Keep the green letters fixed in place and rearrange the yellow ones.",
+      "Don't reuse letters you already know are gray — they waste a guess.",
+      "Watch for double letters; a color only counts as many times as it appears."
+    ],
+    "tr": [
+      "Hızlı ipucu için yaygın sesli ve sessiz harfler içeren bir kelimeyle başla.",
+      "Yeşil harfleri yerinde tut ve sarı harfleri yeniden konumlandır.",
+      "Gri olduğunu bildiğin harfleri tekrar kullanma — tahminini boşa harcar.",
+      "Çift harflere dikkat et; bir renk yalnızca göründüğü sayı kadar geçerlidir."
+    ],
+    "de": [
+      "Beginne mit einem Wort voller häufiger Vokale und Konsonanten für schnelle Hinweise.",
+      "Lass die grünen Buchstaben an ihrem Platz und ordne die gelben neu an.",
+      "Verwende keine Buchstaben erneut, die du als grau kennst — das verschwendet einen Versuch.",
+      "Achte auf Doppelbuchstaben; eine Farbe zählt nur so oft, wie sie vorkommt."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Word Guess free to play?",
+        "a": "Yes! Word Guess on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play Word Guess on mobile?",
+        "a": "Just tap the letters on the on-screen keyboard to type, then tap Enter to submit. It works on phones, tablets and computers."
+      },
+      {
+        "q": "What do the tile colors mean?",
+        "a": "Green means the letter is correct and in the right spot, yellow means it is in the word but in a different spot, and gray means it is not in the word."
+      },
+      {
+        "q": "How many guesses do I get?",
+        "a": "You have six tries to find the hidden five-letter word. Solve it in fewer guesses to score higher."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Kelime Bul ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Kelime Bul tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde Kelime Bul nasıl oynanır?",
+        "a": "Yazmak için ekran klavyesindeki harflere dokun, sonra göndermek için Enter'a dokun. Telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Kutu renkleri ne anlama gelir?",
+        "a": "Yeşil harfin doğru ve doğru yerde olduğunu, sarı kelimede ama farklı bir yerde olduğunu, gri ise kelimede olmadığını gösterir."
+      },
+      {
+        "q": "Kaç tahmin hakkım var?",
+        "a": "Gizli beş harfli kelimeyi bulmak için altı hakkın var. Daha az tahminle çözersen daha yüksek puan alırsın."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Wort Raten kostenlos?",
+        "a": "Ja! Wort Raten auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich Wort Raten auf dem Handy?",
+        "a": "Tippe einfach die Buchstaben auf der Bildschirmtastatur und dann auf Enter zum Absenden. Es läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Was bedeuten die Kachelfarben?",
+        "a": "Grün bedeutet, der Buchstabe ist richtig und an der richtigen Stelle, Gelb bedeutet, er steht im Wort, aber an anderer Stelle, und Grau bedeutet, er ist nicht im Wort."
+      },
+      {
+        "q": "Wie viele Versuche habe ich?",
+        "a": "Du hast sechs Versuche, das versteckte Fünf-Buchstaben-Wort zu finden. Löse es mit weniger Versuchen für mehr Punkte."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "word game, word guess, play word puzzle online, free wordle-style game, five letter word",
+    "tr": "kelime oyunu, kelime bul, kelime bulmaca oyna, ücretsiz wordle benzeri oyun, beş harfli kelime",
+    "de": "wortspiel, wort raten, wortpuzzle online spielen, kostenloses wordle-ähnliches spiel, fünf buchstaben wort"
+  },
+  "tags": ["word", "puzzle", "wordle", "vocabulary", "brain"]
+}

@@ -1,0 +1,90 @@
+---
+import { L, type GameEntry } from '../lib/games';
+import { localizePath, useTranslations, type Locale } from '../i18n';
+import { CATEGORY_ICON, type CategoryId } from '../lib/categories';
+
+interface Props {
+  game: GameEntry;
+  locale: Locale;
+  eager?: boolean;
+}
+const { game, locale } = Astro.props;
+const t = useTranslations(locale);
+const d = game.data;
+const href = localizePath(locale, `/g/${d.slug}`);
+const title = L(d.title, locale);
+const tagline = L(d.tagline, locale);
+const icon = CATEGORY_ICON[d.category as CategoryId];
+---
+
+<a class="jelly-card card" href={href} style={`--accent:${d.accent}`} aria-label={title}>
+  <div class="thumb">
+    <span class="glyph" aria-hidden="true">{icon}</span>
+    <span class="play">▶ {t('game.play')}</span>
+  </div>
+  <div class="meta">
+    <h3 class="title">{title}</h3>
+    <p class="tagline">{tagline}</p>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-jelly, 1.25rem);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
+  .thumb {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 120% at 20% 10%, color-mix(in srgb, var(--accent) 70%, white 0%), transparent 60%),
+      linear-gradient(140deg, var(--accent), color-mix(in srgb, var(--accent) 40%, #160a2e));
+  }
+  .glyph {
+    font-size: clamp(2.5rem, 9vw, 3.6rem);
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  }
+  .play {
+    position: absolute;
+    bottom: 0.55rem;
+    right: 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(8, 4, 20, 0.55);
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+  .jelly-card:hover .play,
+  .jelly-card:focus-visible .play {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .meta {
+    padding: 0.7rem 0.8rem 0.85rem;
+  }
+  .title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+  .tagline {
+    margin: 0.15rem 0 0;
+    font-size: 0.82rem;
+    color: var(--color-ink-dim, #b9a7e0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

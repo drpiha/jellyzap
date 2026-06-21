@@ -1,0 +1,87 @@
+---
+import { locales, localeNames, localeFlags, localizePath, stripLocale, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const path = stripLocale(Astro.url.pathname);
+---
+
+<details class="lang">
+  <summary aria-label="Language">
+    <span aria-hidden="true">{localeFlags[locale]}</span>
+    <span class="lang__name">{localeNames[locale]}</span>
+    <span class="lang__chev" aria-hidden="true">▾</span>
+  </summary>
+  <ul>
+    {
+      locales.map((l) => (
+        <li>
+          <a
+            href={localizePath(l, path)}
+            hreflang={l}
+            aria-current={l === locale ? 'true' : undefined}
+          >
+            <span aria-hidden="true">{localeFlags[l]}</span> {localeNames[l]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<style>
+  .lang {
+    position: relative;
+  }
+  .lang summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    font-weight: 700;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  .lang summary::-webkit-details-marker {
+    display: none;
+  }
+  .lang[open] summary {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .lang ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    margin: 0;
+    padding: 0.3rem;
+    list-style: none;
+    background: var(--color-panel, #2a1758);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.9rem;
+    min-width: 10rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    z-index: 60;
+  }
+  .lang li a {
+    display: block;
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .lang li a:hover,
+  .lang li a[aria-current='true'] {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  @media (max-width: 480px) {
+    .lang__name {
+      display: none;
+    }
+  }
+</style>

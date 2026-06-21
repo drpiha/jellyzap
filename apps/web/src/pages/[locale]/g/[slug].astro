@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GameCanvas from '../../../components/GameCanvas.astro';
+import GameCard from '../../../components/GameCard.astro';
+import AdSlot from '../../../components/ads/AdSlot.astro';
+import { getGames, getRelated, L, type GameEntry } from '../../../lib/games';
+import { locales, localizePath, useTranslations, defaultLocale, type Locale } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const games = await getGames();
+  return locales.flatMap((locale) =>
+    games.map((entry) => ({ params: { locale, slug: entry.data.slug }, props: { entry } })),
+  );
+}
+
+const locale = (Astro.params.locale ?? defaultLocale) as Locale;
+const { entry } = Astro.props as { entry: GameEntry };
+const d = entry.data;
+const t = useTranslations(locale);
+const site = (Astro.site ?? new URL('https://jellyzap.com')).href;
+
+const title = L(d.title, locale);
+const tagline = L(d.tagline, locale);
+const description = L(d.description, locale);
+const howTo = L(d.howToPlay, locale);
+const controls = L(d.controls, locale);
+const tips = d.tips ? L(d.tips, locale) : [];
+const faq = L(d.faq, locale);
+const categoryName = t(`categories.${d.category}.name`);
+const related = await getRelated(d.slug, d.category, 6);
+const canonicalUrl = new URL(localizePath(locale, `/g/${d.slug}`), site).href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: title,
+    description,
+    url: canonicalUrl,
+    inLanguage: locale,
+    genre: categoryName,
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any (web browser)',
+    author: { '@type': 'Organization', name: 'Jellyzap' },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('nav.home'), item: new URL(localizePath(locale, '/'), site).href },
+      { '@type': 'ListItem', position: 2, name: t('nav.games'), item: new URL(localizePath(locale, '/games'), site).href },
+      { '@type': 'ListItem', position: 3, name: categoryName, item: new URL(localizePath(locale, `/c/${d.category}`), site).href },
+      { '@type': 'ListItem', position: 4, name: title },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `${t('game.howToPlay')}: ${title}`,
+    step: howTo.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, text: s })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  locale={locale}
+  title={t('seo.gameTitleTemplate', { game: title })}
+  description={description}
+  path={`/g/${d.slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={localizePath(locale, '/')}>{t('nav.home')}</a>
+      <span>/</span>
+      <a href={localizePath(locale, `/c/${d.category}`)}>{categoryName}</a>
+      <span>/</span>
+      <span>{title}</span>
+    </nav>
+
+    <div class="layout">
+      <div class="main">
+        <h1 class="game-title" style={`--accent:${d.accent}`}>{title}</h1>
+        <p class="tagline">{tagline}</p>
+
+        <GameCanvas slug={d.slug} locale={locale} accent={d.accent} playable={d.playable} />
+
+        <AdSlot placement="inContent" locale={locale} class="incontent" />
+
+        <article class="content">
+          <section>
+            <h2>{t('game.about')}</h2>
+            <p>{description}</p>
+          </section>
+
+          <section>
+            <h2>{t('game.howToPlay')}</h2>
+            <ol>{howTo.map((s) => <li>{s}</li>)}</ol>
+          </section>
+
+          <section>
+            <h2>{t('game.controls')}</h2>
+            <ul class="controls">{controls.map((c) => <li>{c}</li>)}</ul>
+          </section>
+
+          {
+            tips.length > 0 && (
+              <section>
+                <h2>{t('game.tips')}</h2>
+                <ul>{tips.map((c) => <li>{c}</li>)}</ul>
+              </section>
+            )
+          }
+
+          <section>
+            <h2>{t('game.faq')}</h2>
+            <div class="faq">
+              {
+                faq.map((f) => (
+                  <details>
+                    <summary>{f.q}</summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))
+              }
+            </div>
+          </section>
+        </article>
+      </div>
+
+      <aside class="side">
+        <AdSlot placement="sidebar" locale={locale} />
+        <h2 class="side-title">{t('game.related')}</h2>
+        <div class="side-grid">
+          {related.map((g) => <GameCard game={g} locale={locale} />)}
+        </div>
+        <a class="back" href={localizePath(locale, '/games')}>← {t('common.backToGames')}</a>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1.2rem 1rem 2rem;
+  }
+  .crumbs {
+    display: flex;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--color-ink-dim, #b9a7e0);
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .crumbs a:hover {
+    color: var(--color-bubble, #ff4d8d);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .game-title {
+    font-size: clamp(1.7rem, 5vw, 2.4rem);
+    margin: 0;
+    color: var(--accent, #fff);
+  }
+  .tagline {
+    margin: 0.2rem 0 1rem;
+    color: var(--color-ink-dim, #b9a7e0);
+    font-weight: 600;
+  }
+  .incontent {
+    margin: 1.4rem auto;
+  }
+  .content section {
+    margin: 1.6rem 0;
+  }
+  .content h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.6rem;
+  }
+  .content p {
+    color: var(--color-ink, #f4ecff);
+    line-height: 1.65;
+    max-width: 70ch;
+  }
+  .content ol,
+  .content ul {
+    line-height: 1.7;
+    max-width: 70ch;
+    padding-left: 1.2rem;
+  }
+  .controls li {
+    margin: 0.2rem 0;
+  }
+  .faq details {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    padding: 0.5rem 0.9rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .faq summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .faq p {
+    color: var(--color-ink-dim, #b9a7e0);
+    margin: 0.5rem 0 0.2rem;
+  }
+  .side-title {
+    font-size: 1.1rem;
+    margin: 1.2rem 0 0.8rem;
+  }
+  .side-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  .back {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .back:hover {
+    color: var(--color-bubble, #ff4d8d);
+  }
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .side-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }
+</style>

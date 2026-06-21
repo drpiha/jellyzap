@@ -1,0 +1,51 @@
+---
+import { alternates, canonical, abs } from '../../lib/seo';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  site: URL;
+  locale: Locale;
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+}
+
+const {
+  site,
+  locale,
+  title,
+  description,
+  path,
+  image = '/og/default.png',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteStr = site.href;
+const canonicalUrl = canonical(siteStr, locale, path);
+const alts = alternates(siteStr, path);
+const ogImage = abs(siteStr, image);
+const ogLocale: Record<Locale, string> = { en: 'en_US', tr: 'tr_TR', de: 'de_DE' };
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+{alts.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content="Jellyzap" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={ogLocale[locale]} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

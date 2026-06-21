@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n';
+
+const t = useTranslations('en');
+---
+
+<BaseLayout
+  locale="en"
+  title={`${t('notFound.title')} | Jellyzap`}
+  description={t('notFound.body')}
+  path="/404"
+  noindex={true}
+>
+  <div class="nf">
+    <p class="big">404</p>
+    <h1>{t('notFound.title')}</h1>
+    <p class="lead">{t('notFound.body')}</p>
+    <a class="cta" href="/en/games">{t('notFound.cta')}</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .nf {
+    text-align: center;
+    padding: 4rem 1rem;
+    max-width: 40ch;
+    margin: 0 auto;
+  }
+  .big {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(4rem, 18vw, 8rem);
+    margin: 0;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--color-grape, #a855f7), var(--color-bubble, #ff4d8d));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lead {
+    color: var(--color-ink-dim, #b9a7e0);
+  }
+  .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 800;
+    padding: 0.8rem 1.6rem;
+    border-radius: 999px;
+    color: white;
+    background: linear-gradient(120deg, var(--color-grape, #a855f7), var(--color-bubble, #ff4d8d));
+  }
+</style>
