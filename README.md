@@ -4,10 +4,9 @@ Free online games for kids & teens — Snake, Tetris, 2048, Word, Wheel of Fortu
 Memory, Flappy, Breakout, Match-3 and a top‑down kart battle. Built for **speed,
 SEO/GEO, multilingual reach (EN/TR/DE), and ad monetization**.
 
-> **Note on the repository.** This project was scaffolded inside the `aikarakutu`
-> repo (in this isolated `jellyzap/` folder) because the current session could not
-> create a standalone GitHub repo (`403 Resource not accessible by integration`).
-> It is fully self‑contained — see **[Moving to its own repo](#moving-to-its-own-repo)**.
+> **Repository.** Standalone repo at **[github.com/drpiha/jellyzap](https://github.com/drpiha/jellyzap)**
+> (imported as a clean history from the original `aikarakutu` scaffold). Deploys to
+> **Cloudflare Pages** — see **[Deploy](#deploy)**.
 
 ## Tech stack
 
@@ -53,20 +52,23 @@ Until set, ad slots render reserved‑size placeholders and analytics logs to th
 console. **No ad/analytics script loads before cookie consent** (GDPR/Consent Mode
 v2), and the audience is treated as child‑directed (COPPA → non‑personalized ads).
 
-## Moving to its own repo
+## Deploy
 
-The `jellyzap/` folder has no dependency on the parent repo:
+Static output (`apps/web/dist`) hosts anywhere. For **Cloudflare Pages**:
 
 ```bash
-# from the parent repo root
-git subtree split --prefix=jellyzap -b jellyzap-only
-# create an empty repo on GitHub (e.g. drpiha/jellyzap), then:
-cd /tmp && git clone <parent-url> jz && cd jz
-git subtree split --prefix=jellyzap -b jellyzap-only
-git push <new-repo-url> jellyzap-only:main
+# one-time auth (opens a browser): npx wrangler login
+pnpm gen:icons && pnpm build
+npx wrangler pages deploy apps/web/dist --project-name=jellyzap
 ```
 
-Or simply copy the `jellyzap/` directory into a fresh repo and `git init`.
+This prints a live `https://<deployment>.jellyzap.pages.dev` URL. To bake correct
+canonical/sitemap URLs for a custom domain, build with `PUBLIC_SITE_URL` set, e.g.
+`PUBLIC_SITE_URL=https://jellyzap.com pnpm build`.
+
+Alternatively, connect the GitHub repo in the Cloudflare Pages dashboard with build
+command `pnpm gen:icons && pnpm build` and output directory `apps/web/dist` — every
+push then deploys automatically.
 
 ## License
 

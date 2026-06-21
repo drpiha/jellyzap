@@ -193,6 +193,49 @@ export function scoreFor(n: number, chain: number): number {
   return BASE_POINTS * groupBonus * chain;
 }
 
+/** Partition matched cells into 4-connected groups (one per contiguous run/blob). */
+export function groupMatches(cells: Cell[]): Cell[][] {
+  const present = new Set(cells.map((p) => idx(p.r, p.c)));
+  const seen = new Set<number>();
+  const groups: Cell[][] = [];
+  for (const start of cells) {
+    if (seen.has(idx(start.r, start.c))) continue;
+    const group: Cell[] = [];
+    const stack: Cell[] = [start];
+    seen.add(idx(start.r, start.c));
+    while (stack.length) {
+      const cur = stack.pop() as Cell;
+      group.push(cur);
+      const neighbours = [
+        { r: cur.r - 1, c: cur.c },
+        { r: cur.r + 1, c: cur.c },
+        { r: cur.r, c: cur.c - 1 },
+        { r: cur.r, c: cur.c + 1 },
+      ];
+      for (const nb of neighbours) {
+        if (!inBounds(nb.r, nb.c)) continue;
+        const id = idx(nb.r, nb.c);
+        if (present.has(id) && !seen.has(id)) {
+          seen.add(id);
+          stack.push(nb);
+        }
+      }
+    }
+    groups.push(group);
+  }
+  return groups;
+}
+
+/**
+ * Total points for the cells cleared in one resolve step. Each connected group is
+ * scored on its own size (so two separate 3-runs score 3+3, not one inflated 6).
+ */
+export function scoreMatches(cells: Cell[], chain: number): number {
+  let total = 0;
+  for (const group of groupMatches(cells)) total += scoreFor(group.length, chain);
+  return total;
+}
+
 export interface ResolveResult {
   /** total gems cleared across all cascade steps */
   cleared: number;
@@ -216,7 +259,7 @@ export function resolveBoard(board: Board, rng: () => number): ResolveResult {
     if (matches.length === 0) break;
     chain++;
     cleared += matches.length;
-    scored += scoreFor(matches.length, chain);
+    scored += scoreMatches(matches, chain);
     for (const { r, c } of matches) board[idx(r, c)] = EMPTY;
     applyGravity(board);
     refill(board, rng);

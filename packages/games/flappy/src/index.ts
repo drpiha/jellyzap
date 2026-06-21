@@ -86,14 +86,19 @@ export default function createFlappy(): Game {
       /* nothing to restore */
     },
     inputEvents: {
-      onTap() {
-        doFlap();
-      },
+      // one flap per tap: handle the press only (the host fires BOTH onPointerDown
+      // and onTap for a single tap, so wiring both would double-flap)
       onPointerDown() {
         doFlap();
       },
       onKeyDown(code) {
-        if (code === 'Space' || code === 'ArrowUp' || code === 'KeyW') doFlap();
+        // edge-triggered: ignore OS key auto-repeat so a held key can't hover the bird
+        if (
+          (code === 'Space' || code === 'ArrowUp' || code === 'KeyW') &&
+          ctx.input.justPressed(code)
+        ) {
+          doFlap();
+        }
       },
     },
     destroy() {

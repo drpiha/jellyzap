@@ -80,6 +80,10 @@ export default function createKarts(): Game {
         else if (diff < -0.05) turn = -1;
         accel = true;
       }
+      // auto-fire while a touch is held so the player can shoot *and* steer at the
+      // same time on touch (keyboard fires manually via Space). fire() is
+      // cooldown-gated, so this does not spam projectiles.
+      fireNow = true;
     }
 
     void dt;
@@ -136,8 +140,9 @@ export default function createKarts(): Game {
       registerKartsSfx(c.audio);
     },
     start() {
+      // NOTE: the host fires onGameStart after calling start(); the game must not
+      // call it too or game_start analytics double-count.
       reset();
-      ctx.hooks.onGameStart?.();
     },
     update(dt) {
       if (gameOver || resolvingContinue) return;

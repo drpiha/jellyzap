@@ -62,9 +62,12 @@ export default function create2048(): Game {
     ctx.audio.play('spawn');
     popTime = 0;
 
-    state.best = Math.max(state.best, state.score);
     ctx.score.set(state.score);
     ctx.hooks.onScore?.(state.score);
+    // 2048 has no lives and can run indefinitely after reaching 2048; commit the
+    // record on every gain so leaving mid-run never loses it and the "Best" HUD
+    // (which reads highScore) tracks the live score. commitHighScore is idempotent.
+    ctx.score.commitHighScore();
 
     if (!state.won && hasWon(state.grid)) {
       state.won = true;
@@ -139,7 +142,8 @@ export default function create2048(): Game {
       },
     },
     destroy() {
-      /* no external resources */
+      // persist any pending record if the player leaves mid-run
+      ctx.score.commitHighScore();
     },
   };
 }

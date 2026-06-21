@@ -12,6 +12,10 @@ export function setupCanvas(mount: HTMLElement): CanvasSetup {
   canvas.style.width = '100%';
   canvas.style.height = '100%';
   canvas.style.touchAction = 'none';
+  // focusable so the game can capture keyboard input without hijacking the whole
+  // page; no focus ring since the canvas is the interaction surface itself.
+  canvas.tabIndex = 0;
+  canvas.style.outline = 'none';
   mount.appendChild(canvas);
 
   const maybeCtx = canvas.getContext('2d', { alpha: false });

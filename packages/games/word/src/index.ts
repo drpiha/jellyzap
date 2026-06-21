@@ -89,6 +89,12 @@ export default function createWord(): Game {
     return null;
   }
 
+  /** Is `letter` an actual key on this locale's on-screen keyboard? */
+  function isBoardLetter(letter: string): boolean {
+    const { keys } = computeLayout(ctx.width, ctx.height, state.locale);
+    return keys.some((k) => k.key === letter);
+  }
+
   function handlePointer(p: PointerInfo): void {
     if (state.status !== 'playing') return;
     const key = keyAt(p);
@@ -133,7 +139,7 @@ export default function createWord(): Game {
       /* nothing to restore */
     },
     inputEvents: {
-      onKeyDown(code) {
+      onKeyDown(code, key) {
         if (code === 'Enter' || code === 'NumpadEnter') {
           applyKey('ENTER');
           return;
@@ -143,7 +149,16 @@ export default function createWord(): Game {
           return;
         }
         const letter = letterFromCode(code);
-        if (letter) applyKey(letter);
+        if (letter) {
+          applyKey(letter);
+          return;
+        }
+        // No Key* code (e.g. a Turkish/German diacritic key): fall back to the
+        // produced character, uppercased per locale, if it exists on the board.
+        if (key && [...key].length === 1) {
+          const up = key.toLocaleUpperCase(locale);
+          if (isBoardLetter(up)) applyKey(up);
+        }
       },
       onPointerDown(p) {
         // Tap handling lives here (not in onTap) because the host fires BOTH

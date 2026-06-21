@@ -31,6 +31,31 @@ const path = stripLocale(Astro.url.pathname);
   </ul>
 </details>
 
+<script is:inline define:vars={{ current: locale }}>
+  (function () {
+    // Remember the visited locale so the bare-domain '/' redirect honours the
+    // user's choice on the next visit (index.astro reads jz:locale).
+    try {
+      localStorage.setItem('jz:locale', current);
+    } catch (e) {
+      /* storage blocked */
+    }
+    if (window.__jzLangPersist) return;
+    window.__jzLangPersist = true;
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[hreflang]') : null;
+      if (!a) return;
+      var to = a.getAttribute('hreflang');
+      try {
+        localStorage.setItem('jz:locale', to);
+      } catch (e2) {
+        /* storage blocked */
+      }
+      if (typeof window.jzTrack === 'function') window.jzTrack('language_change', { to: to });
+    });
+  })();
+</script>
+
 <style>
   .lang {
     position: relative;

@@ -100,10 +100,10 @@ export default function createSnake(): Game {
     inputEvents: {
       onKeyDown(code) {
         const d = dirFromKey(code);
-        if (d) setDirection(state, d);
+        if (d && setDirection(state, d)) ctx.audio.play('turn');
       },
       onSwipe(dir) {
-        setDirection(state, dir);
+        if (setDirection(state, dir)) ctx.audio.play('turn');
       },
     },
     destroy() {

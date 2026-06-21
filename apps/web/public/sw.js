@@ -1,9 +1,21 @@
 /* Jellyzap service worker — app-shell cache for instant repeat loads.
    Same-origin only: ads, fonts and analytics always go to the network. */
-const CACHE = 'jellyzap-v1';
+const CACHE = 'jellyzap-v2';
 
-self.addEventListener('install', () => {
-  self.skipWaiting();
+/* Locale shells precached at install so the app launches offline in any locale
+   (and the bare '/' redirect shell works without a network round-trip). */
+const PRECACHE = ['/', '/en/', '/tr/', '/de/', '/manifest.webmanifest'];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((c) => c.addAll(PRECACHE))
+      .catch(() => {
+        /* a missing entry must not block install */
+      })
+      .then(() => self.skipWaiting()),
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -23,7 +35,8 @@ self.addEventListener('fetch', (event) => {
 
   const accept = req.headers.get('accept') || '';
   if (req.mode === 'navigate' || accept.includes('text/html')) {
-    // network-first for pages
+    // network-first for pages, with a locale-aware offline fallback that never
+    // resolves to undefined (which would make respondWith fail).
     event.respondWith(
       fetch(req)
         .then((res) => {
@@ -31,7 +44,17 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match('/en/'))),
+        .catch(() =>
+          caches.match(req).then((r) => {
+            if (r) return r;
+            const loc = (url.pathname.match(/^\/(en|tr|de)(\/|$)/) || [])[1];
+            const shell = loc ? '/' + loc + '/' : '/';
+            return caches
+              .match(shell)
+              .then((a) => a || caches.match('/'))
+              .then((b) => b || Response.error());
+          }),
+        ),
     );
     return;
   }

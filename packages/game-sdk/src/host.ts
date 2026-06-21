@@ -77,6 +77,9 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
 
   let paused = false;
   let destroyed = false;
+  // distinguishes an auto-pause (tab hidden) from a deliberate user pause, so we
+  // only auto-resume the former when the tab becomes visible again
+  let pausedByVisibility = false;
 
   const loop = createFixedLoop({
     tps: opts.tps ?? 60,
@@ -108,7 +111,16 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
     game.resize(dim.width, dim.height, dim.dpr);
   }
   function onVisibility() {
-    if (document.hidden) doPause();
+    if (document.hidden) {
+      // only auto-pause a running game; never touch an existing user pause
+      if (!paused) {
+        pausedByVisibility = true;
+        doPause();
+      }
+    } else if (pausedByVisibility) {
+      pausedByVisibility = false;
+      doResume();
+    }
   }
   function firstGesture() {
     void audio.resume();
@@ -127,6 +139,9 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
   game.start();
   hooks.onGameStart?.();
   loop.start();
+  // focus the canvas so keyboard input is captured right away (scoped: the input
+  // manager only prevents page scrolling while the canvas holds focus)
+  canvas.focus?.({ preventScroll: true });
 
   return {
     game,

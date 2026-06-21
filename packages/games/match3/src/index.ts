@@ -12,7 +12,7 @@ import {
   idx,
   isValidSwap,
   refill,
-  scoreFor,
+  scoreMatches,
   type Board,
   type Cell,
 } from './logic';
@@ -33,6 +33,9 @@ export default function createMatch3(): Game {
   let ctx!: GameContext;
   let board: Board = [];
   let selected: Cell | null = null;
+  // origin of a press＋swipe gesture, kept separate from `selected` so the
+  // tap-to-select flow (managed solely by onTap/handleSelect) is not clobbered
+  let pressOrigin: Cell | null = null;
   let gameOver = false;
 
   // cascade resolution is gated by a timer so steps are visible; logic stays pure
@@ -59,6 +62,7 @@ export default function createMatch3(): Game {
     board = createBoard(ctx.rng);
     if (!hasAnyValidMove(board)) reshuffleUntilPlayable();
     selected = null;
+    pressOrigin = null;
     gameOver = false;
     resolving = false;
     stepTimer = 0;
@@ -72,7 +76,7 @@ export default function createMatch3(): Game {
     if (matches.length === 0) return 0;
     chain++;
     for (const { r, c } of matches) board[idx(r, c)] = EMPTY;
-    const gained = scoreFor(matches.length, chain);
+    const gained = scoreMatches(matches, chain);
     ctx.score.add(gained);
     ctx.hooks.onScore?.(ctx.score.score);
     applyGravity(board);
@@ -192,18 +196,23 @@ export default function createMatch3(): Game {
       onTap(p: PointerInfo) {
         handleSelect(cellAt(ctx.width, ctx.height, p.x, p.y));
       },
-      // tap+swipe: pressing selects the origin, the swipe direction picks the target
+      // press＋swipe: the press records the origin, the swipe direction picks the
+      // target. Uses pressOrigin (not selected) so it never fights the tap flow.
       onPointerDown(p: PointerInfo) {
-        if (gameOver || resolving) return;
+        if (gameOver || resolving) {
+          pressOrigin = null;
+          return;
+        }
         const cell = cellAt(ctx.width, ctx.height, p.x, p.y);
-        if (cell && board[idx(cell.r, cell.c)] !== EMPTY) selected = cell;
+        pressOrigin = cell && board[idx(cell.r, cell.c)] !== EMPTY ? cell : null;
       },
       onSwipe(dir: Direction) {
-        if (gameOver || resolving || !selected) return;
+        if (gameOver || resolving || !pressOrigin) return;
         const d = DIR_DELTA[dir];
-        const target: Cell = { r: selected.r + d.r, c: selected.c + d.c };
-        const origin = selected;
-        selected = null;
+        const target: Cell = { r: pressOrigin.r + d.r, c: pressOrigin.c + d.c };
+        const origin = pressOrigin;
+        pressOrigin = null;
+        selected = null; // a swipe-swap also clears any pending tap selection
         if (target.r < 0 || target.r >= SIZE || target.c < 0 || target.c >= SIZE) return;
         trySwap(origin, target);
       },

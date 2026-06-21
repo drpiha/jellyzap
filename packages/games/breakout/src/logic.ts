@@ -141,6 +141,17 @@ export function resetBall(state: BreakoutState): void {
   state.launched = false;
 }
 
+/**
+ * Advance an in-progress game to the next level: rebuild a harder brick layout,
+ * rest the ball on the paddle, and resume play. Score and lives carry over.
+ */
+export function advanceLevel(state: BreakoutState): void {
+  state.level += 1;
+  state.bricks = buildLevel(state.level);
+  state.status = 'playing';
+  resetBall(state);
+}
+
 /** Create a fresh game state at `level` (default 1). */
 export function createBreakoutState(level = 1): BreakoutState {
   const state: BreakoutState = {

@@ -46,17 +46,27 @@ export function createInput(): InputManager {
     };
   }
 
+  /** Is the game canvas the focused element? Used to scope page-scroll hijacking. */
+  function canvasFocused(): boolean {
+    return target != null && typeof document !== 'undefined' && document.activeElement === target;
+  }
+
   const onKeyDown = (e: KeyboardEvent) => {
-    if (SCROLL_KEYS.has(e.code)) e.preventDefault();
+    // Only swallow the page's default scroll/space behaviour while the canvas is
+    // focused, so a mounted game never hijacks scrolling or Space-activation of
+    // other page controls when the player isn't actually interacting with it.
+    if (canvasFocused() && SCROLL_KEYS.has(e.code)) e.preventDefault();
     if (!keys.has(e.code)) pressed.add(e.code);
     keys.add(e.code);
-    handler?.onKeyDown?.(e.code);
+    handler?.onKeyDown?.(e.code, e.key);
   };
   const onKeyUp = (e: KeyboardEvent) => {
     keys.delete(e.code);
     handler?.onKeyUp?.(e.code);
   };
   const onPointerDown = (e: PointerEvent) => {
+    // pressing the canvas focuses it so keyboard input is captured (and scoped)
+    target?.focus?.({ preventScroll: true });
     const p = toLocal(e);
     pointers.set(p.id, p);
     swipe = { x: p.x, y: p.y, t: performance.now(), id: p.id };
@@ -69,6 +79,9 @@ export function createInput(): InputManager {
     handler?.onPointerMove?.(p);
   };
   const onPointerUp = (e: PointerEvent) => {
+    // ignore pointers that never started on the canvas (they were never tracked
+    // and are not the active swipe) so off-canvas releases don't reach the game
+    if (!pointers.has(e.pointerId) && swipe?.id !== e.pointerId) return;
     const p = toLocal(e);
     pointers.delete(e.pointerId);
     handler?.onPointerUp?.(p);

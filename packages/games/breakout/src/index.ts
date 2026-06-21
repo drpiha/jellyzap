@@ -1,5 +1,6 @@
 import type { Game, GameContext, PointerInfo } from '@jellyzap/game-sdk';
 import {
+  advanceLevel,
   buildLevel,
   createBreakoutState,
   launchBall,
@@ -106,8 +107,11 @@ export default function createBreakout(): Game {
       if (ev.lostLife && state.status === 'playing') ctx.audio.play('loseLife');
 
       if (ev.won) {
+        // clearing every brick advances to a harder level rather than ending —
+        // this is what makes the level system live and fires the level-up hook
         ctx.audio.play('win');
-        endGame();
+        advanceLevel(state);
+        ctx.hooks.onLevelUp?.(state.level);
       } else if (ev.lost) {
         endGame();
       }
@@ -162,6 +166,7 @@ export default function createBreakout(): Game {
 
 // re-export so the host/tests can reach the pure model through the package entry
 export {
+  advanceLevel,
   buildLevel,
   createBreakoutState,
   launchBall,

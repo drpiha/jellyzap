@@ -11,8 +11,6 @@ export const WIN_VALUE = 2048;
 export interface Game2048State {
   grid: Grid;
   score: number;
-  /** highest score reached this run (mirrors score, kept for convenience) */
-  best: number;
   /** true once a 2048 tile has appeared */
   won: boolean;
   /** true when no legal move remains */
@@ -212,5 +210,5 @@ export function createState(rng: () => number): Game2048State {
   const grid = emptyGrid();
   spawn(grid, rng);
   spawn(grid, rng);
-  return { grid, score: 0, best: 0, won: false, over: false };
+  return { grid, score: 0, won: false, over: false };
 }

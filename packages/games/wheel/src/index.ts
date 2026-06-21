@@ -85,8 +85,14 @@ export default function createWheel(): Game {
     pendingIndex = -1;
     if (result.kind === 'bankrupt') {
       ctx.audio.play('bankrupt');
+      // roundScore was just zeroed — keep the host score in sync so the persisted
+      // high score can never be the stale pre-bankrupt value
+      ctx.score.set(state.roundScore);
+      ctx.hooks.onScore?.(state.roundScore);
     } else if (result.kind === 'lose_turn') {
       ctx.audio.play('wrong');
+      ctx.score.set(state.roundScore);
+      ctx.hooks.onScore?.(state.roundScore);
       checkEnd();
     }
     // 'value' → awaitingGuess is now true; wait for a letter.
@@ -109,12 +115,10 @@ export default function createWheel(): Game {
     if (resolved) return;
     if (state.won || state.lost) {
       resolved = true;
-      if (state.won) {
-        ctx.score.set(state.roundScore);
-        ctx.audio.play('win');
-      } else {
-        ctx.audio.play('lose');
-      }
+      // sync the host score on BOTH outcomes before committing, so the persisted
+      // high score and the value reported to onGameOver always equal roundScore
+      ctx.score.set(state.roundScore);
+      ctx.audio.play(state.won ? 'win' : 'lose');
       const isHigh = ctx.score.commitHighScore();
       void ctx.hooks.onGameOver?.(state.roundScore, isHigh);
     }

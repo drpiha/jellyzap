@@ -56,6 +56,12 @@ export function createAudio(storage: Storage): AudioManager {
         const src = ac.createBufferSource();
         src.buffer = buffer;
         src.connect(gain);
+        // release the per-play nodes once playback ends so they don't pile up on
+        // the master bus over a long session
+        src.onended = () => {
+          src.disconnect();
+          gain.disconnect();
+        };
         src.start(t0);
         src.stop(t0 + dur);
       } else {
@@ -67,6 +73,10 @@ export function createAudio(storage: Storage): AudioManager {
           osc.frequency.exponentialRampToValueAtTime(Math.max(1, spec.freqEnd), t0 + dur);
         }
         osc.connect(gain);
+        osc.onended = () => {
+          osc.disconnect();
+          gain.disconnect();
+        };
         osc.start(t0);
         osc.stop(t0 + dur);
       }

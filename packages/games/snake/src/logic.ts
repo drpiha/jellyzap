@@ -62,9 +62,12 @@ export function createSnakeState(cols: number, rows: number, rng: () => number):
   return state;
 }
 
-export function setDirection(state: SnakeState, dir: Dir): void {
-  if (dir === OPPOSITE[state.dir]) return; // cannot reverse onto the neck
+/** Queue a new heading. Returns true only when it is an accepted, new direction. */
+export function setDirection(state: SnakeState, dir: Dir): boolean {
+  if (dir === OPPOSITE[state.dir]) return false; // cannot reverse onto the neck
+  if (dir === state.pendingDir) return false; // no change
   state.pendingDir = dir;
+  return true;
 }
 
 export type StepResult = 'move' | 'eat' | 'dead';

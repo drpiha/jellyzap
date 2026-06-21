@@ -20,8 +20,9 @@ export function randInt(rng: () => number, min: number, max: number): number {
   return min + Math.floor(rng() * (max - min + 1));
 }
 
-/** Pick a random element. */
+/** Pick a random element. Throws on an empty array (the signature promises a `T`). */
 export function pick<T>(rng: () => number, arr: readonly T[]): T {
+  if (arr.length === 0) throw new Error('pick: cannot pick from an empty array');
   return arr[Math.floor(rng() * arr.length)];
 }
 
@@ -41,6 +42,7 @@ export function shuffle<T>(rng: () => number, arr: readonly T[]): T[] {
 export function weightedIndex(rng: () => number, weights: readonly number[]): number {
   let total = 0;
   for (const w of weights) total += w;
+  if (total <= 0) return 0; // empty / all-zero weights → first index, never -1
   let r = rng() * total;
   for (let i = 0; i < weights.length; i++) {
     r -= weights[i];

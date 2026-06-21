@@ -38,7 +38,12 @@ export interface InputState {
 }
 
 export interface InputEvents {
-  onKeyDown?(code: string): void;
+  /**
+   * @param code physical `KeyboardEvent.code` (layout-independent, e.g. `KeyA`)
+   * @param key  the produced `KeyboardEvent.key` (layout/locale aware, e.g. `ç`),
+   *             so games can accept diacritics that have no `Key*` code
+   */
+  onKeyDown?(code: string, key?: string): void;
   onKeyUp?(code: string): void;
   onSwipe?(dir: Direction): void;
   onTap?(p: PointerInfo): void;

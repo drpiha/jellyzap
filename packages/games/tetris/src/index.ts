@@ -60,11 +60,14 @@ export default function createTetris(): Game {
     void ctx.hooks.onGameOver?.(state.score, isHigh);
   }
 
-  /** Apply the outcome of a lock/clear: sounds, scoring, level-up + game over. */
-  function afterLock(cleared: number, spawned: boolean): void {
+  /**
+   * Apply the outcome of a lock/clear: sounds, scoring, level-up + game over.
+   * `levelBefore` is the level captured *before* the lock ran, since the lock may
+   * have already bumped `state.level` via line clears.
+   */
+  function afterLock(cleared: number, spawned: boolean, levelBefore: number): void {
     if (cleared > 0) ctx.audio.play('lineclear');
     else ctx.audio.play('lock');
-    const levelBefore = state.level;
     syncScore();
     if (state.level > levelBefore) ctx.hooks.onLevelUp?.(state.level);
     if (!spawned) endGame();
@@ -92,9 +95,10 @@ export default function createTetris(): Game {
       const interval = gravityInterval(state.level);
       while (acc >= interval) {
         acc -= interval;
+        const levelBefore = state.level;
         const res = gravityStep(state, ctx.rng);
         if (res.kind === 'lock') {
-          afterLock(res.cleared, res.spawned);
+          afterLock(res.cleared, res.spawned, levelBefore);
         } else if (res.kind === 'over') {
           endGame();
           break;
@@ -147,10 +151,11 @@ export default function createTetris(): Game {
             }
             break;
           case 'Space': {
+            const levelBefore = state.level;
             const res = hardDrop(state, ctx.rng);
             ctx.audio.play('drop');
             acc = 0;
-            afterLock(res.cleared, res.spawned);
+            afterLock(res.cleared, res.spawned, levelBefore);
             break;
           }
           default:

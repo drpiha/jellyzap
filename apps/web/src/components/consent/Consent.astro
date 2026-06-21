@@ -13,6 +13,7 @@ const cfg = {
   gaId: GA_ID,
   adsEnabled: AD_CONFIG.enabled,
   publisherId: AD_CONFIG.publisherId,
+  childDirected: AD_CONFIG.childDirected,
 };
 ---
 
@@ -78,20 +79,52 @@ const cfg = {
       }
     }
 
+    // --- Consent Mode v2 -----------------------------------------------------
+    // gtag/dataLayer must exist independently of whether GA itself ever loads, so
+    // that AdSense (and a later GA load) read the correct consent signals.
+    function ensureGtag() {
+      window.dataLayer = window.dataLayer || [];
+      if (!window.gtag) {
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+      }
+    }
+
+    // Deny everything by default on EVERY page load, before any tag loads.
+    function consentDefaults() {
+      if (window.__jzConsentBootstrapped) return;
+      window.__jzConsentBootstrapped = true;
+      ensureGtag();
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+    }
+
+    // Reflect the user's choice. For a child-directed audience, ads may be served
+    // but ad_user_data / ad_personalization stay denied (non-personalized).
+    function consentUpdate() {
+      ensureGtag();
+      const adsOK = !!(state && state.ads);
+      const analyticsOK = !!(state && state.analytics);
+      const personalized = adsOK && !cfg.childDirected;
+      window.gtag('consent', 'update', {
+        ad_storage: adsOK ? 'granted' : 'denied',
+        ad_user_data: personalized ? 'granted' : 'denied',
+        ad_personalization: personalized ? 'granted' : 'denied',
+        analytics_storage: analyticsOK ? 'granted' : 'denied',
+      });
+    }
+
     function loadGA() {
       if (!cfg.gaId || window.__jzGaLoaded) return;
       window.__jzGaLoaded = true;
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        window.dataLayer.push(arguments);
-      };
+      ensureGtag();
       window.gtag('js', new Date());
-      window.gtag('consent', 'default', {
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        ad_storage: state && state.ads ? 'granted' : 'denied',
-        analytics_storage: 'granted',
-      });
       window.gtag('config', cfg.gaId, { anonymize_ip: true });
       const s = document.createElement('script');
       s.async = true;
@@ -104,6 +137,9 @@ const cfg = {
     function loadAds() {
       if (!cfg.adsEnabled || !cfg.publisherId || window.__jzAdsLoaded) return;
       window.__jzAdsLoaded = true;
+      // child-directed audience → request non-personalized ads (COPPA / GDPR-K)
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.requestNonPersonalizedAds = cfg.childDirected ? 1 : 0;
       const s = document.createElement('script');
       s.async = true;
       s.crossOrigin = 'anonymous';
@@ -113,6 +149,8 @@ const cfg = {
     }
 
     function apply() {
+      // always push the current consent state, even if a given tag doesn't load
+      consentUpdate();
       if (state && state.analytics) loadGA();
       if (state && state.ads) loadAds();
     }
@@ -163,6 +201,9 @@ const cfg = {
         window.jzConsent.open();
       });
     });
+
+    // Consent Mode v2 defaults (all denied) before anything else loads.
+    consentDefaults();
 
     if (state) {
       apply();
