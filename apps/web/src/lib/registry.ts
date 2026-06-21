@@ -19,6 +19,7 @@ export const GAME_LOADERS: Record<string, Loader> = {
   flappy: () => import('@jellyzap/game-flappy').then((m) => m.default()),
   breakout: () => import('@jellyzap/game-breakout').then((m) => m.default()),
   karts: () => import('@jellyzap/game-karts').then((m) => m.default()),
+  penalty: () => import('@jellyzap/game-penalty').then((m) => m.default()),
 };
 
 export function hasGame(slug: string): boolean {

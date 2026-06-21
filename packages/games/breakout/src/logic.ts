@@ -74,6 +74,15 @@ export interface BreakoutState {
   level: number;
   /** true once the ball has been launched off the paddle */
   launched: boolean;
+  /** launch speed (units/s); set by difficulty */
+  ballSpeed: number;
+}
+
+/** Per-difficulty tuning knobs for a fresh game. */
+export interface BreakoutOptions {
+  lives?: number;
+  paddleW?: number;
+  ballSpeed?: number;
 }
 
 /** What happened during a single {@link step}; useful for SFX/feedback. */
@@ -152,19 +161,20 @@ export function advanceLevel(state: BreakoutState): void {
   resetBall(state);
 }
 
-/** Create a fresh game state at `level` (default 1). */
-export function createBreakoutState(level = 1): BreakoutState {
+/** Create a fresh game state at `level` (default 1), optionally tuned by difficulty. */
+export function createBreakoutState(level = 1, opts: BreakoutOptions = {}): BreakoutState {
   const state: BreakoutState = {
     width: WIDTH,
     height: HEIGHT,
-    paddle: { x: WIDTH / 2, w: PADDLE_W },
+    paddle: { x: WIDTH / 2, w: opts.paddleW ?? PADDLE_W },
     ball: { x: WIDTH / 2, y: PADDLE_Y - BALL_R - 0.1, vx: 0, vy: 0, r: BALL_R },
     bricks: buildLevel(level),
-    lives: START_LIVES,
+    lives: opts.lives ?? START_LIVES,
     score: 0,
     status: 'playing',
     level,
     launched: false,
+    ballSpeed: opts.ballSpeed ?? BALL_SPEED,
   };
   return state;
 }
@@ -189,8 +199,9 @@ export function launchBall(state: BreakoutState): void {
   if (state.launched || state.status !== 'playing') return;
   state.launched = true;
   const angle = -Math.PI / 2 + 0.25; // up and a touch to the right
-  state.ball.vx = Math.cos(angle) * BALL_SPEED;
-  state.ball.vy = Math.sin(angle) * BALL_SPEED;
+  const speed = state.ballSpeed || BALL_SPEED;
+  state.ball.vx = Math.cos(angle) * speed;
+  state.ball.vy = Math.sin(angle) * speed;
 }
 
 /**

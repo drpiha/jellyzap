@@ -53,6 +53,9 @@ importers:
       '@jellyzap/game-memory':
         specifier: workspace:*
         version: link:../../packages/games/memory
+      '@jellyzap/game-penalty':
+        specifier: workspace:*
+        version: link:../../packages/games/penalty
       '@jellyzap/game-sdk':
         specifier: workspace:*
         version: link:../../packages/game-sdk
@@ -121,6 +124,12 @@ importers:
         version: link:../../game-sdk
 
   packages/games/memory:
+    dependencies:
+      '@jellyzap/game-sdk':
+        specifier: workspace:*
+        version: link:../../game-sdk
+
+  packages/games/penalty:
     dependencies:
       '@jellyzap/game-sdk':
         specifier: workspace:*

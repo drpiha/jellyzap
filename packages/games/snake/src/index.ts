@@ -5,8 +5,13 @@ import { registerSnakeSfx } from './sfx';
 
 const COLS = 19;
 const ROWS = 19;
-const BASE_INTERVAL = 0.16;
-const MIN_INTERVAL = 0.06;
+
+/** Per-difficulty speed: base tick, fastest tick, and how fast it ramps per point. */
+const DIFFICULTY: Record<string, { base: number; min: number; ramp: number }> = {
+  easy: { base: 0.2, min: 0.11, ramp: 0.003 },
+  normal: { base: 0.16, min: 0.07, ramp: 0.004 },
+  hard: { base: 0.12, min: 0.05, ramp: 0.006 },
+};
 
 function dirFromKey(code: string): Dir | null {
   switch (code) {
@@ -31,13 +36,15 @@ export default function createSnake(): Game {
   let ctx!: GameContext;
   let state!: SnakeState;
   let acc = 0;
-  let interval = BASE_INTERVAL;
+  let cfg = DIFFICULTY.easy;
+  let interval = cfg.base;
   let gameOver = false;
 
   function reset(): void {
+    cfg = DIFFICULTY[ctx.difficulty] ?? DIFFICULTY.easy;
     state = createSnakeState(COLS, ROWS, ctx.rng);
     acc = 0;
-    interval = BASE_INTERVAL;
+    interval = cfg.base;
     gameOver = false;
     ctx.score.reset();
   }
@@ -69,7 +76,7 @@ export default function createSnake(): Game {
           ctx.juice.shake(0.06);
           ctx.score.set(state.score);
           ctx.hooks.onScore?.(state.score);
-          interval = Math.max(MIN_INTERVAL, BASE_INTERVAL - state.score * 0.004);
+          interval = Math.max(cfg.min, cfg.base - state.score * cfg.ramp);
         } else if (result === 'dead') {
           ctx.audio.play('die');
           ctx.juice.shake(0.4);

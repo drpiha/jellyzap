@@ -1,0 +1,140 @@
+{
+  "slug": "penalty",
+  "category": "action",
+  "accent": "#22c55e",
+  "order": 11,
+  "playable": true,
+  "title": { "en": "Penalty Shootout", "tr": "Penaltı Atışı", "de": "Elfmeterschießen" },
+  "tagline": {
+    "en": "Pick your spot and beat the keeper!",
+    "tr": "Köşeni seç ve kaleciyi geç!",
+    "de": "Wähle deine Ecke und überwinde den Torwart!"
+  },
+  "description": {
+    "en": "Penalty Shootout is a quick, family-friendly soccer game: step up to the spot, pick a corner of the goal, and try to send the keeper the wrong way. Aim high or low, left or right, and shoot — score as many goals as you can before you run out of tries. Choose Easy, Normal or Hard to make the keeper sharper, and watch the ball fly into the top corner with a satisfying cheer. It's instant fun for kids and grown-ups, on phone or computer, with no download.",
+    "tr": "Penaltı Atışı, hızlı ve tüm aile için uygun bir futbol oyunudur: noktaya gel, kalenin bir köşesini seç ve kaleciyi yanlış yöne göndermeye çalış. Yukarı ya da aşağı, sağa ya da sola nişan al ve şutu çek — hakların bitmeden olabildiğince çok gol at. Kaleciyi zorlaştırmak için Kolay, Orta veya Zor seç ve topun üst köşeye uçuşunu tezahüratlarla izle. Telefonda veya bilgisayarda, indirme olmadan, çocuklar ve büyükler için anında eğlence.",
+    "de": "Elfmeterschießen ist ein schnelles, familienfreundliches Fußballspiel: Tritt an den Punkt, wähle eine Ecke des Tors und schicke den Torwart in die falsche Ecke. Ziele hoch oder flach, links oder rechts, und schieße — erziele so viele Tore wie möglich, bevor deine Versuche aufgebraucht sind. Wähle Leicht, Normal oder Schwer, um den Torwart stärker zu machen, und sieh zu, wie der Ball mit Jubel in den Winkel fliegt. Sofortiger Spaß für Kinder und Erwachsene, auf Handy oder Computer, ohne Download."
+  },
+  "howToPlay": {
+    "en": [
+      "Look at the goal — it's split into six target zones.",
+      "Tap a zone (or use the arrow keys) to choose where to shoot.",
+      "Tap the zone again, or press Space, to take the shot.",
+      "If the keeper doesn't reach your zone, it's a goal!",
+      "Each save costs a life — score as many goals as you can."
+    ],
+    "tr": [
+      "Kaleye bak — altı hedef bölgesine ayrılmıştır.",
+      "Nereye şut çekeceğini seçmek için bir bölgeye dokun (ya da ok tuşlarını kullan).",
+      "Şutu çekmek için bölgeye tekrar dokun ya da Boşluk tuşuna bas.",
+      "Kaleci senin bölgene yetişemezse gol olur!",
+      "Her kurtarış bir cana mal olur — olabildiğince çok gol at."
+    ],
+    "de": [
+      "Schau aufs Tor — es ist in sechs Zielzonen aufgeteilt.",
+      "Tippe auf eine Zone (oder nutze die Pfeiltasten), um zu wählen, wohin du schießt.",
+      "Tippe die Zone erneut an oder drücke die Leertaste, um zu schießen.",
+      "Erreicht der Torwart deine Zone nicht, ist es ein Tor!",
+      "Jede Parade kostet ein Leben — erziele so viele Tore wie möglich."
+    ]
+  },
+  "controls": {
+    "en": [
+      "Tap a goal zone — aim and shoot",
+      "Arrow keys — move your aim",
+      "Space or Enter — shoot"
+    ],
+    "tr": [
+      "Kale bölgesine dokun — nişan al ve şut çek",
+      "Ok tuşları — nişanını oynat",
+      "Boşluk veya Enter — şut çek"
+    ],
+    "de": [
+      "Tippe auf eine Torzone — zielen und schießen",
+      "Pfeiltasten — Zielpunkt bewegen",
+      "Leertaste oder Enter — schießen"
+    ]
+  },
+  "tips": {
+    "en": [
+      "Aim for the top corners — they're the hardest for the keeper to reach.",
+      "Mix up your shots so the keeper can't guess your favourite spot.",
+      "Start on Easy to get your eye in, then move up to Hard for a real test.",
+      "Quick taps work great on a phone — pick a corner and go."
+    ],
+    "tr": [
+      "Üst köşelere nişan al — kalecinin yetişmesi en zor yerler oralardır.",
+      "Şutlarını çeşitlendir ki kaleci en sevdiğin köşeyi tahmin edemesin.",
+      "Gözünü alıştırmak için Kolay'da başla, sonra gerçek bir sınav için Zor'a geç.",
+      "Telefonda hızlı dokunuşlar harika çalışır — bir köşe seç ve at."
+    ],
+    "de": [
+      "Ziele in die oberen Ecken — dort kommt der Torwart am schwersten hin.",
+      "Variiere deine Schüsse, damit der Torwart deine Lieblingsecke nicht errät.",
+      "Beginne auf Leicht, um dich einzuspielen, und wechsle dann auf Schwer.",
+      "Schnelle Tipps funktionieren super am Handy — Ecke wählen und schießen."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Penalty Shootout free to play?",
+        "a": "Yes! Penalty Shootout on Jellyzap is completely free and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play on mobile?",
+        "a": "Tap a zone in the goal to aim and shoot. It works on phones, tablets and computers."
+      },
+      {
+        "q": "Can I change how hard the keeper is?",
+        "a": "Yes — use the difficulty button to switch between Easy, Normal and Hard. Harder levels give the keeper better reflexes and fewer lives."
+      },
+      {
+        "q": "Is it suitable for kids?",
+        "a": "Absolutely. It's a friendly, cartoon-style soccer game with no violence, chat or in-game purchases."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Penaltı Atışı ücretsiz mi?",
+        "a": "Evet! Jellyzap'teki Penaltı Atışı tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde nasıl oynanır?",
+        "a": "Nişan alıp şut çekmek için kaledeki bir bölgeye dokun. Telefon, tablet ve bilgisayarda çalışır."
+      },
+      {
+        "q": "Kalecinin zorluğunu değiştirebilir miyim?",
+        "a": "Evet — Kolay, Orta ve Zor arasında geçmek için zorluk düğmesini kullan. Zor seviyeler kaleciye daha iyi refleks ve daha az can verir."
+      },
+      {
+        "q": "Çocuklar için uygun mu?",
+        "a": "Kesinlikle. Şiddet, sohbet veya oyun içi satın alma içermeyen, çizgi film tarzı dostça bir futbol oyunudur."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Elfmeterschießen kostenlos?",
+        "a": "Ja! Elfmeterschießen auf Jellyzap ist völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich auf dem Handy?",
+        "a": "Tippe auf eine Zone im Tor, um zu zielen und zu schießen. Es läuft auf Handy, Tablet und Computer."
+      },
+      {
+        "q": "Kann ich einstellen, wie stark der Torwart ist?",
+        "a": "Ja — mit dem Schwierigkeitsknopf wechselst du zwischen Leicht, Normal und Schwer. Höhere Stufen geben dem Torwart bessere Reflexe und weniger Leben."
+      },
+      {
+        "q": "Ist es für Kinder geeignet?",
+        "a": "Auf jeden Fall. Es ist ein freundliches Fußballspiel im Comic-Stil ohne Gewalt, Chat oder In-Game-Käufe."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "penalty shootout, soccer game, football penalty, free penalty game, play penalty online, kids soccer game",
+    "tr": "penaltı atışı, futbol oyunu, penaltı oyna, ücretsiz penaltı oyunu, çocuk futbol oyunu, online penaltı",
+    "de": "elfmeterschießen, fußballspiel, elfmeter spielen, kostenloses elfmeter spiel, fußball penalty, kinder fußballspiel"
+  },
+  "tags": ["penalty", "soccer", "football", "sports", "action", "high-score"]
+}

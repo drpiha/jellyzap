@@ -68,6 +68,19 @@ export interface FlappyState {
   started: boolean;
   /** x at which the next pipe will be spawned (tracks the scroll) */
   nextPipeX: number;
+  /** gravity (world units/s²) — tunable per difficulty */
+  gravity: number;
+  /** half-height of the passable gap — tunable per difficulty */
+  gapHalf: number;
+  /** pipe scroll speed (world units/s) — tunable per difficulty */
+  pipeSpeed: number;
+}
+
+/** Per-game difficulty knobs (defaults reproduce the original tuning). */
+export interface FlappyOptions {
+  gravity?: number;
+  gapHalf?: number;
+  pipeSpeed?: number;
 }
 
 /** The lowest (smallest y) a gap centre may be placed. */
@@ -88,7 +101,7 @@ export function randomGapY(rng: () => number, gapHalf: number = GAP_HALF): numbe
   return lo + rng() * (hi - lo);
 }
 
-export function createFlappyState(): FlappyState {
+export function createFlappyState(opts: FlappyOptions = {}): FlappyState {
   return {
     y: WORLD_HEIGHT / 2,
     vy: 0,
@@ -97,6 +110,9 @@ export function createFlappyState(): FlappyState {
     alive: true,
     started: false,
     nextPipeX: WORLD_WIDTH + PIPE_SPACING,
+    gravity: opts.gravity ?? GRAVITY,
+    gapHalf: opts.gapHalf ?? GAP_HALF,
+    pipeSpeed: opts.pipeSpeed ?? PIPE_SPEED,
   };
 }
 
@@ -110,8 +126,8 @@ export function flap(state: FlappyState): void {
 function spawnPipe(state: FlappyState, rng: () => number): void {
   state.pipes.push({
     x: state.nextPipeX,
-    gapY: randomGapY(rng, GAP_HALF),
-    gapHalf: GAP_HALF,
+    gapY: randomGapY(rng, state.gapHalf),
+    gapHalf: state.gapHalf,
     passed: false,
   });
   state.nextPipeX += PIPE_SPACING;
@@ -158,12 +174,12 @@ export function step(state: FlappyState, dt: number, rng: () => number): StepRes
   }
 
   // Integrate vertical motion (gravity), clamped to a terminal speed.
-  state.vy += GRAVITY * dt;
+  state.vy += state.gravity * dt;
   if (state.vy > MAX_FALL_SPEED) state.vy = MAX_FALL_SPEED;
   state.y += state.vy * dt;
 
   // Scroll pipes left and the spawn marker with them.
-  const advance = PIPE_SPEED * dt;
+  const advance = state.pipeSpeed * dt;
   for (const p of state.pipes) p.x -= advance;
   state.nextPipeX -= advance;
 

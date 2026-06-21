@@ -18,13 +18,20 @@ import { registerBreakoutSfx } from './sfx';
 /** Paddle keyboard speed in abstract units per second. */
 const KEY_SPEED = 90;
 
+/** Per-difficulty tuning: easier = more lives, wider paddle, slower ball. */
+const DIFFICULTY = {
+  easy: { lives: 5, paddleW: 28, ballSpeed: 56 },
+  normal: { lives: 3, paddleW: 20, ballSpeed: 70 },
+  hard: { lives: 2, paddleW: 15, ballSpeed: 86 },
+} as const;
+
 export default function createBreakout(): Game {
   let ctx!: GameContext;
   let state!: BreakoutState;
   let ended = false;
 
   function reset(): void {
-    state = createBreakoutState(1);
+    state = createBreakoutState(1, DIFFICULTY[ctx.difficulty] ?? DIFFICULTY.easy);
     ended = false;
     ctx.score.reset();
   }

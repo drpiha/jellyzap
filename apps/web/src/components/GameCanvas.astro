@@ -21,6 +21,10 @@ const strings = {
   sound: t('game.sound'),
   music: t('game.music'),
   motion: t('game.motion'),
+  difficulty: t('game.difficulty'),
+  easy: t('game.easy'),
+  normal: t('game.normal'),
+  hard: t('game.hard'),
   pause: t('game.pause'),
   fullscreen: t('game.fullscreen'),
   restart: t('game.restart'),
@@ -66,6 +70,7 @@ const strings = {
   </div>
 
   <div class="jz-controls">
+    <button data-jz-difficulty type="button" aria-label={strings.difficulty}>🐣</button>
     <button data-jz-sound type="button" aria-label={strings.sound}>🔊</button>
     <button data-jz-music type="button" aria-label={strings.music} aria-pressed="true">🎵</button>
     <button data-jz-motion type="button" aria-label={strings.motion} aria-pressed="true">🌀</button>
@@ -128,6 +133,17 @@ const strings = {
     let musicOn = prefBool('jz:music') ?? true;
     const motionPref = prefBool('jz:reducedmotion');
     let reducedMotion = motionPref === null ? prefersReduced : motionPref;
+
+    type Diff = 'easy' | 'normal' | 'hard';
+    const DIFFS: Diff[] = ['easy', 'normal', 'hard'];
+    const DIFF_ICON: Record<Diff, string> = { easy: '🐣', normal: '🙂', hard: '🔥' };
+    let difficulty: Diff = 'easy';
+    try {
+      const d = localStorage.getItem('jz:difficulty');
+      if (d === 'easy' || d === 'normal' || d === 'hard') difficulty = d;
+    } catch {
+      /* storage blocked */
+    }
 
     const show = (el: HTMLElement | null) => el && (el.hidden = false);
     const hide = (el: HTMLElement | null) => el && (el.hidden = true);
@@ -195,6 +211,7 @@ const strings = {
         t: tt,
         music: musicOn,
         reducedMotion,
+        difficulty,
         hooks: {
           onAnalytics: (e, p) => track(e, p),
           onGameOver: (score) => void onGameOver(score),
@@ -238,6 +255,36 @@ const strings = {
       setPref('jz:reducedmotion', reducedMotion);
       host?.setReducedMotion(reducedMotion);
       syncMotion();
+    });
+
+    const diffBtn = stage.querySelector<HTMLButtonElement>('[data-jz-difficulty]');
+    const diffName: Record<Diff, string> = {
+      easy: strings.easy,
+      normal: strings.normal,
+      hard: strings.hard,
+    };
+    const syncDiff = () => {
+      if (!diffBtn) return;
+      diffBtn.textContent = DIFF_ICON[difficulty];
+      const label = `${strings.difficulty}: ${diffName[difficulty]}`;
+      diffBtn.setAttribute('aria-label', label);
+      diffBtn.title = label;
+    };
+    syncDiff();
+    diffBtn?.addEventListener('click', () => {
+      difficulty = DIFFS[(DIFFS.indexOf(difficulty) + 1) % DIFFS.length];
+      try {
+        localStorage.setItem('jz:difficulty', difficulty);
+      } catch {
+        /* storage blocked */
+      }
+      syncDiff();
+      // apply immediately: change tuning and restart the round
+      if (host) {
+        host.setDifficulty(difficulty);
+        hide(ovOver);
+        host.restart();
+      }
     });
     stage.querySelector('[data-jz-pause]')?.addEventListener('click', () => {
       if (!host) return;

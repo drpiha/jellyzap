@@ -19,6 +19,7 @@
     "@jellyzap/game-karts": "workspace:*",
     "@jellyzap/game-match3": "workspace:*",
     "@jellyzap/game-memory": "workspace:*",
+    "@jellyzap/game-penalty": "workspace:*",
     "@jellyzap/game-sdk": "workspace:*",
     "@jellyzap/game-snake": "workspace:*",
     "@jellyzap/game-tetris": "workspace:*",

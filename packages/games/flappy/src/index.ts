@@ -8,6 +8,13 @@ const FIXED_DT = 1 / 120;
 /** Safety cap so a long stall can't spiral the accumulator. */
 const MAX_ACC = 0.25;
 
+/** Per-difficulty: easier = weaker gravity, bigger gap, slower pipes. */
+const DIFFICULTY = {
+  easy: { gravity: 1.7, gapHalf: 0.17, pipeSpeed: 0.32 },
+  normal: { gravity: 2.4, gapHalf: 0.13, pipeSpeed: 0.42 },
+  hard: { gravity: 2.9, gapHalf: 0.105, pipeSpeed: 0.52 },
+} as const;
+
 export default function createFlappy(): Game {
   let ctx!: GameContext;
   let state!: FlappyState;
@@ -15,7 +22,7 @@ export default function createFlappy(): Game {
   let gameOver = false;
 
   function reset(): void {
-    state = createFlappyState();
+    state = createFlappyState(DIFFICULTY[ctx.difficulty] ?? DIFFICULTY.easy);
     acc = 0;
     gameOver = false;
     ctx.score.reset();

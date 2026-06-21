@@ -10,6 +10,9 @@
 
 export type Direction = 'up' | 'down' | 'left' | 'right';
 
+/** Player-selected difficulty. Games scale speed / lives / spawn rate from this. */
+export type Difficulty = 'easy' | 'normal' | 'hard';
+
 export interface GameMeta {
   /** unique kebab-case id, matches the package + route + content entry */
   slug: string;
@@ -163,6 +166,8 @@ export interface GameContext {
   readonly hooks: LifecycleHooks;
   /** cosmetic screen-shake + particles (never affects game logic) */
   readonly juice: Juice;
+  /** current difficulty; games read this in start()/reset() to scale tuning */
+  difficulty: Difficulty;
   locale: string;
   t(key: string): string;
 }
@@ -197,6 +202,8 @@ export interface GameHostOptions {
   reducedMotion?: boolean;
   /** play gentle procedural background music (default true) */
   music?: boolean;
+  /** starting difficulty (default 'easy' — forgiving for younger players) */
+  difficulty?: Difficulty;
 }
 
 export interface GameHostHandle {
@@ -210,6 +217,8 @@ export interface GameHostHandle {
   setMusicEnabled(enabled: boolean): void;
   /** toggle screen shake / particles at runtime (accessibility) */
   setReducedMotion(reduced: boolean): void;
+  /** change difficulty; takes effect on the next start()/restart() */
+  setDifficulty(difficulty: Difficulty): void;
   isPaused(): boolean;
 }
 

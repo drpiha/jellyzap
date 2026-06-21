@@ -23,10 +23,14 @@ const FALLBACK: Record<string, Record<string, string>> = {
   'game.next': { en: 'Next', tr: 'Sıradaki', de: 'Nächstes' },
 };
 
+/** Gravity multiplier per difficulty (>1 = slower fall = more forgiving). */
+const GRAVITY_MULT = { easy: 1.8, normal: 1.0, hard: 0.7 } as const;
+
 export default function createTetris(): Game {
   let ctx!: GameContext;
   let state!: TetrisState;
   let acc = 0;
+  let gravityMult: number = GRAVITY_MULT.easy;
   let gameOver = false;
 
   /** Translate `key`, falling back to a localized default if it is undefined. */
@@ -40,6 +44,7 @@ export default function createTetris(): Game {
   }
 
   function reset(): void {
+    gravityMult = GRAVITY_MULT[ctx.difficulty] ?? GRAVITY_MULT.easy;
     state = createTetrisState(ctx.rng);
     acc = 0;
     gameOver = state.over;
@@ -100,7 +105,7 @@ export default function createTetris(): Game {
     update(dt) {
       if (gameOver || state.over) return;
       acc += dt;
-      const interval = gravityInterval(state.level);
+      const interval = gravityInterval(state.level) * gravityMult;
       while (acc >= interval) {
         acc -= interval;
         const levelBefore = state.level;

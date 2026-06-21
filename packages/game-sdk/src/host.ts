@@ -90,6 +90,7 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
     rng,
     hooks,
     juice,
+    difficulty: opts.difficulty ?? 'easy',
     locale: opts.locale ?? 'en',
     t: opts.t ?? ((k) => k),
   };
@@ -234,6 +235,9 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
         particles.clear();
         canvas.style.transform = '';
       }
+    },
+    setDifficulty(difficulty) {
+      context.difficulty = difficulty;
     },
     isPaused() {
       return paused;

@@ -12,6 +12,9 @@ import { registerWheelSfx } from './sfx';
 const SPIN_DURATION = 2.4; // seconds of wheel animation per spin
 const FULL_TURNS = 4; // base whole rotations before settling
 
+/** Lives per difficulty (easier = more wrong guesses allowed). */
+const LIVES = { easy: 8, normal: 5, hard: 4 } as const;
+
 /** Map a keyboard code to an A–Z letter, or null. */
 function letterFromKey(code: string): string | null {
   if (/^Key[A-Z]$/.test(code)) return code.slice(3);
@@ -33,7 +36,9 @@ export default function createWheel(): Game {
   let resolved = false; // guards a single onGameOver call
 
   function reset(): void {
-    state = createWheelState(ctx.rng, ctx.locale);
+    state = createWheelState(ctx.rng, ctx.locale, {
+      lives: LIVES[ctx.difficulty] ?? LIVES.easy,
+    });
     spinning = false;
     spinT = 0;
     displayAngle = 0;
