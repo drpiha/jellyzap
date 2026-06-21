@@ -76,6 +76,8 @@ export interface AudioManager {
   play(name: string): void;
   loadMusic(url: string): Promise<void>;
   playMusic(loop?: boolean): void;
+  /** start gentle, asset-free procedural background music (no-op if already on) */
+  startMusic(): void;
   stopMusic(): void;
   setMuted(muted: boolean): void;
   isMuted(): boolean;
@@ -99,6 +101,38 @@ export interface ScoreTracker {
   reset(): void;
   /** persist the score if it beats the stored high score; returns true on a new record */
   commitHighScore(): boolean;
+}
+
+/** Options for a particle burst (all optional). */
+export interface BurstOptions {
+  /** number of particles (default 12) */
+  count?: number;
+  /** a single CSS color or a palette to pick from */
+  color?: string | string[];
+  /** initial speed in logical px/s (default 90) */
+  speed?: number;
+  /** particle size in logical px (default 4) */
+  size?: number;
+  /** angular spread in radians; >= 2π means a full circle (default full circle) */
+  spread?: number;
+  /** downward acceleration in px/s² (default 220) */
+  gravity?: number;
+  /** base lifetime in seconds (default 0.6) */
+  life?: number;
+}
+
+/**
+ * Render-layer "juice": screen shake + particle bursts. Cosmetic only — it never
+ * touches game logic, so games stay deterministic. All calls are no-ops when
+ * {@link Juice.reducedMotion} is true (accessibility / user setting).
+ */
+export interface Juice {
+  /** add screen-shake trauma in [0,1] (shake intensity ∝ trauma²) */
+  shake(trauma: number): void;
+  /** emit a particle burst at logical (x, y) */
+  burst(x: number, y: number, opts?: BurstOptions): void;
+  /** true when motion effects are suppressed */
+  readonly reducedMotion: boolean;
 }
 
 export type RewardReason = 'extra_life' | 'continue';
@@ -127,6 +161,8 @@ export interface GameContext {
   /** seedable PRNG in [0,1); deterministic when a seed is supplied to the host */
   rng(): number;
   readonly hooks: LifecycleHooks;
+  /** cosmetic screen-shake + particles (never affects game logic) */
+  readonly juice: Juice;
   locale: string;
   t(key: string): string;
 }
@@ -157,6 +193,10 @@ export interface GameHostOptions {
   showVirtualControls?: boolean | 'auto';
   /** fixed logic ticks per second (default 60) */
   tps?: number;
+  /** suppress screen shake / particles (defaults to the OS prefers-reduced-motion) */
+  reducedMotion?: boolean;
+  /** play gentle procedural background music (default true) */
+  music?: boolean;
 }
 
 export interface GameHostHandle {
@@ -166,6 +206,10 @@ export interface GameHostHandle {
   restart(): void;
   destroy(): void;
   setMuted(muted: boolean): void;
+  /** turn the procedural background music on/off */
+  setMusicEnabled(enabled: boolean): void;
+  /** toggle screen shake / particles at runtime (accessibility) */
+  setReducedMotion(reduced: boolean): void;
   isPaused(): boolean;
 }
 

@@ -1,6 +1,7 @@
 export * from './types';
 export * from './gfx';
 export * from './rng';
+export * from './juice';
 export * from './loop';
 export * from './canvas';
 export * from './input';

@@ -97,19 +97,27 @@ export default function createBreakout(): Game {
 
       if (ev.wall) ctx.audio.play('bounce');
       if (ev.paddle) ctx.audio.play('paddle');
-      if (ev.bricksHit > 0) ctx.audio.play('brick');
+      if (ev.bricksHit > 0) {
+        ctx.audio.play('brick');
+        ctx.juice.shake(0.05 * ev.bricksHit);
+      }
 
       if (state.score !== prevScore) {
         ctx.score.set(state.score);
         ctx.hooks.onScore?.(state.score);
       }
 
-      if (ev.lostLife && state.status === 'playing') ctx.audio.play('loseLife');
+      if (ev.lostLife && state.status === 'playing') {
+        ctx.audio.play('loseLife');
+        ctx.juice.shake(0.4);
+      }
 
       if (ev.won) {
         // clearing every brick advances to a harder level rather than ending —
         // this is what makes the level system live and fires the level-up hook
         ctx.audio.play('win');
+        ctx.juice.shake(0.25);
+        ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 48, speed: 210, life: 1.1 });
         advanceLevel(state);
         ctx.hooks.onLevelUp?.(state.level);
       } else if (ev.lost) {

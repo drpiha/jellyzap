@@ -66,10 +66,18 @@ export default function createTetris(): Game {
    * have already bumped `state.level` via line clears.
    */
   function afterLock(cleared: number, spawned: boolean, levelBefore: number): void {
-    if (cleared > 0) ctx.audio.play('lineclear');
-    else ctx.audio.play('lock');
+    if (cleared > 0) {
+      ctx.audio.play('lineclear');
+      ctx.juice.shake(0.1 * cleared); // bigger clears shake harder (Tetris = 0.4)
+    } else {
+      ctx.audio.play('lock');
+    }
     syncScore();
-    if (state.level > levelBefore) ctx.hooks.onLevelUp?.(state.level);
+    if (state.level > levelBefore) {
+      ctx.hooks.onLevelUp?.(state.level);
+      ctx.juice.shake(0.25);
+      ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 40, speed: 190, life: 1.0 });
+    }
     if (!spawned) endGame();
   }
 

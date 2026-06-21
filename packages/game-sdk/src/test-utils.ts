@@ -31,6 +31,7 @@ export function silentAudio(): AudioManager {
     play: () => {},
     loadMusic: async () => {},
     playMusic: () => {},
+    startMusic: () => {},
     stopMusic: () => {},
     setMuted: (m) => {
       muted = m;

@@ -54,8 +54,12 @@ export default function create2048(): Game {
     state.grid = result.grid;
     state.score += result.gained;
 
-    if (result.gained > 0) ctx.audio.play('merge');
-    else ctx.audio.play('move');
+    if (result.gained > 0) {
+      ctx.audio.play('merge');
+      ctx.juice.shake(Math.min(0.3, 0.04 + result.gained / 2048));
+    } else {
+      ctx.audio.play('move');
+    }
 
     // a successful move always reveals a new tile
     popCell = spawnCell(state.grid, ctx.rng);
@@ -71,6 +75,8 @@ export default function create2048(): Game {
 
     if (!state.won && hasWon(state.grid)) {
       state.won = true;
+      ctx.juice.shake(0.3);
+      ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 46, speed: 200, life: 1.1 });
     }
 
     if (isGameOver(state.grid)) {

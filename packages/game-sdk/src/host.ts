@@ -1,11 +1,12 @@
 import { setupCanvas } from './canvas';
 import { createAudio } from './audio';
 import { createInput } from './input';
+import { createParticles, createShaker } from './juice';
 import { createFixedLoop } from './loop';
 import { mulberry32, randomSeed } from './rng';
 import { createScoreTracker } from './score';
 import { createStorage } from './storage';
-import type { GameContext, GameHostHandle, GameHostOptions, LifecycleHooks } from './types';
+import type { GameContext, GameHostHandle, GameHostOptions, Juice, LifecycleHooks } from './types';
 
 /**
  * Mounts a {@link Game} into the DOM and wires it to the loop, canvas, input,
@@ -54,6 +55,28 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
   const { canvas, ctx, resize } = setupCanvas(mount);
   let dim = resize();
 
+  // cosmetic juice (screen shake + particles); suppressed for reduced-motion users
+  let reducedMotion =
+    opts.reducedMotion ??
+    (typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false);
+  const particles = createParticles();
+  const shaker = createShaker();
+  const juice: Juice = {
+    get reducedMotion() {
+      return reducedMotion;
+    },
+    shake(trauma) {
+      if (!reducedMotion) shaker.add(trauma);
+    },
+    burst(x, y, o) {
+      if (!reducedMotion) particles.burst(x, y, o);
+    },
+  };
+
+  let musicEnabled = opts.music ?? true;
+
   const context: GameContext = {
     canvas,
     ctx,
@@ -66,6 +89,7 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
     score,
     rng,
     hooks,
+    juice,
     locale: opts.locale ?? 'en',
     t: opts.t ?? ((k) => k),
   };
@@ -84,10 +108,24 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
   const loop = createFixedLoop({
     tps: opts.tps ?? 60,
     update: (dt) => {
-      if (!paused) game.update(dt);
+      if (paused) return;
+      game.update(dt);
+      if (!reducedMotion) {
+        particles.update(dt);
+        shaker.update(dt);
+      }
     },
     render: () => {
       game.render();
+      if (!reducedMotion) {
+        // draw particles on top in logical (CSS px) coordinates; the game fully
+        // redraws each frame so resetting the transform here is safe
+        ctx.setTransform(context.dpr, 0, 0, context.dpr, 0, 0);
+        particles.draw(ctx);
+        // screen shake via the canvas element transform (independent of the 2D ctx)
+        const o = shaker.offset();
+        canvas.style.transform = o.x || o.y ? `translate(${o.x}px, ${o.y}px)` : '';
+      }
       input.endFrame();
     },
   });
@@ -123,7 +161,9 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
     }
   }
   function firstGesture() {
-    void audio.resume();
+    void audio.resume().then(() => {
+      if (musicEnabled) audio.startMusic();
+    });
     window.removeEventListener('pointerdown', firstGesture);
     window.removeEventListener('keydown', firstGesture);
   }
@@ -142,6 +182,9 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
   // focus the canvas so keyboard input is captured right away (scoped: the input
   // manager only prevents page scrolling while the canvas holds focus)
   canvas.focus?.({ preventScroll: true });
+  // if the audio context is already running (e.g. a previous game this session),
+  // start music now; otherwise firstGesture() starts it after the user's tap
+  if (musicEnabled) audio.startMusic();
 
   return {
     game,
@@ -151,8 +194,11 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
       if (destroyed) return;
       score.reset();
       paused = false;
+      particles.clear();
+      canvas.style.transform = '';
       game.start();
       hooks.onGameStart?.();
+      if (musicEnabled) audio.startMusic();
     },
     destroy() {
       if (destroyed) return;
@@ -165,6 +211,8 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
       window.removeEventListener('keydown', firstGesture);
       input.detach();
       audio.stopMusic();
+      particles.clear();
+      canvas.style.transform = '';
       game.destroy();
       try {
         mount.removeChild(canvas);
@@ -174,6 +222,18 @@ export async function createGameHost(opts: GameHostOptions): Promise<GameHostHan
     },
     setMuted(m) {
       audio.setMuted(m);
+    },
+    setMusicEnabled(enabled) {
+      musicEnabled = enabled;
+      if (enabled) audio.startMusic();
+      else audio.stopMusic();
+    },
+    setReducedMotion(reduced) {
+      reducedMotion = reduced;
+      if (reduced) {
+        particles.clear();
+        canvas.style.transform = '';
+      }
     },
     isPaused() {
       return paused;

@@ -75,6 +75,10 @@ export default function createMatch3(): Game {
     const matches = findMatches(board);
     if (matches.length === 0) return 0;
     chain++;
+    ctx.juice.shake(Math.min(0.4, 0.05 * chain + matches.length * 0.01));
+    if (chain >= 3) {
+      ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 30, speed: 170, life: 0.9 });
+    }
     for (const { r, c } of matches) board[idx(r, c)] = EMPTY;
     const gained = scoreMatches(matches, chain);
     ctx.score.add(gained);

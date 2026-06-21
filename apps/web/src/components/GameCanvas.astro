@@ -19,6 +19,8 @@ const strings = {
   score: t('game.score'),
   best: t('game.best'),
   sound: t('game.sound'),
+  music: t('game.music'),
+  motion: t('game.motion'),
   pause: t('game.pause'),
   fullscreen: t('game.fullscreen'),
   restart: t('game.restart'),
@@ -65,6 +67,8 @@ const strings = {
 
   <div class="jz-controls">
     <button data-jz-sound type="button" aria-label={strings.sound}>🔊</button>
+    <button data-jz-music type="button" aria-label={strings.music} aria-pressed="true">🎵</button>
+    <button data-jz-motion type="button" aria-label={strings.motion} aria-pressed="true">🌀</button>
     <button data-jz-pause type="button" aria-label={strings.pause}>⏸</button>
     <button data-jz-restart type="button" aria-label={strings.restart}>↻</button>
     <button data-jz-fs type="button" aria-label={strings.fullscreen}>⛶</button>
@@ -102,6 +106,28 @@ const strings = {
     let host: GameHostHandle | null = null;
     let lastInterstitial = 0;
     let muted = false;
+
+    // persisted player preferences (per-browser)
+    const prefBool = (k: string): boolean | null => {
+      try {
+        const v = localStorage.getItem(k);
+        return v === null ? null : v === 'true';
+      } catch {
+        return null;
+      }
+    };
+    const setPref = (k: string, v: boolean) => {
+      try {
+        localStorage.setItem(k, String(v));
+      } catch {
+        /* storage blocked */
+      }
+    };
+    const prefersReduced =
+      typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let musicOn = prefBool('jz:music') ?? true;
+    const motionPref = prefBool('jz:reducedmotion');
+    let reducedMotion = motionPref === null ? prefersReduced : motionPref;
 
     const show = (el: HTMLElement | null) => el && (el.hidden = false);
     const hide = (el: HTMLElement | null) => el && (el.hidden = true);
@@ -167,6 +193,8 @@ const strings = {
         locale,
         seed,
         t: tt,
+        music: musicOn,
+        reducedMotion,
         hooks: {
           onAnalytics: (e, p) => track(e, p),
           onGameOver: (score) => void onGameOver(score),
@@ -191,6 +219,25 @@ const strings = {
       muted = !muted;
       host?.setMuted(muted);
       syncSound();
+    });
+
+    const musicBtn = stage.querySelector<HTMLButtonElement>('[data-jz-music]');
+    const motionBtn = stage.querySelector<HTMLButtonElement>('[data-jz-motion]');
+    const syncMusic = () => musicBtn?.setAttribute('aria-pressed', String(musicOn));
+    const syncMotion = () => motionBtn?.setAttribute('aria-pressed', String(!reducedMotion));
+    syncMusic();
+    syncMotion();
+    musicBtn?.addEventListener('click', () => {
+      musicOn = !musicOn;
+      setPref('jz:music', musicOn);
+      host?.setMusicEnabled(musicOn);
+      syncMusic();
+    });
+    motionBtn?.addEventListener('click', () => {
+      reducedMotion = !reducedMotion;
+      setPref('jz:reducedmotion', reducedMotion);
+      host?.setReducedMotion(reducedMotion);
+      syncMotion();
     });
     stage.querySelector('[data-jz-pause]')?.addEventListener('click', () => {
       if (!host) return;
@@ -331,5 +378,8 @@ const strings = {
   }
   .jz-controls button:hover {
     background: rgba(255, 255, 255, 0.16);
+  }
+  .jz-controls button[aria-pressed='false'] {
+    opacity: 0.4;
   }
 </style>

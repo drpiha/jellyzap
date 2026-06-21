@@ -66,11 +66,14 @@ export default function createSnake(): Game {
         const result = step(state, ctx.rng);
         if (result === 'eat') {
           ctx.audio.play('eat');
+          ctx.juice.shake(0.06);
           ctx.score.set(state.score);
           ctx.hooks.onScore?.(state.score);
           interval = Math.max(MIN_INTERVAL, BASE_INTERVAL - state.score * 0.004);
         } else if (result === 'dead') {
           ctx.audio.play('die');
+          ctx.juice.shake(0.4);
+          ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 28, speed: 150, life: 0.8 });
           gameOver = true;
           const isHigh = ctx.score.commitHighScore();
           void ctx.hooks.onGameOver?.(state.score, isHigh);

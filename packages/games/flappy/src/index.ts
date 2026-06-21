@@ -51,11 +51,14 @@ export default function createFlappy(): Game {
         const result = step(state, FIXED_DT, ctx.rng);
         if (result === 'score') {
           ctx.audio.play('score');
+          ctx.juice.burst(ctx.width / 2, ctx.height * 0.22, { count: 10, speed: 90, life: 0.5 });
           ctx.score.set(state.score);
           ctx.hooks.onScore?.(state.score);
         } else if (result === 'dead') {
           ctx.audio.play('hit');
           ctx.audio.play('gameover');
+          ctx.juice.shake(0.55);
+          ctx.juice.burst(ctx.width / 2, ctx.height / 2, { count: 26, speed: 160, life: 0.8 });
           gameOver = true;
           const isHigh = ctx.score.commitHighScore();
           void ctx.hooks.onGameOver?.(state.score, isHigh);

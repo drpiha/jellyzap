@@ -15,6 +15,8 @@ export function createAudio(storage: Storage): AudioManager {
   let musicBuffer: AudioBuffer | null = null;
   let musicSource: AudioBufferSourceNode | null = null;
   let musicGain: GainNode | null = null;
+  let musicTimer: ReturnType<typeof setInterval> | null = null;
+  let musicStep = 0;
 
   function ensure(): AudioContext | null {
     if (actx) return actx;
@@ -101,7 +103,44 @@ export function createAudio(storage: Storage): AudioManager {
       musicSource.connect(musicGain);
       musicSource.start();
     },
+    startMusic() {
+      const ac = ensure();
+      // needs a user gesture first (ac running); no-op if already playing or muted
+      if (!ac || !master || ac.state !== 'running' || musicTimer) return;
+      // cozy minor-pentatonic arpeggio, gentle and asset-free
+      const root = 220; // A3
+      const scale = [0, 3, 5, 7, 10, 12, 10, 7]; // up-and-down for a soft melody
+      const masterNode = master;
+      const playNote = () => {
+        if (muted || ac.state !== 'running') return;
+        const t0 = ac.currentTime;
+        const semis = scale[musicStep % scale.length];
+        musicStep++;
+        const freq = root * Math.pow(2, semis / 12);
+        const g = ac.createGain();
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.05, t0 + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.55);
+        g.connect(masterNode);
+        const osc = ac.createOscillator();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, t0);
+        osc.connect(g);
+        osc.onended = () => {
+          osc.disconnect();
+          g.disconnect();
+        };
+        osc.start(t0);
+        osc.stop(t0 + 0.6);
+      };
+      playNote();
+      musicTimer = setInterval(playNote, 430);
+    },
     stopMusic() {
+      if (musicTimer) {
+        clearInterval(musicTimer);
+        musicTimer = null;
+      }
       try {
         musicSource?.stop();
       } catch {
