@@ -1,108 +1,157 @@
 /**
  * Pure, deterministic Football ("Goal Hunt") logic — no DOM, no Math.random, no
- * requestAnimationFrame. Top-down, time-attack: dribble up the pitch, dodge a
- * defender, and shoot past a sliding keeper to score as many goals as you can.
+ * requestAnimationFrame. Top-down, time-attack: dribble up the pitch, dodge the
+ * defenders, and beat the keeper with an AIMED shot.
  *
- * There is NO death — the only pressure is the clock — so it stays gentle for
- * younger players. A tackle simply resets the ball to your start.
+ * There is NO death — only the clock — so it stays gentle. A tackle just resets
+ * the ball to your start. Difficulty scales goal width, keeper reach/skill,
+ * defender count/speed and match time (see the index).
  *
- * All distances are in abstract field units (FW × FH); the renderer scales them.
+ * Movers carry a velocity so the renderer can face them and animate a run cycle.
  */
 
 export const FW = 100;
 export const FH = 150;
-/** goal mouth spans [MOUTH_LEFT, MOUTH_RIGHT] along the top edge (y = 0) */
-export const MOUTH_LEFT = 28;
-export const MOUTH_RIGHT = 72;
 /** y where the keeper patrols / blocks */
-export const KEEPER_Y = 8;
-/** keeper block half-width and tackle radius */
-export const KEEPER_R = 7;
+export const KEEPER_Y = 9;
+export const PLAYER_R = 4.2;
 export const TACKLE_R = 7;
-export const PLAYER_R = 4;
+/** seconds the goal celebration freezes play */
+export const CELEBRATE_TIME = 1.1;
 
-const START_PLAYER = { x: FW / 2, y: FH - 14 };
-const START_DEFENDER = { x: FW / 2, y: FH * 0.5 };
+const START_PLAYER = { x: FW / 2, y: FH - 16 };
 
-export type Phase = 'play' | 'over';
+export type Phase = 'play' | 'celebrate' | 'over';
 export type StepEvent = 'none' | 'goal' | 'miss' | 'tackle';
 
+export interface Mover {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+}
+
 export interface FootballState {
-  player: { x: number; y: number };
-  defender: { x: number; y: number };
-  keeper: { x: number };
-  ball: { x: number; y: number; vx: number; vy: number; held: boolean; pastKeeper: boolean };
+  player: Mover;
+  defenders: Mover[];
+  keeper: { x: number; vx: number };
+  ball: { x: number; y: number; vx: number; vy: number; held: boolean; pastKeeper: boolean; spin: number };
   score: number;
   timeLeft: number;
   phase: Phase;
   cooldown: number;
+  celebrateTimer: number;
   lastEvent: StepEvent;
-  // tuning (set per difficulty)
+  // tuning
   playerSpeed: number;
   defenderSpeed: number;
+  defenderCount: number;
   keeperSpeed: number;
+  keeperReach: number;
+  goalW: number;
   ballSpeed: number;
+  predictiveKeeper: boolean;
 }
 
 export interface FootballOptions {
   time?: number;
   playerSpeed?: number;
   defenderSpeed?: number;
+  defenderCount?: number;
   keeperSpeed?: number;
+  keeperReach?: number;
+  goalW?: number;
   ballSpeed?: number;
+  predictiveKeeper?: boolean;
 }
 
 function clamp(v: number, lo: number, hi: number): number {
   return v < lo ? lo : v > hi ? hi : v;
 }
 
-function dist(ax: number, ay: number, bx: number, by: number): number {
-  return Math.hypot(ax - bx, ay - by);
+export function mouthLeft(state: FootballState): number {
+  return (FW - state.goalW) / 2;
+}
+export function mouthRight(state: FootballState): number {
+  return (FW + state.goalW) / 2;
+}
+
+/** Defenders start spread across the middle third, in front of the player. */
+function placeDefenders(state: FootballState): void {
+  const n = state.defenderCount;
+  state.defenders = [];
+  for (let i = 0; i < n; i++) {
+    state.defenders.push({
+      x: (FW * (i + 1)) / (n + 1),
+      y: FH * (0.42 + 0.1 * (i % 2)),
+      vx: 0,
+      vy: 0,
+    });
+  }
 }
 
 export function createFootballState(opts: FootballOptions = {}): FootballState {
-  return {
-    player: { ...START_PLAYER },
-    defender: { ...START_DEFENDER },
-    keeper: { x: FW / 2 },
-    ball: { x: START_PLAYER.x, y: START_PLAYER.y - 3, vx: 0, vy: 0, held: true, pastKeeper: false },
+  const state: FootballState = {
+    player: { x: START_PLAYER.x, y: START_PLAYER.y, vx: 0, vy: 0 },
+    defenders: [],
+    keeper: { x: FW / 2, vx: 0 },
+    ball: { x: START_PLAYER.x, y: START_PLAYER.y - 4, vx: 0, vy: 0, held: true, pastKeeper: false, spin: 0 },
     score: 0,
-    timeLeft: opts.time ?? 75,
+    timeLeft: opts.time ?? 80,
     phase: 'play',
     cooldown: 0,
+    celebrateTimer: 0,
     lastEvent: 'none',
-    playerSpeed: opts.playerSpeed ?? 60,
-    defenderSpeed: opts.defenderSpeed ?? 34,
-    keeperSpeed: opts.keeperSpeed ?? 34,
-    ballSpeed: opts.ballSpeed ?? 95,
+    playerSpeed: opts.playerSpeed ?? 62,
+    defenderSpeed: opts.defenderSpeed ?? 30,
+    defenderCount: opts.defenderCount ?? 1,
+    keeperSpeed: opts.keeperSpeed ?? 30,
+    keeperReach: opts.keeperReach ?? 9,
+    goalW: opts.goalW ?? 52,
+    ballSpeed: opts.ballSpeed ?? 96,
+    predictiveKeeper: opts.predictiveKeeper ?? false,
   };
+  placeDefenders(state);
+  return state;
 }
 
-/** Put the ball back on the player's foot after a goal / miss / tackle. */
 function resetPlay(state: FootballState, event: StepEvent): void {
   state.player.x = START_PLAYER.x;
   state.player.y = START_PLAYER.y;
-  state.defender.x = START_DEFENDER.x;
-  state.defender.y = START_DEFENDER.y;
+  state.player.vx = 0;
+  state.player.vy = 0;
+  placeDefenders(state);
+  state.keeper.x = FW / 2;
+  state.keeper.vx = 0;
   state.ball.held = true;
   state.ball.pastKeeper = false;
   state.ball.vx = 0;
   state.ball.vy = 0;
   state.ball.x = state.player.x;
-  state.ball.y = state.player.y - 3;
-  state.cooldown = 0.8;
+  state.ball.y = state.player.y - 4;
+  state.cooldown = 0.7;
   state.lastEvent = event;
 }
 
-/** Shoot the held ball straight up the pitch toward the goal. Returns true if shot. */
-export function shoot(state: FootballState): boolean {
+/**
+ * Shoot the held ball toward (aimX, aimY). The aim is forced to have an upward
+ * component (the goal is at the top) so a shot always heads goalward.
+ */
+export function shoot(state: FootballState, aimX: number, aimY: number): boolean {
   if (state.phase !== 'play' || !state.ball.held) return false;
+  const tx = clamp(aimX, 0, FW);
+  const ty = Math.min(aimY, state.player.y - 12); // always aim up the pitch
+  let dx = tx - state.player.x;
+  let dy = ty - state.player.y;
+  const len = Math.hypot(dx, dy) || 1;
+  dx /= len;
+  dy /= len;
   state.ball.held = false;
   state.ball.pastKeeper = false;
   state.ball.x = state.player.x;
   state.ball.y = state.player.y - PLAYER_R;
-  state.ball.vx = 0;
-  state.ball.vy = -state.ballSpeed;
+  state.ball.vx = dx * state.ballSpeed;
+  state.ball.vy = dy * state.ballSpeed;
   return true;
 }
 
@@ -110,79 +159,120 @@ function moveBall(state: FootballState, dt: number): StepEvent {
   const b = state.ball;
   b.x += b.vx * dt;
   b.y += b.vy * dt;
+  b.spin += (Math.hypot(b.vx, b.vy) / 6) * dt;
   // crossing the keeper line: blocked if the keeper covers the ball's x
   if (!b.pastKeeper && b.y <= KEEPER_Y) {
     b.pastKeeper = true;
-    if (Math.abs(b.x - state.keeper.x) <= KEEPER_R) {
+    if (Math.abs(b.x - state.keeper.x) <= state.keeperReach) {
       resetPlay(state, 'miss');
       return 'miss';
     }
   }
-  // reached the goal line
   if (b.y <= 0) {
-    const inGoal = b.x >= MOUTH_LEFT && b.x <= MOUTH_RIGHT;
+    const inGoal = b.x >= mouthLeft(state) && b.x <= mouthRight(state);
     if (inGoal) {
       state.score += 1;
-      resetPlay(state, 'goal');
+      state.celebrateTimer = CELEBRATE_TIME;
+      state.phase = 'celebrate';
+      state.lastEvent = 'goal';
       return 'goal';
     }
     resetPlay(state, 'miss');
     return 'miss';
   }
-  // off the field
-  if (b.x < 0 || b.x > FW || b.y > FH) {
+  if (b.x < -2 || b.x > FW + 2 || b.y > FH) {
     resetPlay(state, 'miss');
     return 'miss';
   }
   return 'none';
 }
 
+function stepKeeper(state: FootballState, dt: number): void {
+  let targetX: number;
+  if (!state.ball.held && state.ball.vy < 0) {
+    if (state.predictiveKeeper) {
+      const t = (KEEPER_Y - state.ball.y) / state.ball.vy; // vy<0, ball above line → t>0
+      targetX = state.ball.x + state.ball.vx * Math.max(0, t);
+    } else {
+      targetX = state.ball.x;
+    }
+  } else {
+    targetX = state.player.x; // shade across to the shooter while the ball is held
+  }
+  targetX = clamp(targetX, mouthLeft(state) + 1, mouthRight(state) - 1);
+  const move = state.keeperSpeed * dt;
+  const d = targetX - state.keeper.x;
+  const stepX = Math.abs(d) <= move ? d : Math.sign(d) * move;
+  state.keeper.x += stepX;
+  state.keeper.vx = stepX / Math.max(dt, 1e-4);
+}
+
+function stepDefenders(state: FootballState, dt: number): void {
+  for (const def of state.defenders) {
+    // chase a small lead ahead of the player's motion
+    const tx = state.player.x + state.player.vx * 0.3;
+    const ty = state.player.y + state.player.vy * 0.3;
+    const dx = tx - def.x;
+    const dy = ty - def.y;
+    const d = Math.hypot(dx, dy) || 1;
+    const vx = (dx / d) * state.defenderSpeed;
+    const vy = (dy / d) * state.defenderSpeed;
+    def.x = clamp(def.x + vx * dt, PLAYER_R, FW - PLAYER_R);
+    def.y = clamp(def.y + vy * dt, PLAYER_R, FH - PLAYER_R);
+    def.vx = vx;
+    def.vy = vy;
+  }
+}
+
+function tackled(state: FootballState): boolean {
+  if (state.cooldown > 0) return false;
+  for (const def of state.defenders) {
+    if (Math.hypot(state.player.x - def.x, state.player.y - def.y) < TACKLE_R) return true;
+  }
+  return false;
+}
+
 /**
- * Advance the simulation by `dt`. `dirX`/`dirY` are the player's intended
- * movement direction in [-1,1] (from keys or a touch target). Returns the
- * notable event this step (for SFX / juice).
+ * Advance by `dt`. `dirX`/`dirY` is the player's intended movement direction in
+ * [-1,1]. Returns the notable event this step (for SFX / juice).
  */
 export function step(state: FootballState, dirX: number, dirY: number, dt: number): StepEvent {
   if (state.phase === 'over') return 'none';
 
+  // goal celebration freezes play (and the clock) briefly
+  if (state.phase === 'celebrate') {
+    state.celebrateTimer -= dt;
+    state.ball.spin += dt * 4;
+    if (state.celebrateTimer <= 0) {
+      resetPlay(state, 'none');
+      state.phase = 'play';
+    }
+    return 'none';
+  }
+
   state.timeLeft -= dt;
   if (state.cooldown > 0) state.cooldown = Math.max(0, state.cooldown - dt);
 
-  // player
-  const len = Math.hypot(dirX, dirY) || 1;
-  state.player.x = clamp(state.player.x + (dirX / len) * state.playerSpeed * dt, PLAYER_R, FW - PLAYER_R);
-  state.player.y = clamp(
-    state.player.y + (dirY / len) * state.playerSpeed * dt,
-    PLAYER_R,
-    FH - PLAYER_R,
-  );
-
-  // defender chases the player
-  {
-    const dx = state.player.x - state.defender.x;
-    const dy = state.player.y - state.defender.y;
-    const d = Math.hypot(dx, dy) || 1;
-    state.defender.x = clamp(state.defender.x + (dx / d) * state.defenderSpeed * dt, PLAYER_R, FW - PLAYER_R);
-    state.defender.y = clamp(state.defender.y + (dy / d) * state.defenderSpeed * dt, PLAYER_R, FH - PLAYER_R);
+  // player movement (velocity stored for facing/animation)
+  const len = Math.hypot(dirX, dirY);
+  if (len > 0) {
+    state.player.vx = (dirX / len) * state.playerSpeed;
+    state.player.vy = (dirY / len) * state.playerSpeed;
+  } else {
+    state.player.vx = 0;
+    state.player.vy = 0;
   }
+  state.player.x = clamp(state.player.x + state.player.vx * dt, PLAYER_R, FW - PLAYER_R);
+  state.player.y = clamp(state.player.y + state.player.vy * dt, PLAYER_R, FH - PLAYER_R);
 
-  // keeper tracks the ball (or the player while the ball is held)
-  {
-    const targetX = state.ball.held ? state.player.x : state.ball.x;
-    const kx = clamp(targetX, MOUTH_LEFT, MOUTH_RIGHT);
-    const move = state.keeperSpeed * dt;
-    if (Math.abs(kx - state.keeper.x) <= move) state.keeper.x = kx;
-    else state.keeper.x += Math.sign(kx - state.keeper.x) * move;
-  }
+  stepDefenders(state, dt);
+  stepKeeper(state, dt);
 
   let ev: StepEvent = 'none';
   if (state.ball.held) {
     state.ball.x = state.player.x;
-    state.ball.y = state.player.y - 3;
-    if (
-      state.cooldown <= 0 &&
-      dist(state.player.x, state.player.y, state.defender.x, state.defender.y) < TACKLE_R
-    ) {
+    state.ball.y = state.player.y - 4;
+    if (tackled(state)) {
       resetPlay(state, 'tackle');
       ev = 'tackle';
     }

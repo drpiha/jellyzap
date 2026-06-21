@@ -1,13 +1,27 @@
 import type { Game, GameContext, PointerInfo } from '@jellyzap/game-sdk';
 import { createFootballState, shoot, step, type FootballState, type StepEvent } from './logic';
-import { draw, pointerToField } from './render';
+import { draw, pointerToField, type PlayerPose } from './render';
 import { registerFootballSfx } from './sfx';
 
-/** Per-difficulty: easier = more time, slower defender + keeper. */
-const DIFFICULTY: Record<string, { time: number; defenderSpeed: number; keeperSpeed: number }> = {
-  easy: { time: 80, defenderSpeed: 32, keeperSpeed: 34 },
-  normal: { time: 65, defenderSpeed: 44, keeperSpeed: 48 },
-  hard: { time: 55, defenderSpeed: 56, keeperSpeed: 62 },
+/**
+ * Per-difficulty tuning. Easy is deliberately very winnable: a wide goal, one
+ * slow defender, and a slow, short-reach keeper, so kids score often.
+ */
+const DIFFICULTY: Record<
+  string,
+  {
+    time: number;
+    defenderCount: number;
+    defenderSpeed: number;
+    keeperSpeed: number;
+    keeperReach: number;
+    goalW: number;
+    predictiveKeeper: boolean;
+  }
+> = {
+  easy: { time: 90, defenderCount: 1, defenderSpeed: 26, keeperSpeed: 26, keeperReach: 7, goalW: 60, predictiveKeeper: false },
+  normal: { time: 70, defenderCount: 2, defenderSpeed: 40, keeperSpeed: 44, keeperReach: 9, goalW: 50, predictiveKeeper: false },
+  hard: { time: 55, defenderCount: 3, defenderSpeed: 52, keeperSpeed: 58, keeperReach: 10, goalW: 42, predictiveKeeper: true },
 };
 
 const BANNER = {
@@ -22,6 +36,8 @@ export default function createFootball(): Game {
   let touchTarget: { x: number; y: number } | null = null;
   let flashTimer = 0;
   let flashType: Exclude<StepEvent, 'none'> | null = null;
+  let kickTimer = 0;
+  let clock = 0;
   let resolved = false;
 
   function lang(): 'en' | 'tr' | 'de' {
@@ -33,12 +49,18 @@ export default function createFootball(): Game {
     const d = DIFFICULTY[ctx.difficulty] ?? DIFFICULTY.easy;
     state = createFootballState({
       time: d.time,
+      defenderCount: d.defenderCount,
       defenderSpeed: d.defenderSpeed,
       keeperSpeed: d.keeperSpeed,
+      keeperReach: d.keeperReach,
+      goalW: d.goalW,
+      predictiveKeeper: d.predictiveKeeper,
     });
     touchTarget = null;
     flashTimer = 0;
     flashType = null;
+    kickTimer = 0;
+    clock = 0;
     resolved = false;
     ctx.score.reset();
     ctx.audio.play('whistle');
@@ -49,8 +71,11 @@ export default function createFootball(): Game {
     flashTimer = 0.9;
   }
 
-  function takeShot(): void {
-    if (shoot(state)) ctx.audio.play('kick');
+  function takeShot(aimX: number, aimY: number): void {
+    if (shoot(state, aimX, aimY)) {
+      ctx.audio.play('kick');
+      kickTimer = 0.18;
+    }
   }
 
   function endGame(): void {
@@ -79,6 +104,9 @@ export default function createFootball(): Game {
     },
     update(dt) {
       if (state.phase === 'over') return;
+      clock += dt;
+      if (kickTimer > 0) kickTimer = Math.max(0, kickTimer - dt);
+      if (flashTimer > 0) flashTimer = Math.max(0, flashTimer - dt);
 
       let dx = 0;
       let dy = 0;
@@ -99,8 +127,8 @@ export default function createFootball(): Game {
       const ev = step(state, dx, dy, dt);
       if (ev === 'goal') {
         ctx.audio.play('goal');
-        ctx.juice.shake(0.25);
-        ctx.juice.burst(ctx.width / 2, ctx.height * 0.35, { count: 38, speed: 200, life: 1.0 });
+        ctx.juice.shake(0.3);
+        ctx.juice.burst(ctx.width / 2, ctx.height * 0.32, { count: 44, speed: 210, life: 1.2 });
         ctx.score.set(state.score);
         ctx.hooks.onScore?.(state.score);
         flash('goal');
@@ -113,7 +141,6 @@ export default function createFootball(): Game {
         flash('tackle');
       }
 
-      if (flashTimer > 0) flashTimer = Math.max(0, flashTimer - dt);
       if (state.timeLeft <= 0) endGame(); // step() flips phase to 'over' at zero
     },
     render() {
@@ -121,10 +148,15 @@ export default function createFootball(): Game {
         flashTimer > 0 && flashType
           ? { text: BANNER[flashType][lang()], color: BANNER[flashType].color }
           : null;
+      let pose: PlayerPose = 'run';
+      if (state.phase === 'celebrate') pose = 'celebrate';
+      else if (kickTimer > 0) pose = 'kick';
       draw(ctx.ctx, state, ctx.width, ctx.height, {
         scoreLabel: ctx.t('game.score'),
         timeLabel: ctx.t('game.time'),
         banner,
+        clock,
+        playerPose: pose,
       });
     },
     resize() {
@@ -146,13 +178,17 @@ export default function createFootball(): Game {
       onPointerUp() {
         touchTarget = null;
       },
-      onTap() {
-        // a quick tap shoots and stops the player (drag to steer instead)
+      onTap(p: PointerInfo) {
+        // a quick tap shoots toward the tapped spot (aim a corner!) and stops moving
         touchTarget = null;
-        takeShot();
+        const aim = pointerToField(ctx.width, ctx.height, p.x, p.y);
+        takeShot(aim.x, aim.y);
       },
       onKeyDown(code) {
-        if (code === 'Space' || code === 'Enter') takeShot();
+        if (code === 'Space' || code === 'Enter') {
+          // aim up-pitch, nudged in the direction the player is moving
+          takeShot(state.player.x + state.player.vx * 0.4, 0);
+        }
       },
     },
     destroy() {
