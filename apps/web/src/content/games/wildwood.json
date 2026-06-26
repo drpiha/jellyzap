@@ -1,0 +1,143 @@
+{
+  "slug": "wildwood",
+  "category": "action",
+  "accent": "#f59e0b",
+  "order": 0,
+  "playable": true,
+  "title": { "en": "Wildwood Nights", "tr": "Vahşi Orman Geceleri", "de": "Wildwald-Nächte" },
+  "tagline": {
+    "en": "Chop wood, feed the fire, survive 99 nights.",
+    "tr": "Odun topla, ateşi besle, 99 geceyi atlat.",
+    "de": "Holz hacken, Feuer schüren, 99 Nächte überleben."
+  },
+  "description": {
+    "en": "Wildwood Nights is a cozy-but-tense top-down forest survival game. By day you roam a clearing to chop wood and pick berries; by night shadow-wolves slip out of the treeline and hunt you. Keep your campfire fed — its glow is your safe zone, slowing and burning anything that creeps too close — and swing your axe to drive the pack back. Watch your health, your hunger and the fuel gauge all at once, and live to see the dawn. Each night sends a bigger, faster pack, and the goal is to survive a full 99 nights in the wild. Pick Easy, Normal or Hard, play with arrow keys or by dragging on a touchscreen, and jump straight in — no download, no sign-up. Quick to learn, hard to put down, and friendly for kids and grown-ups alike.",
+    "tr": "Vahşi Orman Geceleri, sıcacık ama gergin, yukarıdan bakışlı bir orman hayatta kalma oyunudur. Gündüz açıklıkta dolaşıp odun toplar ve böğürtlen toplarsın; gece ise gölge-kurtlar ağaç hattından sızıp peşine düşer. Kamp ateşini beslemeyi sürdür — ışığı senin güvenli bölgendir, fazla yaklaşan her şeyi yavaşlatıp yakar — ve baltanı savurarak sürüyü geri püskürt. Aynı anda canına, açlığına ve yakıt göstergene dikkat et ve şafağı görmeyi başar. Her gece daha büyük ve daha hızlı bir sürü gelir; amaç ise vahşi doğada tam 99 geceyi atlatmaktır. Kolay, Orta veya Zor seç, ok tuşlarıyla ya da dokunmatik ekranda sürükleyerek oyna ve hemen başla — indirme yok, kayıt yok. Öğrenmesi kolay, bırakması zor; çocuklar ve büyükler için dostça.",
+    "de": "Wildwald-Nächte ist ein gemütliches, aber spannendes Survival-Spiel aus der Vogelperspektive. Tagsüber streifst du durch eine Lichtung, hackst Holz und pflückst Beeren; nachts schleichen Schattenwölfe aus dem Wald und jagen dich. Halte dein Lagerfeuer am Brennen — sein Schein ist deine sichere Zone und verlangsamt und verbrennt alles, was zu nah kommt — und schwinge deine Axt, um das Rudel zurückzudrängen. Behalte gleichzeitig Gesundheit, Hunger und die Brennstoffanzeige im Auge und erlebe die Morgendämmerung. Jede Nacht schickt ein größeres, schnelleres Rudel, und das Ziel ist es, ganze 99 Nächte in der Wildnis zu überstehen. Wähle Leicht, Normal oder Schwer, spiele mit den Pfeiltasten oder per Wischen auf dem Touchscreen und leg sofort los — kein Download, keine Anmeldung. Schnell zu lernen, schwer wegzulegen und für Kinder wie Erwachsene geeignet."
+  },
+  "howToPlay": {
+    "en": [
+      "Move with the arrow keys / WASD, or drag on a touchscreen.",
+      "Walk up to a tree to chop wood, and up to a bush to pick berries.",
+      "Stand in the campfire's glow to feed your wood into it and keep the light alive.",
+      "When night falls, press Space (or tap) to swing your axe at the wolves.",
+      "Keep your health, hunger and fire from running out — survive as many nights as you can!"
+    ],
+    "tr": [
+      "Ok tuşları / WASD ile hareket et ya da dokunmatik ekranda sürükle.",
+      "Odun için bir ağaca, böğürtlen için bir çalıya yaklaş.",
+      "Odununu ateşe vermek ve ışığı sürdürmek için kamp ateşinin parıltısında dur.",
+      "Gece çökünce kurtlara balta savurmak için Boşluk'a bas (ya da dokun).",
+      "Canının, açlığının ve ateşinin bitmesine izin verme — olabildiğince çok gece atlat!"
+    ],
+    "de": [
+      "Bewege dich mit den Pfeiltasten / WASD oder wische auf dem Touchscreen.",
+      "Geh zu einem Baum, um Holz zu hacken, und zu einem Busch, um Beeren zu pflücken.",
+      "Stell dich in den Schein des Lagerfeuers, um Holz nachzulegen und das Licht zu erhalten.",
+      "Wenn die Nacht hereinbricht, drücke die Leertaste (oder tippe), um die Wölfe mit der Axt zu treffen.",
+      "Lass Gesundheit, Hunger und Feuer nicht ausgehen — überlebe so viele Nächte wie möglich!"
+    ]
+  },
+  "controls": {
+    "en": ["Arrow keys / WASD or drag — move", "Walk into trees & bushes — gather", "Space / Enter / tap — swing axe"],
+    "tr": ["Ok tuşları / WASD veya sürükle — hareket", "Ağaç ve çalılara yürü — topla", "Boşluk / Enter / dokun — balta salla"],
+    "de": ["Pfeiltasten / WASD oder ziehen — bewegen", "In Bäume & Büsche laufen — sammeln", "Leertaste / Enter / tippen — Axt schwingen"]
+  },
+  "tips": {
+    "en": [
+      "Stockpile extra wood during the day — the fire burns faster at night.",
+      "Don't stray far from the fire after dark: outside its light the cold drains your health.",
+      "Pick berries before you're starving so you always have food in reserve.",
+      "Let the wolves come into the firelight — it slows and burns them, making them easy to finish off.",
+      "If the fire ever goes out, dash back with wood fast — a dark clearing is deadly."
+    ],
+    "tr": [
+      "Gündüz fazladan odun biriktir — ateş geceleri daha hızlı yanar.",
+      "Karanlık bastıktan sonra ateşten fazla uzaklaşma: ışığının dışında soğuk canını eritir.",
+      "Aç kalmadan böğürtlen topla ki her zaman yedek yiyeceğin olsun.",
+      "Kurtların ateş ışığına girmesine izin ver — bu onları yavaşlatıp yakar, işlerini bitirmek kolaylaşır.",
+      "Ateş sönerse hızla odunla geri koş — karanlık açıklık ölümcüldür."
+    ],
+    "de": [
+      "Lege tagsüber Holz auf Vorrat an — nachts brennt das Feuer schneller.",
+      "Entferne dich nach Einbruch der Dunkelheit nicht weit vom Feuer: außerhalb seines Lichts zehrt die Kälte an deiner Gesundheit.",
+      "Pflücke Beeren, bevor du verhungerst, damit du immer Nahrung in Reserve hast.",
+      "Lass die Wölfe ins Feuerlicht kommen — es verlangsamt und verbrennt sie, so erledigst du sie leicht.",
+      "Wenn das Feuer ausgeht, lauf schnell mit Holz zurück — eine dunkle Lichtung ist tödlich."
+    ]
+  },
+  "faq": {
+    "en": [
+      {
+        "q": "Is Wildwood Nights free to play?",
+        "a": "Yes! It's completely free on Jellyzap and runs right in your browser — no download or sign-up needed."
+      },
+      {
+        "q": "How do I play on mobile?",
+        "a": "Drag your finger to walk around. Walk next to trees and bushes to gather, stand by the fire to feed it, and tap to swing your axe at night."
+      },
+      {
+        "q": "What's the goal?",
+        "a": "Survive as many nights as you can. Each night is harder, and reaching night 99 wins the game."
+      },
+      {
+        "q": "How do I keep my campfire from going out?",
+        "a": "Chop wood from trees during the day, then stand in the fire's glow to feed it. The fire burns faster at night, so keep a stockpile ready."
+      },
+      {
+        "q": "Can I make it easier or harder?",
+        "a": "Yes — use the difficulty button to choose Easy, Normal or Hard. Higher levels mean a shorter day, a hungrier fire and bigger, faster wolf packs."
+      }
+    ],
+    "tr": [
+      {
+        "q": "Vahşi Orman Geceleri ücretsiz mi?",
+        "a": "Evet! Jellyzap'te tamamen ücretsizdir ve doğrudan tarayıcında çalışır — indirme veya kayıt gerekmez."
+      },
+      {
+        "q": "Mobilde nasıl oynanır?",
+        "a": "Dolaşmak için parmağını sürükle. Toplamak için ağaç ve çalıların yanına yürü, beslemek için ateşin yanında dur ve gece balta savurmak için dokun."
+      },
+      {
+        "q": "Amaç nedir?",
+        "a": "Olabildiğince çok gece hayatta kal. Her gece daha zordur ve 99. geceye ulaşmak oyunu kazandırır."
+      },
+      {
+        "q": "Kamp ateşimin sönmesini nasıl önlerim?",
+        "a": "Gündüz ağaçlardan odun topla, sonra beslemek için ateşin parıltısında dur. Ateş geceleri daha hızlı yanar, bu yüzden stok bulundur."
+      },
+      {
+        "q": "Daha kolay ya da zor yapabilir miyim?",
+        "a": "Evet — zorluk düğmesiyle Kolay, Orta veya Zor seç. Yüksek seviyeler daha kısa gündüz, daha açgözlü bir ateş ve daha büyük, daha hızlı kurt sürüleri demektir."
+      }
+    ],
+    "de": [
+      {
+        "q": "Ist Wildwald-Nächte kostenlos?",
+        "a": "Ja! Es ist auf Jellyzap völlig kostenlos und läuft direkt im Browser — ohne Download oder Anmeldung."
+      },
+      {
+        "q": "Wie spiele ich auf dem Handy?",
+        "a": "Ziehe mit dem Finger, um umherzulaufen. Geh zum Sammeln neben Bäume und Büsche, stell dich zum Nachlegen ans Feuer und tippe, um nachts die Axt zu schwingen."
+      },
+      {
+        "q": "Was ist das Ziel?",
+        "a": "Überlebe so viele Nächte wie möglich. Jede Nacht wird schwerer, und Nacht 99 zu erreichen gewinnt das Spiel."
+      },
+      {
+        "q": "Wie verhindere ich, dass mein Lagerfeuer ausgeht?",
+        "a": "Hacke tagsüber Holz von Bäumen und stell dich dann in den Schein des Feuers, um nachzulegen. Das Feuer brennt nachts schneller, also halte einen Vorrat bereit."
+      },
+      {
+        "q": "Kann ich es leichter oder schwerer machen?",
+        "a": "Ja — wähle mit dem Schwierigkeitsknopf Leicht, Normal oder Schwer. Höhere Stufen bedeuten einen kürzeren Tag, ein hungrigeres Feuer und größere, schnellere Wolfsrudel."
+      }
+    ]
+  },
+  "keywords": {
+    "en": "forest survival game, campfire survival, survive the night game, free survival game, top-down survival, wolf survival game, kids survival game",
+    "tr": "orman hayatta kalma oyunu, kamp ateşi oyunu, gece hayatta kalma oyunu, ücretsiz hayatta kalma oyunu, kurt oyunu, çocuk hayatta kalma oyunu",
+    "de": "wald survival spiel, lagerfeuer survival, überlebe die nacht spiel, kostenloses survival spiel, wolf survival spiel, kinder survival spiel"
+  },
+  "tags": ["survival", "forest", "action", "campfire", "wolves", "high-score", "day-night"]
+}

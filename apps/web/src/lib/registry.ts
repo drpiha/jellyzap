@@ -21,6 +21,7 @@ export const GAME_LOADERS: Record<string, Loader> = {
   karts: () => import('@jellyzap/game-karts').then((m) => m.default()),
   penalty: () => import('@jellyzap/game-penalty').then((m) => m.default()),
   football: () => import('@jellyzap/game-football').then((m) => m.default()),
+  wildwood: () => import('@jellyzap/game-wildwood').then((m) => m.default()),
 };
 
 export function hasGame(slug: string): boolean {

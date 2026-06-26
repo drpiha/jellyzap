@@ -25,6 +25,7 @@
     "@jellyzap/game-snake": "workspace:*",
     "@jellyzap/game-tetris": "workspace:*",
     "@jellyzap/game-wheel": "workspace:*",
+    "@jellyzap/game-wildwood": "workspace:*",
     "@jellyzap/game-word": "workspace:*",
     "astro": "^5.0.0"
   },
