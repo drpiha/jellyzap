@@ -519,8 +519,14 @@ function updateFire(state: WildwoodState, dt: number): void {
   const burn = state.isNight ? o.fireBurnNight : o.fireBurnDay;
   const before = f.fuel;
   f.fuel = Math.max(0, f.fuel - burn * dt);
-  // one-shot warnings as the fire crosses thresholds downward
-  if (before > 20 && f.fuel <= 20 && f.fuel > 0 && !state.warnedLow) {
+  // Re-arm the low-fuel warning once the fire recovers comfortably (hysteresis
+  // band above the danger line), so a later dip within the same night warns again.
+  if (f.fuel > 25) state.warnedLow = false;
+  // Warn once whenever the fire is genuinely in the danger band — at NIGHT only
+  // (a low fire by day is harmless, so no misleading urgency then). This is a
+  // level check, not an edge crossing, so it also covers a night that *begins*
+  // already low — exactly when the warning matters most.
+  if (state.isNight && f.fuel > 0 && f.fuel <= 20 && !state.warnedLow) {
     state.warnedLow = true;
     state.events.push('firelow');
   }

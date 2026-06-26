@@ -7,7 +7,7 @@ import {
   type WildwoodOptions,
   type WildwoodState,
 } from './logic';
-import { computeView, draw, pointerToWorld, type Banner } from './render';
+import { computeView, disposeRenderCache, draw, pointerToWorld, type Banner } from './render';
 import { registerWildwoodSfx } from './sfx';
 
 /**
@@ -89,8 +89,11 @@ type Lang = 'en' | 'tr' | 'de';
 const TEXT = {
   night: { en: 'Night', tr: 'Gece', de: 'Nacht' },
   best: { en: 'Best', tr: 'En iyi', de: 'Beste' },
-  wood: { en: 'Wood', tr: 'Odun', de: 'Holz' },
-  food: { en: 'Food', tr: 'Yiyecek', de: 'Essen' },
+  playAgain: {
+    en: 'Press ↻ to play again',
+    tr: 'Tekrar oynamak için ↻',
+    de: 'Zum Neustart ↻ drücken',
+  },
   nightfall: {
     en: 'Night falls — stay in the light!',
     tr: 'Gece çöküyor — ışıkta kal!',
@@ -227,12 +230,24 @@ export default function createWildwood(): Game {
         ctx.juice.shake(0.3);
         setBanner(TEXT.fireout[L], '#ff6b6b', 1.8);
         break;
-      case 'won':
-        setBanner(TEXT.won[lang()], '#7CFCB4', 3, undefined);
+      case 'won': {
+        // A win is terminal but is NOT a loss: report the final night through the
+        // normal channels and commit the high score, but do NOT call onGameOver —
+        // the host's onGameOver overlay is titled "Game Over", which would
+        // mislabel a victory. Instead we hold a celebratory screen on the canvas
+        // and let the player restart via the host's ↻ control.
+        resolved = true;
+        ctx.score.set(state.survived);
+        ctx.hooks.onScore?.(state.survived);
+        ctx.hooks.onLevelUp?.(state.night);
+        ctx.score.commitHighScore();
+        ctx.hooks.onAnalytics?.('game_win', { nights: state.survived });
+        ctx.audio.play('won');
+        setBanner(TEXT.won[L], '#7CFCB4', Infinity, TEXT.playAgain[L]);
         ctx.juice.shake(0.5);
         ctx.juice.burst(ctx.width / 2, ctx.height * 0.4, { count: 60, speed: 200, life: 1.3 });
-        endGame(true);
         break;
+      }
       case 'gameover':
         endGame(false);
         break;
@@ -282,7 +297,8 @@ export default function createWildwood(): Game {
     },
     update(dt) {
       clock += dt;
-      if (bannerTimer > 0) {
+      // banners fade only during play; a terminal win banner stays on screen
+      if (bannerTimer > 0 && state.phase === 'play') {
         bannerTimer -= dt;
         if (bannerTimer <= 0) banner = null;
       }
@@ -295,12 +311,11 @@ export default function createWildwood(): Game {
     render() {
       draw(ctx.ctx, state, ctx.width, ctx.height, {
         clock,
+        dpr: ctx.dpr,
         best: ctx.score.highScore,
         labels: {
           night: TEXT.night[lang()],
           best: TEXT.best[lang()],
-          wood: TEXT.wood[lang()],
-          food: TEXT.food[lang()],
         },
         banner,
       });
@@ -331,7 +346,7 @@ export default function createWildwood(): Game {
       },
     },
     destroy() {
-      /* no external resources */
+      disposeRenderCache();
     },
   };
 }

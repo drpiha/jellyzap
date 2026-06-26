@@ -152,6 +152,51 @@ describe('wildwood: fire', () => {
   });
 });
 
+describe('wildwood: fire warnings', () => {
+  it('warns when the fire is already low as night begins', () => {
+    const s = createWildwoodState({}, mulberry32(41));
+    s.trees = [];
+    s.bushes = [];
+    s.isNight = true;
+    s.fire.fuel = 19; // already in the danger band before any crossing
+    s.player.x = 6;
+    s.player.y = 6; // away from the fire so it isn't fed
+    step(s, IDLE, 0.1, mulberry32(0));
+    expect(s.events).toContain('firelow');
+  });
+
+  it('re-arms after the fire recovers, so it warns again on a later dip', () => {
+    const s = createWildwoodState({ fireBurnNight: 5 }, mulberry32(40));
+    s.trees = [];
+    s.bushes = [];
+    s.isNight = true;
+    s.player.x = 6;
+    s.player.y = 6;
+    let warnings = 0;
+    s.fire.fuel = 22;
+    step(s, IDLE, 1, mulberry32(0)); // 22 -> 17: first warning
+    if (s.events.includes('firelow')) warnings++;
+    s.fire.fuel = 40; // player ran wood back and fed the fire
+    step(s, IDLE, 0.1, mulberry32(0)); // recovers above 25 -> re-arm
+    s.fire.fuel = 22;
+    step(s, IDLE, 1, mulberry32(0)); // 22 -> 17: second warning
+    if (s.events.includes('firelow')) warnings++;
+    expect(warnings).toBe(2);
+  });
+
+  it('does not warn about a low fire during the day', () => {
+    const s = createWildwoodState({}, mulberry32(42));
+    s.trees = [];
+    s.bushes = [];
+    s.isNight = false;
+    s.fire.fuel = 15;
+    s.player.x = 6;
+    s.player.y = 6;
+    step(s, IDLE, 0.5, mulberry32(0));
+    expect(s.events).not.toContain('firelow');
+  });
+});
+
 describe('wildwood: needs', () => {
   it('auto-eats a berry when hunger drops below the threshold', () => {
     const s = createWildwoodState({ startFood: 2, eatThreshold: 35, eatRestore: 40 }, mulberry32(8));

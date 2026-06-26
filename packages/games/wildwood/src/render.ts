@@ -36,8 +36,6 @@ export interface View {
 export interface DrawLabels {
   night: string;
   best: string;
-  wood: string;
-  food: string;
 }
 
 export interface Banner {
@@ -49,10 +47,24 @@ export interface Banner {
 export interface DrawInfo {
   /** seconds clock for animation */
   clock: number;
+  /** device pixel ratio — the night overlay is rendered at device resolution */
+  dpr: number;
   best: number;
   labels: DrawLabels;
   banner: Banner | null;
 }
+
+/** HUD font with emoji fallbacks so glyph icons render across platforms. */
+const HUD_FONT = "system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
+
+/**
+ * Fixed grass-tuft positions (normalized 0..1), hashed once at module load so the
+ * hot draw path doesn't recompute 180 Math.sin calls per frame.
+ */
+const GRASS_TUFTS: { fx: number; fy: number }[] = Array.from({ length: 90 }, (_, i) => ({
+  fx: Math.abs((Math.sin(i * 12.9898) * 43758.5453) % 1),
+  fy: Math.abs((Math.sin(i * 78.233) * 12543.789) % 1),
+}));
 
 export function computeView(width: number, height: number): View {
   const s = Math.min(width / WORLD_W, height / WORLD_H);
@@ -116,16 +128,24 @@ function darknessOf(state: WildwoodState): number {
 }
 
 // Cached offscreen layer for the night overlay (so light "holes" don't erase the
-// scene). Re-created only when the logical canvas size changes.
+// scene). Sized to DEVICE pixels (width*dpr) so the darkness and the soft light
+// edges stay crisp on HiDPI screens; re-created when the size or dpr changes.
 let darkLayer: HTMLCanvasElement | null = null;
-function getDarkLayer(width: number, height: number): CanvasRenderingContext2D | null {
+function getDarkLayer(width: number, height: number, dpr: number): CanvasRenderingContext2D | null {
   if (typeof document === 'undefined') return null;
-  if (!darkLayer || darkLayer.width !== width || darkLayer.height !== height) {
+  const dw = Math.round(width * dpr);
+  const dh = Math.round(height * dpr);
+  if (!darkLayer || darkLayer.width !== dw || darkLayer.height !== dh) {
     darkLayer = document.createElement('canvas');
-    darkLayer.width = width;
-    darkLayer.height = height;
+    darkLayer.width = dw;
+    darkLayer.height = dh;
   }
   return darkLayer.getContext('2d');
+}
+
+/** Release the cached offscreen night layer (called on game teardown). */
+export function disposeRenderCache(): void {
+  darkLayer = null;
 }
 
 function drawGround(
@@ -145,14 +165,12 @@ function drawGround(
   ctx.fillStyle = mix(day, night, dark);
   ctx.fillRect(v.ox, v.oy, WORLD_W * v.s, WORLD_H * v.s);
 
-  // subtle scattered grass tufts at deterministic positions (hash-placed)
+  // subtle scattered grass tufts at fixed, precomputed positions
   ctx.fillStyle = mix([52, 82, 46], [20, 34, 36], dark);
-  for (let i = 0; i < 90; i++) {
-    const hx = (Math.sin(i * 12.9898) * 43758.5453) % 1;
-    const hy = (Math.sin(i * 78.233) * 12543.789) % 1;
-    const gx = v.ox + (Math.abs(hx) * WORLD_W) * v.s;
-    const gy = v.oy + (Math.abs(hy) * WORLD_H) * v.s;
-    ctx.fillRect(gx, gy, Math.max(1, v.s * 0.7), Math.max(1, v.s * 1.6));
+  const gw = Math.max(1, v.s * 0.7);
+  const gh = Math.max(1, v.s * 1.6);
+  for (const t of GRASS_TUFTS) {
+    ctx.fillRect(v.ox + t.fx * WORLD_W * v.s, v.oy + t.fy * WORLD_H * v.s, gw, gh);
   }
 
   // bare dirt ring around the campfire
@@ -481,15 +499,18 @@ function drawNight(
   width: number,
   height: number,
   dark: number,
+  dpr: number,
 ): void {
   if (dark <= 0.001) return;
-  const layer = getDarkLayer(width, height);
+  const layer = getDarkLayer(width, height, dpr);
   if (!layer) {
     // fallback: flat dim (no light holes) if no offscreen canvas
     ctx.fillStyle = `rgba(6,10,26,${dark})`;
     ctx.fillRect(0, 0, width, height);
     return;
   }
+  // draw the overlay in logical coords but at device resolution
+  layer.setTransform(dpr, 0, 0, dpr, 0, 0);
   layer.clearRect(0, 0, width, height);
   layer.fillStyle = `rgba(6,10,26,${dark})`;
   layer.fillRect(0, 0, width, height);
@@ -522,7 +543,12 @@ function drawNight(
   layer.fill();
   layer.globalCompositeOperation = 'source-over';
 
-  ctx.drawImage(layer.canvas, 0, 0, width, height);
+  // blit the device-resolution layer 1:1 onto the backing store — reset the main
+  // context's DPR transform so it isn't upscaled/blurred, then restore it for the HUD.
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.drawImage(layer.canvas, 0, 0);
+  ctx.restore();
 }
 
 function bar(
@@ -545,7 +571,7 @@ function bar(
     ctx.fill();
   }
   ctx.fillStyle = '#fff';
-  ctx.font = `${Math.round(h * 0.92)}px system-ui, sans-serif`;
+  ctx.font = `${Math.round(h * 0.92)}px ${HUD_FONT}`;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   ctx.fillText(icon, x - h * 1.15, y + h / 2);
@@ -568,7 +594,8 @@ function drawHud(
 
   bar(ctx, x0, y, bw, bh, p.health / p.maxHealth, '#e0455e', '♥');
   y += gap;
-  bar(ctx, x0, y, bw, bh, p.hunger / p.maxHunger, '#e0a23b', '🍃');
+  // green (not amber) so the hunger bar reads distinctly from the orange fire bar
+  bar(ctx, x0, y, bw, bh, p.hunger / p.maxHunger, '#6cc24a', '🍃');
   y += gap;
   bar(ctx, x0, y, bw, bh, state.fire.fuel / state.fire.maxFuel, '#ff8a3d', '🔥');
 
@@ -577,12 +604,12 @@ function drawHud(
   ctx.textBaseline = 'top';
   ctx.fillStyle = '#fff';
   const big = Math.round(height * 0.035);
-  ctx.font = `800 ${big}px system-ui, sans-serif`;
+  ctx.font = `800 ${big}px ${HUD_FONT}`;
   const moon = state.isNight ? '🌙' : '☀️';
   ctx.fillText(`${moon} ${info.labels.night} ${state.night}`, width - pad, pad);
 
   const small = Math.round(height * 0.028);
-  ctx.font = `700 ${small}px system-ui, sans-serif`;
+  ctx.font = `700 ${small}px ${HUD_FONT}`;
   ctx.fillText(`🪵 ${p.wood}    🍒 ${p.food}`, width - pad, pad + big * 1.4);
   if (info.best > 0) {
     ctx.fillStyle = '#cbb8e8';
@@ -639,6 +666,6 @@ export function draw(
   items.sort((a, b) => a.y - b.y);
   for (const it of items) it.draw();
 
-  drawNight(ctx, state, v, width, height, dark);
+  drawNight(ctx, state, v, width, height, dark, info.dpr);
   drawHud(ctx, state, width, height, info);
 }
