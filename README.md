@@ -1,8 +1,9 @@
 # 🟣 Jellyzap — Viral Web Games Portal
 
 Free online games for kids & teens — Snake, Tetris, 2048, Word, Wheel of Fortune,
-Memory, Flappy, Breakout, Match-3 and a top‑down kart battle. Built for **speed,
-SEO/GEO, multilingual reach (EN/TR/DE), and ad monetization**.
+Memory, Flappy, Breakout, Match-3, a top‑down kart battle, football & penalty
+shootout, and **Wildwood Nights** (a top‑down forest survival game). Built for
+**speed, SEO/GEO, multilingual reach (EN/TR/DE), and ad monetization**.
 
 > **Repository.** Standalone repo at **[github.com/drpiha/jellyzap](https://github.com/drpiha/jellyzap)**
 > (imported as a clean history from the original `aikarakutu` scaffold). Deploys to

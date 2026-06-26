@@ -71,6 +71,9 @@ importers:
       '@jellyzap/game-wheel':
         specifier: workspace:*
         version: link:../../packages/games/wheel
+      '@jellyzap/game-wildwood':
+        specifier: workspace:*
+        version: link:../../packages/games/wildwood
       '@jellyzap/game-word':
         specifier: workspace:*
         version: link:../../packages/games/word
@@ -157,6 +160,12 @@ importers:
         version: link:../../game-sdk
 
   packages/games/wheel:
+    dependencies:
+      '@jellyzap/game-sdk':
+        specifier: workspace:*
+        version: link:../../game-sdk
+
+  packages/games/wildwood:
     dependencies:
       '@jellyzap/game-sdk':
         specifier: workspace:*
